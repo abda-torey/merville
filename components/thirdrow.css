@@ -1,0 +1,50 @@
+.carousel .carousel-status {
+    display: none;  /* This will hide the default status that displays the slide numbers */
+}
+
+.carousel .control-dots {
+  position: absolute;
+  right: 100px;
+  bottom: 10px;
+  top: auto;
+  left: auto; /* Ensure the left property is set to auto to avoid any centering */
+  text-align: right; /* This will align the dots to the right */
+  padding: 0px ;
+}
+
+.carousel .control-dots .dot {
+  margin: 3px 2px; /* Adjust the margin if needed */
+}
+.carousel .control-dots .dot {
+    width: 8px;            /* Small dot size */
+    height: 8px;
+    border-radius: 50%;   /* This makes the dot circular */
+    margin: 4px 3px;      /* Adjust the margin for spacing */
+    box-shadow: none;     /* Optional: remove box-shadow if it's there */
+    transition: width 0.3s, height 0.3s; /* Smooth transition for size change */
+  }
+  
+  .carousel .control-dots .dot.selected {
+    width: 12px;           /* Slightly larger size for selected dot */
+    height: 12px;
+  }
+  @media (max-width: 639px) {
+    .carousel .control-dots {
+      position: absolute;
+      right: 20px;
+      bottom: 40px;
+      top: auto;
+      left: auto; 
+      text-align: right;
+    }
+  }
+  @media (max-width: 768px) {
+    .carousel .control-dots {
+      position: absolute;
+      right: 20px;
+      bottom: 30px;
+      top: auto;
+      left: auto; 
+      text-align: right;
+    }
+  }
