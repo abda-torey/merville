@@ -14,7 +14,7 @@ const FourthRow = () => {
         <div className="w-full  flex flex-col md:w-1/2  p-2   items-center justify-start  mb-8   text-black">
           <div className="">
             <Image
-              src="/tshirt.jpg"
+              src="/tshirt2.png"
               width={250}
               height={250}
               alt="Description for Tshort"
