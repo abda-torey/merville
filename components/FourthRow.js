@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const FourthRow = () => {
   return (
-    <div className="flex  w-full h-screen justify-center items-start bg-white  ">
+    <div className="flex   w-full  md:h-[700px] justify-center items-start bg-white  ">
       <div className="flex  flex-col md:flex-row  items-center justify-center bg-white">
         {/* First div */}
         <div className="flex w-full p-8 items-center   justify-center">

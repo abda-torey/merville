@@ -20,6 +20,9 @@ module.exports = {
         backgroundImage: {
           "video-gradient": "linear-gradient(0deg, #000 0%, transparent 100%)",
         },
+        animation: {
+          moveRightToLeft: 'moveRightToLeft 70s infinite',
+        }
     },
     },
 
