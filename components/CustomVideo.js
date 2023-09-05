@@ -33,6 +33,7 @@ const CustomVideo = () => {
       <video
         muted
         autoPlay
+        playsInline
         ref={videoRef}
         className="w-full h-full object-cover"
         onEnded={handleVideoEnd}
