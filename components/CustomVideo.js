@@ -37,7 +37,7 @@ const CustomVideo = () => {
         className="w-full h-full object-cover"
         onEnded={handleVideoEnd}
       >
-        <source src="RPReplay_Final1681840287.mov" />
+        <source src="headerVid.mov" />
         Your browser does not support the video tag.
       </video>
       <div className="absolute inset-0 flex flex-col bottom-20 gap-5 justify-end items-center">
