@@ -37,7 +37,8 @@ const CustomVideo = () => {
         className="w-full h-full object-cover"
         onEnded={handleVideoEnd}
       >
-        <source src="headerVid.mov" />
+        <source src="video.webm" type="video/webm" />
+       <source src="video.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       <div className="absolute inset-0 flex flex-col bottom-20 gap-5 justify-end items-center">
