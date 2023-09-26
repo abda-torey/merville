@@ -1,18 +1,31 @@
 "use client";
-import React,{useState} from "react";
+import CartContext from "@/app/context/CartContext";
+import React,{useState,useContext} from "react";
+
 
 const Product = ({ product }) => {
   const [selectedSize, setSize] = useState(null);
   const [selectedColor, setColor] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const {addItemToCart} = useContext(CartContext)
 
-  const proceedToCheckout = () => {
+  const addToCartHandler = () => {
     console.log("Selected Product Details:", {
       productId: product.id,
       selectedSize,
       selectedColor,
       quantity,
     });
+    addItemToCart({
+      productId:product.id,
+      name:product.name,
+      size :  selectedSize ,
+      color   :    selectedColor,
+      price: product.price,
+      image : product.imageDetails[0].imageUrl,
+      stock:product.stock,
+
+    })
   };
   return (
     <div className="p-4 bg-gray-100 min-h-screen flex flex-col md:flex-row mt-28 text-black">
@@ -87,7 +100,7 @@ const Product = ({ product }) => {
 
         {/* Proceed to Checkout Button */}
         <button
-          onClick={() => proceedToCheckout()}
+          onClick={addToCartHandler}
           className="mt-6 bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
         >
           Proceed to Checkout

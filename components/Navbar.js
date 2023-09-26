@@ -4,7 +4,7 @@ import {
   Bars3Icon,
   MagnifyingGlassIcon,
   ShoppingBagIcon,
-  UserCircleIcon
+  UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import classNames from "classnames";
@@ -17,29 +17,30 @@ const Header = () => {
         "md:h-[88px]"
       )}
     >
-        {/* header inner */}
-      <div className={classNames(
-        "flex top-2 flex-1 items-center justify-between px-[36px] group-hover:text-black",
-        "md:px-[36px]"
-      )}>
+      {/* header inner */}
+      <div
+        className={classNames(
+          "flex top-2 flex-1 items-center justify-between px-[36px] group-hover:text-black",
+          "md:px-[36px]"
+        )}
+      >
         {/* header left */}
-        <div className={classNames(
-            "flex items-center gap-[16px]",
-            "gap-[30px]"
-        )}>
+        <div
+          className={classNames("flex items-center gap-[16px]", "gap-[30px]")}
+        >
           {/* menu */}
           <button type="button" className="flex items-center gap-2">
             <Bars3Icon className="h-6 w-6" />
-            <span className={classNames(
-                "hidden","md:inline-block"
-            )}>Menu</span>
+            <span className={classNames("hidden", "md:inline-block")}>
+              Menu
+            </span>
           </button>
           {/* search */}
           <button type="button" className="flex items-center gap-2">
             <MagnifyingGlassIcon className="h-6 w-6" />
-            <span className={classNames(
-                "hidden","md:inline-block"
-            )}>Search</span>
+            <span className={classNames("hidden", "md:inline-block")}>
+              Search
+            </span>
           </button>
         </div>
         {/* header center */}
@@ -50,28 +51,31 @@ const Header = () => {
           )}
         >
           <Link href="/">
-          <span className=" font-body-Futura font-bold tracking-widest text-xl md:pl-4">
-            Merville
-          </span>
+            <span className=" font-body-Futura font-bold tracking-widest text-xl md:pl-4">
+              Merville
+            </span>
           </Link>
         </div>
         {/* menu right */}
         <div className="flex items-center gap-[10px]">
-          <div className={classNames(
-            "flex items-center gap-[20px] md:gap-[50px]",
-            "md:flex"
-            
-          )}>
+          <div
+            className={classNames(
+              "flex items-center gap-[20px] md:gap-[50px]",
+              "md:flex"
+            )}
+          >
             <button className="flex items-center gap-2">
-                <span className="hidden md:inline">Sign In</span>
-                <UserCircleIcon className="h-6 w-6" />
+              <span className="hidden md:inline">Sign In</span>
+              <UserCircleIcon className="h-6 w-6" />
             </button>
             <button className="flex items-center gap-1">
-            <span className="hidden md:inline">Bag</span>
-            <ShoppingBagIcon className="h-6 w-6" />
+              <Link href="/cart">
+                
+                <span className="hidden md:inline">Bag</span>
+                <ShoppingBagIcon className="h-6 w-6" />
+              </Link>
             </button>
           </div>
-           
         </div>
       </div>
     </header>
