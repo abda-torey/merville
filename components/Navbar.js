@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import {
   Bars3Icon,
@@ -8,8 +7,11 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import classNames from "classnames";
+import { UserButton, auth } from "@clerk/nextjs";
 
 const Header = () => {
+  const { userId } = auth();
+  
   return (
     <header
       className={classNames(
@@ -64,13 +66,18 @@ const Header = () => {
               "md:flex"
             )}
           >
-            <button className="flex items-center gap-2">
-              <span className="hidden md:inline">Sign In</span>
-              <UserCircleIcon className="h-6 w-6" />
-            </button>
+            {!userId && (
+              <Link href="/sign-in">
+                <button className="flex items-center gap-2">
+                  <span className="hidden md:inline">Sign In</span>
+                  <UserCircleIcon className="h-6 w-6" />
+                </button>
+              </Link>
+            )}
+            
+          <UserButton afterSignOutUrl="/"/>
             <button className="flex items-center gap-1">
               <Link href="/cart">
-                
                 <span className="hidden md:inline">Bag</span>
                 <ShoppingBagIcon className="h-6 w-6" />
               </Link>

@@ -1,5 +1,6 @@
 "use client";
-import React, { useContext, useState } from "react";
+import axios from "axios";
+import React, { useContext, useState, useEffect } from "react";
 import CartContext from "@/app/context/CartContext";
 import {
   CheckIcon,
@@ -7,19 +8,45 @@ import {
   QuestionMarkCircleIcon,
   XMarkIcon,
 } from "@heroicons/react/20/solid";
+import { useSearchParams } from "next/navigation";
 
 const Cart = () => {
-  const { addItemToCart, cart,deleteItemFromCart } = useContext(CartContext);
+  const { addItemToCart, cart, deleteItemFromCart } = useContext(CartContext);
   const [selectedQuantities, setSelectedQuantities] = useState({});
+  const searchParams = useSearchParams();
   const updateQuantity = (e, product) => {
     const item = { ...product, quantity: parseInt(e.target.value) };
     if (parseInt(e.target.value) > Number(product.stock)) return;
     addItemToCart(item);
   };
 
-  const amountWithoutTax = cart?.cartItems?.reduce((acc,item) => acc + item.quantity * item.price,0);
-  const tax = (amountWithoutTax * 0.15).toFixed(2)
-  const totalAmount = Number(amountWithoutTax) + Number(tax)
+  const amountWithoutTax = cart?.cartItems?.reduce(
+    (acc, item) => acc + item.quantity * item.price,
+    0
+  );
+  const tax = (amountWithoutTax * 0.15).toFixed(2);
+  const totalAmount = Number(amountWithoutTax) + Number(tax);
+
+  const onCheckOut = async (event) => {
+    event.preventDefault()
+    
+    const response = await axios.post(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/checkout`,
+      {
+        productIds: cart?.cartItems?.map((product) => product.productId),
+      }
+    );
+    
+    window.location = response.data.url
+  };
+  useEffect(() => {
+    if (searchParams.get("success")) {
+      console.log("payment completed.......");
+    }
+    if (searchParams.get("canceled")) {
+      console.log("something went wrong");
+    }
+  }, [searchParams]);
   return (
     <div className="bg-white mt-28">
       <div className="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -92,7 +119,9 @@ const Cart = () => {
                           <button
                             type="button"
                             className="-m-2 inline-flex p-2 text-gray-400 hover:text-gray-500"
-                            onClick={() => deleteItemFromCart(product.productId)}
+                            onClick={() =>
+                              deleteItemFromCart(product.productId)
+                            }
                           >
                             <span className="sr-only">Remove</span>
                             <XMarkIcon className="h-5 w-5" aria-hidden="true" />
@@ -100,26 +129,6 @@ const Cart = () => {
                         </div>
                       </div>
                     </div>
-
-                    {/* <p className="mt-4 flex space-x-2 text-sm text-gray-700">
-                      {product.inStock ? (
-                        <CheckIcon
-                          className="h-5 w-5 flex-shrink-0 text-green-500"
-                          aria-hidden="true"
-                        />
-                      ) : (
-                        <ClockIcon
-                          className="h-5 w-5 flex-shrink-0 text-gray-300"
-                          aria-hidden="true"
-                        />
-                      )}
-
-                      <span>
-                        {product.inStock
-                          ? "In stock"
-                          : `Ships in ${product.leadTime}`}
-                      </span>
-                    </p> */}
                   </div>
                 </li>
               ))}
@@ -141,7 +150,9 @@ const Cart = () => {
             <dl className="mt-6 space-y-4">
               <div className="flex items-center justify-between">
                 <dt className="text-sm text-gray-600">Subtotal</dt>
-                <dd className="text-sm font-medium text-gray-900">${amountWithoutTax}</dd>
+                <dd className="text-sm font-medium text-gray-900">
+                  ${amountWithoutTax}
+                </dd>
               </div>
               <div className="flex items-center justify-between border-t border-gray-200 pt-4">
                 <dt className="flex items-center text-sm text-gray-600">
@@ -183,13 +194,16 @@ const Cart = () => {
                 <dt className="text-base font-medium text-gray-900">
                   Order total
                 </dt>
-                <dd className="text-base font-medium text-gray-900">${totalAmount}</dd>
+                <dd className="text-base font-medium text-gray-900">
+                  ${totalAmount}
+                </dd>
               </div>
             </dl>
 
             <div className="mt-6">
               <button
                 type="submit"
+                onClick={onCheckOut}
                 className="w-full rounded-md border border-transparent bg-indigo-600 px-4 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
               >
                 Checkout
