@@ -1,6 +1,8 @@
 "use client";
+import { useUser } from "@clerk/nextjs";
 import axios from "axios";
 import React, { useContext, useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import CartContext from "@/app/context/CartContext";
 import {
   CheckIcon,
@@ -14,6 +16,10 @@ const Cart = () => {
   const { addItemToCart, cart, deleteItemFromCart } = useContext(CartContext);
   const [selectedQuantities, setSelectedQuantities] = useState({});
   const searchParams = useSearchParams();
+  const { isSignedIn, user } = useUser();
+  const router = useRouter();
+  const isGuest = localStorage.getItem("guestEmail");
+  console.log(user);
   const updateQuantity = (e, product) => {
     const item = { ...product, quantity: parseInt(e.target.value) };
     if (parseInt(e.target.value) > Number(product.stock)) return;
@@ -28,16 +34,47 @@ const Cart = () => {
   const totalAmount = Number(amountWithoutTax) + Number(tax);
 
   const onCheckOut = async (event) => {
-    event.preventDefault()
-    
-    const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/checkout`,
-      {
-        productIds: cart?.cartItems?.map((product) => product.productId),
+    event.preventDefault();
+    if (!isSignedIn && !isGuest) {
+      router.push("/checkoutLogin");
+    } else {
+      let checkoutData = {
+        items: cart?.cartItems?.map((product) => ({
+          productId: product.productId,
+          selectedColor: product.color,
+          selectedSize: product.size,
+          quantity: product.quantity,
+        })),
+      };
+
+      if (isSignedIn) {
+        checkoutData.userId = user.id; // ClerkJS provides the user ID in the user object
+      } else if (isGuest) {
+        checkoutData.guestEmail =
+          isGuest; /* Your logic to retrieve the guest's email here */
       }
-    );
-    
-    window.location = response.data.url
+      // const response = await axios.post(
+      //   `${process.env.NEXT_PUBLIC_API_URL}/api/checkout`,
+      //   {
+      //     items: cart?.cartItems?.map((product) => ({
+      //       productId: product.productId,
+      //       selectedColor: product.color,
+      //       selectedSize: product.size,
+      //       quantity: product.quantity,
+      //     })),
+      //   }
+      // );
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/checkout`,
+        checkoutData
+      );
+
+      if (response && response.status === 200) {
+        // Order processed successfully
+        localStorage.removeItem("guestEmail");
+        window.location = response.data.url;
+      }
+    }
   };
   useEffect(() => {
     if (searchParams.get("success")) {
