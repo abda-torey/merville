@@ -6,7 +6,7 @@ import Featured from "@/components/Featured";
 import Thirdrow from "@/components/Thirdrow";
 import FourthRow from "@/components/FourthRow";
 import FifthRow from "@/components/FifthRow";
-import Footer from "@/components/Footer";
+
 
 
 export default function Home() {
@@ -45,7 +45,7 @@ export default function Home() {
       <Thirdrow />
       <FourthRow />
       <FifthRow />
-      <Footer />
+     
     </main>
   );
 }

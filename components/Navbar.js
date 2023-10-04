@@ -15,8 +15,8 @@ const Header = () => {
   return (
     <header
       className={classNames(
-        "fixed  left-0 w-full h-[56px] flex items-center z-10 bg-black  hover:bg-white transition-all duration-[.4s] ease-in-out group",
-        "md:h-[88px]"
+        "fixed  left-0 w-full h-[50px] flex items-center z-10 bg-black  hover:bg-white transition-all duration-[.4s] ease-in-out group",
+        "md:h-[70px]"
       )}
     >
       {/* header inner */}

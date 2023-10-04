@@ -29,24 +29,26 @@ const MensWear = ({ categories }) => {
               className={`relative flex flex-col items-center justify-center rounded overflow-hidden bg-gray-100 ${
                 idx === 0
                   ? "md:row-span-2 h-[calc(2*18rem)] md:h-auto"
-                  : "h-[18rem] py-7 pt-10"
+                  : "h-[18rem] py-7"
               }`}
             >
               <Image
                 src={category.imageDetails[0].imageUrl}
                 alt={category.name}
-                width={100}
-                height={100}
-                className=" w-60 h-60"
+                width={250}
+                height={250}
+                className=" w-44 h-44 object-contain" // Add this to make sure image respects the width and height given
               />
 
-              <div className="mt-2 text-center mb-7">
-                <h2 className="text-black text-xl ">{category.name}</h2>
+              <div className="text-center my-2">
+                <h2 className="text-black font-medium text-xl mb-2">
+                  {category.name}
+                </h2>
                 <Link
                   href={`/mens-wear/${category.id}`}
-                  className="text-black text-xs underline"
+                  className="text-black font-normal text-xs tracking-tighter underline"
                 >
-                  Discover More
+                  DISCOVER MORE
                 </Link>
               </div>
             </div>
