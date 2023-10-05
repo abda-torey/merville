@@ -26,6 +26,9 @@ module.exports = {
         print: {raw: 'print'},
         screen: {raw: 'screen'},
       },
+      colors: {
+        customColor: '#e9e9e9',
+      },
     },
   },
  
