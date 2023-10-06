@@ -13,7 +13,6 @@ const Footer = () => {
           <span className="mr-24">
             FREE ORDERS ABOVE 200 FREE FOR RED MEMBERS
           </span>
-
           {/* Duplicated texts */}
           <span className="mr-24">
             FREE ORDERS ABOVE 200 FREE FOR RED MEMBERS

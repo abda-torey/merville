@@ -2,6 +2,26 @@
 import CartContext from "@/app/context/CartContext";
 import React, { useState, useContext } from "react";
 import Image from "next/image";
+import { Disclosure } from "@headlessui/react";
+import { ChevronDownIcon } from "@heroicons/react/solid"; // You might need to install @heroicons/react
+
+const sampleProductDetails = {
+  details: [
+    "Made with 100% organic cotton.",
+    "Slim fit design.",
+    "Button-up collar.",
+    "Machine washable.",
+    "Available in multiple sizes and colors.",
+  ],
+
+  returnsInfo: [
+    "Returns accepted within 30 days of purchase.",
+    "Items must be unused and in the original packaging.",
+    "Return shipping fees are the responsibility of the customer.",
+    "Refunds will be processed within 7-10 business days after receiving the return.",
+    "Exchanges are subject to product availability.",
+  ],
+};
 
 const Product = ({ product }) => {
   const [selectedSize, setSize] = useState(null);
@@ -29,7 +49,7 @@ const Product = ({ product }) => {
   return (
     <div className="flex flex-col  mb-8 mt-24 md:flex-row justify-center items-center md:space-x-2 mx-3">
       {/* First Div */}
-      <div className="flex-1 min-h-[500px] md:w-1/3 p-4 bg-customColor shadow-md rounded flex justify-center items-center">
+      <div className="flex-1 min-h-[200px] md:min-h-[700px] md:w-1/3 p-4 bg-customColor shadow-md rounded flex justify-center items-center">
         <Image
           src={product.imageDetails[0].imageUrl}
           alt="Description"
@@ -40,7 +60,7 @@ const Product = ({ product }) => {
       </div>
 
       {/* Second Div */}
-      <div className="flex-1 min-h-[500px] md:w-1/3 p-4 bg-customColor shadow-md rounded flex justify-center items-center">
+      <div className="flex-1 min-h-[200px] md:min-h-[700px] md:w-1/3 p-4 bg-customColor shadow-md rounded flex justify-center items-center">
         <Image
           src={product.imageDetails[1].imageUrl}
           alt="Description"
@@ -51,9 +71,9 @@ const Product = ({ product }) => {
       </div>
 
       {/* Third Div */}
-      <div className="w-full md:w-1/4 p-4 min-h-[500px] text-gray-600 bg-white flex flex-col items-start justify-start md:px-10">
+      <div className="w-full md:w-1/4 p-4 min-h-[200px] md:min-h-[700px] text-gray-600 bg-white flex flex-col items-start justify-start md:px-10">
         <h2 className="text-lg font-body font-medium">{product.name}</h2>
-        <p className="text-sm font-medium tracking-widest mb-8">
+        <p className="text-sm font-medium tracking-widest mb-4">
           ${product.price}
         </p>
 
@@ -80,7 +100,7 @@ const Product = ({ product }) => {
             value={selectedSize}
             className="appearance-none text-sm w-40 pl-2 pr-8 py-1 border border-gray-300 relative bg-transparent"
           >
-            <option value="" selected disabled >
+            <option value="" selected disabled>
               Select size
             </option>
             {product.sizes.map((size, index) => (
@@ -103,10 +123,62 @@ const Product = ({ product }) => {
 
         <button
           onClick={addToCartHandler}
-          className="bg-black text-white text-xs w-full py-2"
+          className="bg-black mb-10 text-white text-xs w-full py-2"
         >
           ADD TO BAG
         </button>
+
+        {/* Disclosure panels */}
+        <div className="">
+          {[
+            {
+              title: "Product Details and Sizing",
+              items: sampleProductDetails.details,
+            },
+            {
+              title: "Delivery and Returns",
+              items: sampleProductDetails.returnsInfo,
+            },
+          ].map((panel, idx) => (
+            <Disclosure
+              as="div"
+              key={idx}
+              className={idx < panel.length - 1 ? "border-b" : " mb-5"}
+            >
+              {({ open }) => (
+                <>
+                  <Disclosure.Button className="flex justify-between items-center w-full py-2  text-left border-b border-gray-200 space-x-8">
+                    <span className="text-xs font-medium">{panel.title}</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      className={`${
+                        open ? "transform rotate-180" : ""
+                      } w-5 h-5 text-gray-500`}
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M12.53 16.28a.75.75 0 01-1.06 0l-7.5-7.5a.75.75 0 011.06-1.06L12 14.69l6.97-6.97a.75.75 0 111.06 1.06l-7.5 7.5z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </Disclosure.Button>
+                  <Disclosure.Panel
+                    as="ul"
+                    className="mt-2 space-y-2 px-4 py-2"
+                  >
+                    {panel.items.map((item, idx) => (
+                      <li key={idx} className="text-xs">
+                        {item}
+                      </li>
+                    ))}
+                  </Disclosure.Panel>
+                </>
+              )}
+            </Disclosure>
+          ))}
+        </div>
       </div>
     </div>
   );
