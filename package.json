@@ -11,10 +11,12 @@
   "dependencies": {
     "@clerk/nextjs": "^4.24.2",
     "@headlessui/react": "^1.7.17",
+    "@headlessui/tailwindcss": "^0.2.0",
     "@heroicons/react": "^2.0.18",
     "autoprefixer": "10.4.14",
     "axios": "^1.5.1",
     "classnames": "^2.3.2",
+    "countries-list": "^3.0.5",
     "eslint": "8.45.0",
     "eslint-config-next": "13.4.10",
     "next": "13.4.10",

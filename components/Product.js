@@ -47,7 +47,7 @@ const Product = ({ product }) => {
     });
   };
   return (
-    <div className="flex flex-col  mb-8 mt-24 md:flex-row justify-center items-center md:space-x-2 mx-3">
+    <div className="flex flex-col  mb-8 mt-24 md:flex-row justify-center items-center space-y-3 md:space-y-0 md:space-x-2 mx-3">
       {/* First Div */}
       <div className="flex-1 min-h-[200px] md:min-h-[700px] md:w-1/3 p-4 bg-customColor shadow-md rounded flex justify-center items-center">
         <Image
@@ -66,12 +66,12 @@ const Product = ({ product }) => {
           alt="Description"
           width={500}
           height={500}
-          className="rounded-lg"
+          className=""
         />
       </div>
 
       {/* Third Div */}
-      <div className="w-full md:w-1/4 p-4 min-h-[200px] md:min-h-[700px] text-gray-600 bg-white flex flex-col items-start justify-start md:px-10">
+      <div className="w-full md:w-1/4 p-6 min-h-[200px] md:min-h-[700px] text-gray-600 bg-white flex flex-col items-start justify-start md:px-10">
         <h2 className="text-lg font-body font-medium">{product.name}</h2>
         <p className="text-sm font-medium tracking-widest mb-4">
           ${product.price}
@@ -123,7 +123,7 @@ const Product = ({ product }) => {
 
         <button
           onClick={addToCartHandler}
-          className="bg-black mb-10 text-white text-xs w-full py-2"
+          className="bg-black mb-10 text-white text-xs w-48 md:w-full py-2"
         >
           ADD TO BAG
         </button>
