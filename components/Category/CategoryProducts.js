@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-const CategoryProducts = ({ products }) => {
+const CategoryProducts = ({ products, colors, sizes }) => {
   const [showFilters, setShowFilters] = useState(false);
   return (
     <div className="bg-white mt-16 mb-2">
@@ -72,7 +72,7 @@ const CategoryProducts = ({ products }) => {
             <div className="grid grid-cols-3 gap-4">
               <div>
                 <h3 className="mb-2 font-bold">Color</h3>
-                {["Green", "Blue", "Yellow", "Orange"].map((color) => (
+                {colors?.map((color) => (
                   <div className="flex items-center">
                     <input type="checkbox" id={color} className="mr-3 mt-4" />
                     <label htmlFor={color} className="mr-3 mt-4">
@@ -83,7 +83,7 @@ const CategoryProducts = ({ products }) => {
               </div>
               <div>
                 <h3 className="mb-2 font-bold">Size</h3>
-                {["sm", "xl", "l", "xxl"].map((size) => (
+                {sizes?.map((size) => (
                   <div className="flex items-center">
                     <input type="checkbox" id={size} className="mr-3 mt-4" />
                     <label htmlFor={size} className="mr-3 mt-4">
@@ -119,7 +119,9 @@ const CategoryProducts = ({ products }) => {
             key={product.id}
             className="bg-gray-200 text-black p-4  flex flex-col items-center"
           >
-            <img
+            <Image
+            width={100}
+            height={100}
               src={product.imageDetails[0].imageUrl}
               alt={product.name}
               className="w-1/2 mt-10"
