@@ -25,8 +25,12 @@ const CategoryProducts = ({ products, colors, sizes }) => {
       <div className="sticky top-12 md:top-14 z-10 bg-white shadow-sm">
         <div className="flex justify-between items-center text-black p-2 border-b pb-4">
           <div className="flex space-x-1 md:space-x-2">
-            <span className="text-black text-xs md:text-sm font-medium">Men |</span>
-            <span className="text-black text-xs md:text-sm font-medium">Men FootWear</span>
+            <span className="text-black text-xs md:text-sm font-medium">
+              Men |
+            </span>
+            <span className="text-black text-xs md:text-sm font-medium">
+              Men FootWear
+            </span>
           </div>
           <div className="flex space-x-1 md:space-x-4 mr-2 md:mr-5">
             <button
@@ -73,10 +77,14 @@ const CategoryProducts = ({ products, colors, sizes }) => {
               <div>
                 <h3 className="mb-2 font-bold">Color</h3>
                 {colors?.map((color) => (
-                  <div className="flex items-center">
-                    <input type="checkbox" id={color} className="mr-3 mt-4" />
-                    <label htmlFor={color} className="mr-3 mt-4">
-                      {color}
+                  <div className="flex items-center" key={color.id}>
+                    <input
+                      type="checkbox"
+                      id={color.name}
+                      className="mr-3 mt-4"
+                    />
+                    <label htmlFor={color.name} className="mr-3 mt-4">
+                      {color.name}
                     </label>
                   </div>
                 ))}
@@ -84,13 +92,18 @@ const CategoryProducts = ({ products, colors, sizes }) => {
               <div>
                 <h3 className="mb-2 font-bold">Size</h3>
                 {sizes?.map((size) => (
-                  <div className="flex items-center">
-                    <input type="checkbox" id={size} className="mr-3 mt-4" />
-                    <label htmlFor={size} className="mr-3 mt-4">
-                      {size}
+                  <div className="flex items-center" key={size.id}>
+                    <input
+                      type="checkbox"
+                      id={size.name}
+                      className="mr-3 mt-4"
+                    />
+                    <label htmlFor={size.name} className="mr-3 mt-4">
+                      {size.name}
                     </label>
                   </div>
                 ))}
+              
               </div>
             </div>
             <div className="flex mt-8 items-center justify-center">
@@ -120,8 +133,8 @@ const CategoryProducts = ({ products, colors, sizes }) => {
             className="bg-gray-200 text-black p-4  flex flex-col items-center"
           >
             <Image
-            width={100}
-            height={100}
+              width={100}
+              height={100}
               src={product.imageDetails[0].imageUrl}
               alt={product.name}
               className="w-1/2 mt-10"
