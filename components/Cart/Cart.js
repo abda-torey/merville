@@ -11,6 +11,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/20/solid";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 
 const Cart = () => {
   const { addItemToCart, cart, deleteItemFromCart } = useContext(CartContext);
@@ -103,9 +104,11 @@ const Cart = () => {
               {cart?.cartItems?.map((product, productIdx) => (
                 <li key={product.productId} className="flex py-6 sm:py-10">
                   <div className="flex-shrink-0">
-                    <img
+                    <Image
                       src={product.image}
                       alt={product.name}
+                      width={24}
+                      height={24}
                       className="h-24 w-24 rounded-md object-cover object-center sm:h-48 sm:w-48"
                     />
                   </div>

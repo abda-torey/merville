@@ -12,7 +12,7 @@ const GuestEmail = () => {
     // Save the email somewhere (e.g., in local storage or context) 
     localStorage.setItem('guestEmail', guestEmail);
     console.log(guestEmail)
-    router.push('/cart');
+    router.push('/checkoutPage');
   };
 
   return (
