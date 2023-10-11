@@ -107,9 +107,9 @@ const Cart = () => {
                     <Image
                       src={product.image}
                       alt={product.name}
-                      width={24}
-                      height={24}
-                      className="h-24 w-24 rounded-md object-cover object-center sm:h-48 sm:w-48"
+                      width={500}
+                      height={500}
+                      className="h-20 w-20 rounded-md object-cover object-center "
                     />
                   </div>
 
