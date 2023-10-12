@@ -11,7 +11,7 @@ const MensWear = ({ categories }) => {
           src="/menswear.jpg"
           width={100}
           height={100}
-          alt="mens wear image"
+          alt="mens wear images"
           className="w-full h-full object-cover"
         />
         <div className="absolute bottom-24 left-20">
