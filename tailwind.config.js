@@ -8,9 +8,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        body: [
-          "Futura",
-        ],
+        futura: ["var(--font-futura)"],
       },
       boxShadow: {
         border: "inset  0 0 0 1px #fff",
