@@ -59,7 +59,7 @@ const Header = () => {
     <header
       className={classNames(
         isHeaderVisible ? "block" : "hidden", // This line toggles header visibility
-        "fixed left-0 w-full h-[50px] flex items-center z-10 bg-black transition-all duration-[.4s] ease-in-out group",
+        "fixed left-0 w-full h-[50px] flex items-center z-20 bg-black transition-all duration-[.4s] ease-in-out group",
         "md:h-[70px]"
       )}
     >
@@ -93,13 +93,13 @@ const Header = () => {
             </span>
           </button>
           <div
-            className={`fixed inset-0 z-20 bg-black opacity-50 ${
+            className={`fixed inset-0 z-30 bg-black opacity-50 ${
               isOpen ? "block" : "hidden"
             }`}
             onClick={toggleDrawer}
           ></div>
           <aside
-            className={`transform top-0 left-0 w-64 bg-white text-black fixed h-full overflow-auto z-30 transition-transform duration-1000 ease-in-out ${
+            className={`transform top-0 left-0 w-64 bg-white text-black fixed h-full overflow-auto z-40 transition-transform duration-1000 ease-in-out ${
               isOpen ? "translate-x-0" : "-translate-x-full"
             }`}
           >
