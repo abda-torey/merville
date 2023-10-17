@@ -49,18 +49,18 @@ const Product = ({ product }) => {
   return (
     <div className="flex flex-col  mb-8 mt-24 md:flex-row justify-center items-center space-y-3 md:space-y-0 md:space-x-2 mx-3">
       {/* First Div */}
-      <div className="flex-1 min-h-[200px] md:min-h-[700px] md:w-1/3 p-4 bg-customColor shadow-md rounded flex justify-center items-center">
+      <div className="flex-1 min-h-[200px] md:min-h-[700px] md:w-1/3 p-4 bg-customColor shadow-md  flex justify-center items-center">
         <Image
           src={product.imageDetails[0].imageUrl}
           alt="Description"
           width={500}
           height={500}
-          className="rounded-lg"
+          className=""
         />
       </div>
 
       {/* Second Div */}
-      <div className="flex-1 min-h-[200px] md:min-h-[700px] md:w-1/3 p-4 bg-customColor shadow-md rounded flex justify-center items-center">
+      <div className="flex-1 min-h-[200px] md:min-h-[700px] md:w-1/3 p-4 bg-customColor shadow-md  flex justify-center items-center">
         <Image
           src={product.imageDetails[1].imageUrl}
           alt="Description"
