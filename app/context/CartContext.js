@@ -15,7 +15,7 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  const addItemToCart =  ({
+  const addItemToCart = ({
     productId,
     name,
     size,
@@ -51,11 +51,26 @@ export const CartProvider = ({ children }) => {
     setCartToState();
   };
 
+  const updateQuantity = (productId, qty) => {
+    const updatedCartItems = cart.cartItems.map((item) => {
+      if (item.productId === productId) {
+        return { ...item, quantity: qty };
+      }
+      return item;
+    });
+
+    localStorage.setItem(
+      "cart",
+      JSON.stringify({ cartItems: updatedCartItems })
+    );
+    setCartToState();
+  };
+
   const deleteItemFromCart = (id) => {
-    const newCartItems = cart?.cartItems?.filter((i) => i.productId !== id)
+    const newCartItems = cart?.cartItems?.filter((i) => i.productId !== id);
     localStorage.setItem("cart", JSON.stringify({ cartItems: newCartItems }));
     setCartToState();
-  }
+  };
 
   useEffect(() => {
     setCartToState();
@@ -64,7 +79,9 @@ export const CartProvider = ({ children }) => {
     <CartContext.Provider
       value={{
         cart,
-        addItemToCart,deleteItemFromCart,
+        addItemToCart,
+        deleteItemFromCart,
+        updateQuantity,
       }}
     >
       {children}

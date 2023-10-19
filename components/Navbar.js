@@ -12,6 +12,7 @@ import { UserButton } from "@clerk/nextjs";
 import { useUser } from "@clerk/nextjs";
 import localFont from "next/font/local";
 import Cart from "./Cart/Cart";
+import CartSideBar from "./Cart/CartSideBar";
 
 const futuraMedium = localFont({
   src: "../public/fonts/futura medium bt.ttf",
@@ -275,32 +276,11 @@ const Header = ({ categories }) => {
               onClick={toggleDrawerBag}
             ></div>
             <aside
-              className={`transform top-0 right-0 w-52 md:w-64 bg-white text-black fixed h-full overflow-auto z-40 transition-transform duration-1000 ease-in-out ${
+              className={`transform top-0 right-0 w-64 md:w-80 bg-white text-black fixed h-full overflow-auto z-40 transition-transform duration-1000 ease-in-out ${
                 isBagOpen ? "translate-x-0" : "translate-x-full"
               }`}
             >
-              <div>
-                <div className="flex items-start justify-center pt-5   gap-8">
-                <h3>Shopping Bag</h3>
-                <button className="text-2xl" onClick={() => toggleDrawerBag()}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="w-6 h-6"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                </svg>
-              </button>
-
-                </div>
-              </div>
+              <CartSideBar toggleDrawerBag={toggleDrawerBag} />
             </aside>
           </div>
         </div>
