@@ -30,23 +30,23 @@ const CartSideBar = ({ toggleDrawerBag }) => {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="currentColor"
-            class="w-5 h-5"
+            className="w-5 h-5"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M6 18L18 6M6 6l12 12"
             />
           </svg>
         </button>
       </div>
       {cart?.cartItems?.map((product, productIdx) => (
-        <div className="flex mt-7 ">
+        <div className="flex mt-7 " key={productIdx}>
           {/* Product Image */}
           <div className=" w-[180px] p-4 bg-customColor flex items-center justify-center">
-            <Image src={product.image} width={500} height={500} />
+            <Image src={product.image} width={500} height={500} alt={product.name} className=" w-48"/>
           </div>
 
           {/* Product Details */}
@@ -119,9 +119,9 @@ const CartSideBar = ({ toggleDrawerBag }) => {
           </span>
         </div>
         <div className="flex items-center justify-center mt-5">
-          <div className="flex justify-between space-x-4 ">
-            <button className="bg-black text-white px-4 py-2 ">VIEW BAG</button>
-            <button className="bg-black text-white px-4 py-2 ">CHECKOUT</button>
+          <div className="flex justify-between space-x-4 font-futura ">
+            <button className = {`${futuraMedium.className} bg-black text-white text-xs tracking-tighter px-4 py-2 w-24`}>VIEW BAG</button>
+            <button className={`${futuraMedium.className} bg-black text-white text-xs tracking-tighter px-4 py-2 w-24`}>CHECKOUT</button>
           </div>
         </div>
       </div>

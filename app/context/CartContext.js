@@ -25,7 +25,7 @@ export const CartProvider = ({ children }) => {
     stock,
     quantity = 1,
   }) => {
-    console.log(productId, name, size, color, price, image, stock);
+    // check if a product with same id and color and size already exists
     const item = {
       productId,
       name,
@@ -37,16 +37,25 @@ export const CartProvider = ({ children }) => {
       quantity,
     };
     const isItemExist = cart?.cartItems?.find(
-      (i) => i.productId === item.productId
+      (i) =>
+        i.productId === item.productId &&
+        i.color === item.color &&
+        i.size === item.size
     );
+
     let newCartItems;
     if (isItemExist) {
       newCartItems = cart?.cartItems?.map((i) =>
-        i.productId === isItemExist.productId ? item : i
+        i.productId === isItemExist.productId &&
+        i.color === isItemExist.color &&
+        i.size === isItemExist.size
+          ? { ...i, quantity: i.quantity + item.quantity }
+          : i
       );
     } else {
       newCartItems = [...(cart?.cartItems || []), item];
     }
+
     localStorage.setItem("cart", JSON.stringify({ cartItems: newCartItems }));
     setCartToState();
   };

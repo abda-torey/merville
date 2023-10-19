@@ -30,12 +30,7 @@ const Product = ({ product }) => {
   const { addItemToCart } = useContext(CartContext);
   console.log(product);
   const addToCartHandler = () => {
-    console.log("Selected Product Details:", {
-      productId: product.id,
-      selectedSize,
-      selectedColor,
-      quantity,
-    });
+    
     addItemToCart({
       productId: product.id,
       name: product.name,
@@ -100,7 +95,7 @@ const Product = ({ product }) => {
             value={selectedSize}
             className="appearance-none text-sm w-40 pl-2 pr-8 py-1 border border-gray-300 relative bg-transparent"
           >
-            <option value="" selected disabled>
+            <option  value="" disabled>
               Select size
             </option>
             {product.sizes.map((size, index) => (
