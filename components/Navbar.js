@@ -30,8 +30,12 @@ const Header = ({ categories }) => {
   const toggleSubcategories = () => setShowSubcategories(!showSubcategories);
   const { isSignedIn, user } = useUser();
   const SCROLL_THRESHOLD = 20;
- 
+
   useEffect(() => {
+    // Ensure document and window objects are defined
+    if (typeof document === "undefined" || typeof window === "undefined") {
+      return;
+    }
     if (isOpen || isBagOpen) {
       // Prevent scrolling when either drawer is open
       document.body.style.overflow = "hidden";
@@ -60,7 +64,7 @@ const Header = ({ categories }) => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [lastScrollTop,isOpen, isBagOpen]);
+  }, [lastScrollTop, isOpen, isBagOpen]);
   const toggleDrawer = () => {
     setIsOpen((prev) => !prev);
     setShowSubcategories(false);
@@ -70,18 +74,18 @@ const Header = ({ categories }) => {
     setIsBagOpen((prev) => !prev);
   };
 
-  if (isOpen) {
-    // Prevent scrolling when the menu is open
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "auto";
-  }
-  if (isBagOpen) {
-    // Prevent scrolling when the menu is open
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "auto";
-  }
+  // if (isOpen) {
+  //   // Prevent scrolling when the menu is open
+  //   document.body.style.overflow = "hidden";
+  // } else {
+  //   document.body.style.overflow = "auto";
+  // }
+  // if (isBagOpen) {
+  //   // Prevent scrolling when the menu is open
+  //   document.body.style.overflow = "hidden";
+  // } else {
+  //   document.body.style.overflow = "auto";
+  // }
   return (
     <header
       className={classNames(
@@ -276,8 +280,15 @@ const Header = ({ categories }) => {
               onClick={toggleDrawerBag}
             ></div>
             <aside
-              className={`transform top-0 right-0 w-64 md:w-80 bg-white text-black fixed h-full overflow-auto z-40 transition-transform duration-1000 ease-in-out ${
+              className={`hidden md:block transform top-0 right-0 w-64 md:w-[360px] bg-white text-black fixed h-full overflow-auto z-40 transition-transform duration-1000 ease-in-out ${
                 isBagOpen ? "translate-x-0" : "translate-x-full"
+              }`}
+            >
+              <CartSideBar toggleDrawerBag={toggleDrawerBag} />
+            </aside>
+            <aside
+              className={`md:hidden block transform bottom-0 right-0 w-full md:w-[360px] bg-white text-black fixed h-[600px] overflow-auto z-40 transition-transform duration-1000 ease-in-out ${
+                isBagOpen ? "translate-y-0" : "translate-y-full"
               }`}
             >
               <CartSideBar toggleDrawerBag={toggleDrawerBag} />

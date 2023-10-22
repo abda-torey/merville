@@ -60,9 +60,9 @@ export const CartProvider = ({ children }) => {
     setCartToState();
   };
 
-  const updateQuantity = (productId, qty) => {
+  const updateQuantity = (productId,color,size, qty) => {
     const updatedCartItems = cart.cartItems.map((item) => {
-      if (item.productId === productId) {
+      if (item.productId === productId && item.color === color && item.size === size) {
         return { ...item, quantity: qty };
       }
       return item;
@@ -75,11 +75,14 @@ export const CartProvider = ({ children }) => {
     setCartToState();
   };
 
-  const deleteItemFromCart = (id) => {
-    const newCartItems = cart?.cartItems?.filter((i) => i.productId !== id);
+  const deleteItemFromCart = (productId, color, size) => {
+    const newCartItems = cart?.cartItems?.filter(
+      (i) => !(i.productId === productId && i.color === color && i.size === size)
+    );
     localStorage.setItem("cart", JSON.stringify({ cartItems: newCartItems }));
     setCartToState();
-  };
+};
+
 
   useEffect(() => {
     setCartToState();
