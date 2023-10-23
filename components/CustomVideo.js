@@ -65,7 +65,7 @@ useEffect(() => {
         </button>
     </div>
       <div className="absolute bottom-8 left-2 md:bottom-4 md:left-0 lg:bottom-4 lg:left-20 w-20 flex space-x-2 items-center gap-6  bg-opacity-60 p-2">
-        <button onClick={toggleMute} className="text-white focus:outline-none">
+        <button onClick={toggleMute} className="text-white focus:outline-none p-2">
           {isMuted ? (
            <SpeakerXMarkIcon className="h-5 w-5" />
           ) : (
@@ -75,7 +75,7 @@ useEffect(() => {
        
         <button
           onClick={togglePlayPause}
-          className="text-white focus:outline-none"
+          className="text-white focus:outline-none p-2"
         >
           
           {isPlaying ? (
