@@ -65,6 +65,7 @@ const Thirdrow = () => {
         interval={4000}
         transitionTime={0}
         infiniteLoop
+        swipeable={false} // Disable swipe gestures on mobile
       >
         {media.map((item, index) => {
           return (
