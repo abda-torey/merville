@@ -29,7 +29,7 @@ const CustomVideo = () => {
     setIsPlaying(false);
 };
   return (
-    <div className="relative h-[650px] w-full md:h-screen ">
+    <div className="relative w-full h-screen ">
       <video
         muted
         autoPlay

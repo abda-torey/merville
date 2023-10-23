@@ -59,7 +59,7 @@ const CarouselComponent = ({ media }) => {
   };
 
   return (
-    <div className="relative h-screen">
+    <div className="relative min-h-screen">
       <Carousel
         autoPlay
         interval={4000}
@@ -71,14 +71,15 @@ const CarouselComponent = ({ media }) => {
         renderArrowPrev={customPrevArrow}
         renderArrowNext={customNextArrow}
         renderIndicator={renderIndicator}
+      
       >
         {media.map((item, index) => {
           return item.type === "video" ? (
             <CustomVideo key={index} />
           ) : (
-            <div key={index}>
+            <div key={index} >
               <div>
-                <Image src={item.src} alt="" layout="fill" objectFit="cover" />
+                <Image src={item.src} alt=""  fill style={{objectFit:"cover"}} />
               </div>
               {/* Gradient Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
