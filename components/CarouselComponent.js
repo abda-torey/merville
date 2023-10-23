@@ -65,6 +65,7 @@ const CarouselComponent = ({ media }) => {
         interval={4000}
         transitionTime={0}
         infiniteLoop
+        swipeable={false} // Disable swipe gestures on mobile
         showArrows={true}
         showThumbs={false}
         renderArrowPrev={customPrevArrow}
