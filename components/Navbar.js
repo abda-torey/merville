@@ -74,18 +74,6 @@ const Header = ({ categories }) => {
     setIsBagOpen((prev) => !prev);
   };
 
-  // if (isOpen) {
-  //   // Prevent scrolling when the menu is open
-  //   document.body.style.overflow = "hidden";
-  // } else {
-  //   document.body.style.overflow = "auto";
-  // }
-  // if (isBagOpen) {
-  //   // Prevent scrolling when the menu is open
-  //   document.body.style.overflow = "hidden";
-  // } else {
-  //   document.body.style.overflow = "auto";
-  // }
   return (
     <header
       className={classNames(
