@@ -1,6 +1,18 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { ChevronUpIcon } from "@heroicons/react/24/solid";
+import Image from "next/image";
 const Footer = () => {
+  const [openSection, setOpenSection] = useState(null);
+
+  const toggleSection = (section) => {
+    if (openSection === section) {
+      setOpenSection(null); // Close the currently open section
+    } else {
+      setOpenSection(section); // Open the clicked section
+    }
+  };
+
   return (
     <footer className="bg-black text-white p-2">
       {/* Marquee */}
@@ -29,21 +41,50 @@ const Footer = () => {
       {/* Columns */}
       <div className="flex flex-col md:flex-row gap-2  md:gap-8 justify-between">
         {/* First Column */}
-        <div className=" ml-9">
+        <div className=" hidden md:block ml-9">
           {/* <h3 className="font-extrabold tracking-widest text-lg ml-8 mb-4 opacity-60">
             Merville
           </h3> */}
-          <img src="Merville.png" alt="Melville1 Logo" className=" w-20 h-auto" />
+          <Image
+            src="/Merville.png"
+            alt="Melville1 Logo"
+            width={500}
+            height={500}
+            className=" w-20 h-auto"
+          />
 
           <img src="logo8.png" alt="Melville1 Logo" className=" w-32 h-auto" />
         </div>
 
         {/* Second Column */}
-        <div className=" mt-6">
-          <h3 className="font-extrabold tracking-widest text-lg mb-4 opacity-60">
-            MAY WE HELP YOU
+        <div className=" ml-2 md:ml-0 mt-6 border-b md:border-b-0 ">
+          <h3
+            onClick={() => toggleSection("client")}
+            className="font-medium ml-2 mr-2 md:mr-0 md:ml-0 tracking-widest text-lg mb-4 flex justify-between "
+          >
+            CLIENT SERVICE
+            <span className="ml-2 md:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 4.5v15m7.5-7.5h-15"
+                />
+              </svg>
+            </span>
           </h3>
-          <ul className="space-y-2 font-medium text-xs tracking-wider opacity-60">
+          <ul
+            className={`space-y-2 font-medium text-xs tracking-wider ml-10 mb-4 md:mb-0 md:ml-0 ${
+              openSection === "client" ? "block" : "hidden md:block"
+            }`}
+          >
             <li>
               <a href="#" className="hover:underline">
                 FAQs
@@ -74,11 +115,34 @@ const Footer = () => {
 
         {/* Third Column */}
         <div>
-          <div className="mt-6">
-            <h3 className="font-extrabold tracking-widest text-lg mb-4 opacity-60">
+          <div className="ml-2 md:ml-0 mt-6 border-b md:border-b-0 ">
+            <h3
+              onClick={() => toggleSection("company")}
+              className="font-medium ml-2 mr-2 md:mr-0 md:ml-0 tracking-widest text-lg mb-4 flex justify-between "
+            >
               THE COMPANY
+              <span className="ml-2 md:hidden">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 4.5v15m7.5-7.5h-15"
+                  />
+                </svg>
+              </span>
             </h3>
-            <ul className="space-y-2 font-medium text-xs tracking-wider opacity-60">
+            <ul
+              className={`space-y-2 font-medium text-xs tracking-wider ml-10 mb-4 md:mb-0 md:ml-0 ${
+                openSection === "company" ? "block" : "hidden md:block"
+              }`}
+            >
               <li>
                 <a href="#" className="hover:underline">
                   About Merville
@@ -109,12 +173,34 @@ const Footer = () => {
         </div>
 
         {/* Fourth Column */}
-        <div className="mt-6">
-          <h3 className=" text-lg mb-4 font-extrabold tracking-widest opacity-60">
+        <div className="ml-2 md:ml-0 mt-6 border-b md:border-b-0 ">
+          <h3
+            onClick={() => toggleSection("social")}
+            className="font-medium ml-2 mr-2 md:mr-0 md:ml-0 tracking-widest text-lg mb-4 flex justify-between "
+          >
             Find Us On
+            <span className="ml-2 md:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 4.5v15m7.5-7.5h-15"
+                />
+              </svg>
+            </span>
           </h3>
-          <div className="flex flex-col gap-1 font-medium text-xs tracking-wider opacity-60">
-            {/* Replace these with actual icons */}
+          <div
+            className={`flex flex-col gap-1 font-medium text-xs tracking-wider opacity-60 ml-10 mb-4 md:mb-0 md:ml-0 ${
+              openSection === "social" ? "block" : "hidden md:block"
+            } `}
+          >
             <div className="flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -189,26 +275,51 @@ const Footer = () => {
         </div>
 
         {/* Fifth Column - Newsletter Signup */}
-        <div className="mt-6 w-96">
-          <h3 className="font-extrabold text-lg mb-4 tracking-widest opacity-60 ">
-            SIGN UP MERVILLE UPDATES
+        <div className="mt-6 w-full  mr-2 md:mr-0 ml-2 md:ml-0  border-b md:border-b-0 ">
+          <h3
+            onClick={() => toggleSection("updates")}
+            className="font-medium ml-2 mr-4 md:mr-0 md:ml-0 tracking-widest text-lg mb-4 flex justify-between "
+          >
+            Sign Up For Updates
+            <span className="ml-2 md:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 4.5v15m7.5-7.5h-15"
+                />
+              </svg>
+            </span>
           </h3>
-          <p className="mb-4 font-medium text-xs tracking-wider opacity-60">
-            By entering your email address below, you consent to recieving our
-            newsletter with access to our latest collections, events and
-            Initiatives. More details on this are provided in our privacy
-            policy.
-          </p>
+          <div
+            className={` ml-2   mb-4 md:mb-0 md:ml-0 ${
+              openSection === "updates" ? "block" : "hidden md:block"
+            }`}
+          >
+            <p className="mb-4 mr-2 font-medium text-xs tracking-wider ">
+              By entering your email address below, you consent to recieving our
+              newsletter with access to our latest collections, events and
+              Initiatives. More details on this are provided in our privacy
+              policy.
+            </p>
 
-          <div className="flex mt-6">
-            <input
-              type="email"
-              placeholder="Email Address"
-              className="flex-grow bg-black focus:border-none border-b border-white  mr-2 rounded-none"
-            />
-            <button className="bg-white text-black text-sm font-medium opacity-80  hover:bg-gray-200 px-2 py-2 rounded-none ">
-              Subscribe
-            </button>
+            <div className="flex mt-6 mr-2">
+              <input
+                type="email"
+                placeholder="Email Address"
+                className="flex-grow bg-black focus:border-none border-b border-white  mr-2 rounded-none"
+              />
+              <button className="bg-white text-black text-sm font-medium   hover:bg-gray-200 px-2 py-2 rounded-none ">
+                Subscribe
+              </button>
+            </div>
           </div>
         </div>
       </div>

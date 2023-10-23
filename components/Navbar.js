@@ -19,6 +19,15 @@ const futuraMedium = localFont({
   variable: "--font-futura-medium",
 });
 
+// funcion to clear search input after a while
+function debounce(func, wait) {
+  let timeout;
+  return function (...args) {
+    const context = this;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(context, args), wait);
+  };
+}
 const Header = ({ categories }) => {
   // State to hold current and last scroll positions
   const [lastScrollTop, setLastScrollTop] = useState(0);
@@ -27,6 +36,10 @@ const Header = ({ categories }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isBagOpen, setIsBagOpen] = useState(false);
   const [showSubcategories, setShowSubcategories] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false); // State for search overlay
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
+
   const toggleSubcategories = () => setShowSubcategories(!showSubcategories);
   const { isSignedIn, user } = useUser();
   const SCROLL_THRESHOLD = 20;
@@ -36,7 +49,7 @@ const Header = ({ categories }) => {
     if (typeof document === "undefined" || typeof window === "undefined") {
       return;
     }
-    if (isOpen || isBagOpen) {
+    if (isOpen || isBagOpen || isSearchOpen) {
       // Prevent scrolling when either drawer is open
       document.body.style.overflow = "hidden";
     } else {
@@ -64,21 +77,39 @@ const Header = ({ categories }) => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [lastScrollTop, isOpen, isBagOpen]);
+  }, [lastScrollTop, isOpen, isBagOpen, isSearchOpen]);
   const toggleDrawer = () => {
     setIsOpen((prev) => !prev);
     setShowSubcategories(false);
   };
-
+  // toggle search bar
+  const toggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
+  };
   const toggleDrawerBag = () => {
     setIsBagOpen((prev) => !prev);
   };
-
+  //  function to search db as user types
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setQuery(value);
+    debouncedSearch(value);
+  };
+  const debouncedSearch = debounce(async (q) => {
+    try {
+      const res = await fetch(`/api/search?q=${q}`);
+      const data = await res.json();
+      setResults(data);
+    } catch (error) {
+      console.error("Search error:", error);
+    }
+  }, 300); // wait 300ms after the last keypress
+  console.log(results);
   return (
     <header
       className={classNames(
         isHeaderVisible ? "block" : "hidden", // This line toggles header visibility
-        "fixed left-0 w-full h-[40px] flex items-center z-20 bg-black transition-all duration-[.4s] ease-in-out group",
+        "fixed left-0 w-full h-[50px] flex items-center z-20 bg-black transition-all duration-[.4s] ease-in-out group",
         "md:h-[60px]"
       )}
     >
@@ -207,7 +238,11 @@ const Header = ({ categories }) => {
             <hr className="border-gray-300 mb-4 mt-4 w-56" />
           </aside>
           {/* search */}
-          <button type="button" className="flex items-center gap-2">
+          <button
+            type="button"
+            className="flex items-center gap-2"
+            onClick={toggleSearch}
+          >
             <MagnifyingGlassIcon className="h-4 w-4" />
             <span
               className={classNames(
@@ -219,11 +254,49 @@ const Header = ({ categories }) => {
               Search
             </span>
           </button>
+
+          {/* Search overlay */}
+          {isSearchOpen && (
+            <div className="fixed inset-0 z-10 bg-black bg-opacity-100 flex justify-center items-start">
+              {/* Close icon */}
+              <div
+                className="absolute top-8  left-24 cursor-pointer"
+                onClick={toggleSearch}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-4 h-4"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </div>
+
+              {/* Search input */}
+              <div className="w-full md:w-1/2 p-6">
+                <input
+                  type="text"
+                  value={query}
+                  onChange={handleChange}
+                  className="w-full mt-20 p-2 border-0 border-b border-gray-300 bg-transparent focus:outline-none focus:ring-0"
+                  placeholder="Search..."
+                  // Add any input logic or handlers here
+                />
+              </div>
+            </div>
+          )}
         </div>
         {/* header center */}
         <div
           className={classNames(
-            "absolute max-w-[77px] w-full left-1/2 top-[20px] md:top-[30px] -translate-x-1/2 -translate-y-1/2",
+            "absolute max-w-[77px] w-full left-1/2 top-[25px] md:top-[30px] -translate-x-1/2 -translate-y-1/2",
             "md:max-w-[150px]"
           )}
         >

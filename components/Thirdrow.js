@@ -68,7 +68,7 @@ const Thirdrow = () => {
       >
         {media.map((item, index) => {
           return (
-            <div key={index} className="relative w-screen h-[700px]">
+            <div key={index} className="relative w-screen h-screen">
               <Image
                 src={item.src}
                 alt=""

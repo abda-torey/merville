@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
@@ -7,13 +8,14 @@ import Image from "next/image";
 import "./custom.css";
 
 const CarouselComponent = ({ media }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
   const customPrevArrow = (onClickHandler, hasPrev, label) => {
     return (
       <button
         type="button"
         onClick={onClickHandler}
         title={label}
-        className={`absolute left-0 top-1/2 transform -translate-y-1/2 z-10 p-4 rounded-full bg-black bg-opacity-50 hover:bg-opacity-80 focus:outline-none ${
+        className={`absolute left-0 top-1/2 transform -translate-y-1/2 z-10 p-4 bg-opacity-50 hover:bg-opacity-80 focus:outline-none ${
           !hasPrev && "opacity-50 cursor-not-allowed"
         }`}
         disabled={!hasPrev}
@@ -29,7 +31,7 @@ const CarouselComponent = ({ media }) => {
         type="button"
         onClick={onClickHandler}
         title={label}
-        className={`absolute right-0 top-1/2 transform -translate-y-1/2 z-10 p-4 rounded-full bg-black bg-opacity-50 hover:bg-opacity-80 focus:outline-none ${
+        className={`absolute right-0 top-1/2 transform -translate-y-1/2 z-10 p-4  bg-opacity-50 hover:bg-opacity-80 focus:outline-none ${
           !hasNext && "opacity-50 cursor-not-allowed"
         }`}
         disabled={!hasNext}
@@ -71,11 +73,12 @@ const CarouselComponent = ({ media }) => {
         renderArrowPrev={customPrevArrow}
         renderArrowNext={customNextArrow}
         renderIndicator={renderIndicator}
+        onChange={setActiveIndex}
       
       >
         {media.map((item, index) => {
           return item.type === "video" ? (
-            <CustomVideo key={index} />
+            <CustomVideo key={index} isActive={index === activeIndex} />
           ) : (
             <div key={index} >
               <div>
