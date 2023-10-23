@@ -59,7 +59,7 @@ const CarouselComponent = ({ media }) => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative h-screen">
       <Carousel
         autoPlay
         interval={4000}
