@@ -12,7 +12,10 @@ const getCategories = async () => {
   }
   return res.json()
 }
-
+const futuraMedium = localFont({
+  src: "../public/fonts/futura medium bt.ttf",
+  variable: "--font-futura-medium",
+});
 const myFont = localFont({
   src: [
     {

@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { ChevronUpIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
+import PromotionBanner from "./PromotionBanner";
 const Footer = () => {
   const [openSection, setOpenSection] = useState(null);
 
@@ -14,34 +15,14 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-black text-white p-2">
-      {/* Marquee */}
-
-      <div className="w-full overflow-hidden ">
-        <div className="flex overflow-hidden mb-4 text-sm font-medium  opacity-80 whitespace-nowrap animate-moveRightToLeft linear">
-          <span className="mr-24">
-            FREE ORDERS ABOVE 200 FREE FOR RED MEMBERS
-          </span>
-          <span className="mr-24">
-            FREE ORDERS ABOVE 200 FREE FOR RED MEMBERS
-          </span>
-          {/* Duplicated texts */}
-          <span className="mr-24">
-            FREE ORDERS ABOVE 200 FREE FOR RED MEMBERS
-          </span>
-          <span className="mr-24">
-            FREE ORDERS ABOVE 200 FREE FOR RED MEMBERS
-          </span>
-        </div>
-      </div>
-
+    <footer className="bg-black font-FuturaLight text-opacity-90 text-white p-2">
       {/* White Border Line */}
       <hr className="w-full mb-4 border-t border-white opacity-60" />
 
       {/* Columns */}
       <div className="flex flex-col md:flex-row gap-2  md:gap-8 justify-between">
         {/* First Column */}
-        <div className=" hidden md:block ml-9">
+        <div className=" -mt-6 hidden md:block ml-9">
           {/* <h3 className="font-extrabold tracking-widest text-lg ml-8 mb-4 opacity-60">
             Merville
           </h3> */}
@@ -50,10 +31,16 @@ const Footer = () => {
             alt="Melville1 Logo"
             width={500}
             height={500}
-            className=" w-20 h-auto"
+            className=" w-20 h-auto ml-4"
           />
 
-          <img src="logo8.png" alt="Melville1 Logo" className=" w-32 h-auto" />
+          <img
+            src="logobg white.png"
+            alt="Melville1 Logo"
+            width={500}
+            height={500}
+            className=" w-28 h-28"
+          />
         </div>
 
         {/* Second Column */}
@@ -275,7 +262,7 @@ const Footer = () => {
         </div>
 
         {/* Fifth Column - Newsletter Signup */}
-        <div className="mt-6 w-full  mr-2 md:mr-0 ml-2 md:ml-0  border-b md:border-b-0 ">
+        <div className="mt-6 w-full md:w-80  mr-2 md:mr-0 ml-2 md:ml-0    border-b md:border-b-0 ">
           <h3
             onClick={() => toggleSection("updates")}
             className="font-medium ml-2 mr-4 md:mr-0 md:ml-0 tracking-widest text-lg mb-4 flex justify-between "
@@ -303,7 +290,7 @@ const Footer = () => {
               openSection === "updates" ? "block" : "hidden md:block"
             }`}
           >
-            <p className="mb-4 mr-2 font-medium text-xs tracking-wider ">
+            <p className="mb-4 mr-2 font-FuturaLight  font-medium text-xs tracking-wider ">
               By entering your email address below, you consent to recieving our
               newsletter with access to our latest collections, events and
               Initiatives. More details on this are provided in our privacy
@@ -322,8 +309,25 @@ const Footer = () => {
             </div>
           </div>
         </div>
+        {/* logo side by side only for mobile view */}
+        <div className="flex  md:hidden justify-between mx-9 ">
+          <img
+            src="/logobg white.png"
+            alt="merville mobile logo"
+            // width={500}
+            // height={500}
+            className=" w-16 h-16 mt-12"
+          />
+          <Image
+            src="/Merville.png"
+            alt="Description 2"
+            width={500}
+            height={500}
+            className=" w-44 h-44 -mt-4"
+          />
+        </div>
       </div>
-      <div className="relative mt-10 opacity-60">
+      <div className="relative ml-12 md:ml-0 font-FuturaLight mt-5 mb-6 md:mb-0 md:mt-10 opacity-80">
         <div className="absolute bottom-0 left-0 text-xs font-semibold">
           &copy; 2023 Merville London. All rights reserved
         </div>

@@ -1,7 +1,8 @@
 import Image from "next/image";
 import React from "react";
 import Link from "next/link";
-const MensWear = ({ categories }) => {
+import PromotionBanner from "../PromotionBanner";
+const MensWear = ({ categories,menswearPromo }) => {
   return (
     <div className="bg-white">
       <div className="relative w-full h-64 mb-0">
@@ -55,6 +56,7 @@ const MensWear = ({ categories }) => {
           ))}
         </div>
       </div>
+      <PromotionBanner text={menswearPromo} />
     </div>
   );
 };

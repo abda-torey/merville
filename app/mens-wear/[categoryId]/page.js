@@ -12,23 +12,52 @@ const getProducts = async (categoryId) => {
   return res.json();
 };
 const getColors = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/colr`,{cache:'no-store'});
-  if (!res.ok){
-    throw new Error("Failed to fetch data")
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/colr`, {
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
   }
-  return res.json()
-}
+  return res.json();
+};
+
 const getSizes = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/sizes`,{cache:'no-store'});
-  if (!res.ok){
-    throw new Error("Failed to fetch data")
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/sizes`, {
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
   }
-  return res.json()
-}
+  return res.json();
+};
+const getPromoTexts = async (categoryId) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/promoTextBanner/${categoryId}`,
+    {
+      cache: "no-store",
+    }
+  );
+  if (!res.ok) {
+    throw new Error("Failed to fetch promo texts");
+  }
+  return res.json();
+};
 const page = async ({ params }) => {
-  const [products,colors,sizes] = await Promise.all([getProducts(params.categoryId),getColors(),getSizes()]) 
-  
-  return <CategoryProducts products={products} colors={colors} sizes={sizes} />
+  const [products, colors, sizes, promoTexts] = await Promise.all([
+    getProducts(params.categoryId),
+    getColors(),
+    getSizes(),
+    getPromoTexts(params.categoryId),
+  ]);
+
+  return (
+    <CategoryProducts
+      products={products}
+      colors={colors}
+      sizes={sizes}
+      text={promoTexts.text}
+    />
+  );
 };
 
 export default page;

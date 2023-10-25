@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       fontFamily: {
         futura: ["var(--font-futura)"],
+        FuturaLight: ["FuturaLight","sans-serif"]
       },
       boxShadow: {
         border: "inset  0 0 0 1px #fff",

@@ -2,8 +2,9 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import PromotionBanner from "../PromotionBanner";
 
-const CategoryProducts = ({ products, colors, sizes }) => {
+const CategoryProducts = ({ products, colors, sizes,text }) => {
   const [showFilters, setShowFilters] = useState(false);
   return (
     <div className="bg-white mt-16 mb-2">
@@ -150,6 +151,7 @@ const CategoryProducts = ({ products, colors, sizes }) => {
           </div>
         ))}
       </div>
+      <PromotionBanner text={text} />
     </div>
   );
 };

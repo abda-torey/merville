@@ -1,42 +1,26 @@
-'use client'
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import CarouselDisplay from "@/components/CarouselDisplay";
 import Featured from "@/components/Featured";
 import Thirdrow from "@/components/Thirdrow";
 import FourthRow from "@/components/FourthRow";
 import FifthRow from "@/components/FifthRow";
+import PromotionBanner from "@/components/PromotionBanner";
 
+const getPromoText = async () => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/promoTextBanner`,
+    { cache: "no-store" }
+  );
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return res.json();
+};
 
-
-export default function Home() {
-  
-
-  // useEffect(() => {
-  //   const addUser = async () => {
-  //     if (userId) {
-  //       const user = await clerkClient.users.getUser(userId);
-  //       try {
-  //         const response = await axios.post(
-  //           `${process.env.NEXT_PUBLIC_API_URL}/api/users`,
-  //           { 
-  //             email: user.emailAddresses[0].emailAddress, 
-  //             firstName: user.firstName, 
-  //             lastName: user.lastName 
-  //           }
-  //         );
-
-  //         if (response.status === 201 || response.status === 200) {
-  //           console.log("User added successfully!");
-  //         }
-  //       } catch (error) {
-  //         console.error("Error adding user:", error.response?.data || error.message);
-  //       }
-  //     }
-  //   };
-
-  //   addUser();
-  // }, [userId]); // The effect will run only once if userId changes.
+export default async function Home() {
+  const promoText = await getPromoText();
+  const homepagePromo = promoText.find(
+    (promo) => promo.promoArea === "homepage"
+  );
 
   return (
     <main className="relative">
@@ -45,7 +29,7 @@ export default function Home() {
       <Thirdrow />
       <FourthRow />
       <FifthRow />
-     
+      <PromotionBanner text={homepagePromo.text} />
     </main>
   );
 }
