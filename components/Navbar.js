@@ -222,9 +222,9 @@ const Header = ({ categories }) => {
                 <ul className="space-y-2 pl-6">
                   {/* Subcategories */}
                   {categories.map((category) => (
-                   <Link  href={`/mens-wear/${category.id}`}>
+                   <Link  href={`/mens-wear/${category.id}`}  key={category.id}>
                     <li
-                      key={category.id}
+                     
                       className={`${futuraMedium.className} text-xs text-gray-500 tracking-wide cursor-pointer
                       hover:text-gray-600 hover:text-sm
                       `}
