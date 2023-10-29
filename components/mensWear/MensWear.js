@@ -9,8 +9,8 @@ const MensWear = ({ categories, menswearPromo }) => {
       <div className="relative w-full h-80 mb-0">
         <Image
           src="/menswear.jpg"
-          width={100}
-          height={100}
+          width={1000}
+          height={1000}
           alt="mens wear images"
           className="w-full h-full object-cover"
         />
