@@ -1,12 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import {
   Bars3Icon,
   MagnifyingGlassIcon,
   ShoppingBagIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
-import Link from "next/link";
 import classNames from "classnames";
 import { UserButton } from "@clerk/nextjs";
 import { useUser } from "@clerk/nextjs";
@@ -95,15 +95,15 @@ const Header = ({ categories }) => {
     setQuery(value);
     debouncedSearch(value);
   };
-  const debouncedSearch = debounce(async (q) => {
-    try {
-      const res = await fetch(`/api/search?q=${q}`);
-      const data = await res.json();
-      setResults(data);
-    } catch (error) {
-      console.error("Search error:", error);
-    }
-  }, 300); // wait 300ms after the last keypress
+  // const debouncedSearch = debounce(async (q) => {
+  //   try {
+  //     const res = await fetch(`/api/search?q=${q}`);
+  //     const data = await res.json();
+  //     setResults(data);
+  //   } catch (error) {
+  //     console.error("Search error:", error);
+  //   }
+  // }, 300); // wait 300ms after the last keypress
   console.log(results);
   return (
     <header
@@ -222,14 +222,17 @@ const Header = ({ categories }) => {
                 <ul className="space-y-2 pl-6">
                   {/* Subcategories */}
                   {categories.map((category) => (
+                   <Link  href={`/mens-wear/${category.id}`}>
                     <li
                       key={category.id}
                       className={`${futuraMedium.className} text-xs text-gray-500 tracking-wide cursor-pointer
                       hover:text-gray-600 hover:text-sm
                       `}
+                      onClick={toggleDrawer}
                     >
                       {category.name}
                     </li>
+                    </Link> 
                   ))}
                 </ul>
               )}

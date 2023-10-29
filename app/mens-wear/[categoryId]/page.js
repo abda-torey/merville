@@ -1,5 +1,15 @@
 import React from "react";
 import CategoryProducts from "@/components/Category/CategoryProducts";
+const getCategoryName = async (categoryId) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/category/${categoryId}`,
+    { cache: "no-store" }
+  );
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return res.json();
+};
 
 const getProducts = async (categoryId) => {
   const res = await fetch(
@@ -31,31 +41,40 @@ const getSizes = async () => {
   return res.json();
 };
 const getPromoTexts = async (categoryId) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/promoTextBanner/${categoryId}`,
-    {
-      cache: "no-store",
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/promoTextBanner/${categoryId}`,
+      {
+        cache: "no-store",
+      }
+    );
+    if (!res.ok) {
+      throw new Error("Failed to fetch promo texts");
     }
-  );
-  if (!res.ok) {
-    throw new Error("Failed to fetch promo texts");
+    return await res.json();
+  } catch (error) {
+    // If fetching promoTexts fails, return a default value
+    return { text: "" };
   }
-  return res.json();
 };
 const page = async ({ params }) => {
-  const [products, colors, sizes, promoTexts] = await Promise.all([
-    getProducts(params.categoryId),
-    getColors(),
-    getSizes(),
-    getPromoTexts(params.categoryId),
-  ]);
+  const [categoryname, products, colors, sizes, promoTexts] = await Promise.all(
+    [
+      getCategoryName(params.categoryId),
+      getProducts(params.categoryId),
+      getColors(),
+      getSizes(),
+      getPromoTexts(params.categoryId),
+    ]
+  );
 
   return (
     <CategoryProducts
+      title={categoryname.name}
       products={products}
       colors={colors}
       sizes={sizes}
-      text={promoTexts.text}
+      text={promoTexts?.text}
     />
   );
 };

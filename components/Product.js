@@ -24,13 +24,12 @@ const sampleProductDetails = {
 };
 
 const Product = ({ product }) => {
-  const [selectedSize, setSize] = useState(null);
+  const [selectedSize, setSize] = useState('');
   const [selectedColor, setColor] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const { addItemToCart } = useContext(CartContext);
   console.log(product);
   const addToCartHandler = () => {
-    
     addItemToCart({
       productId: product.id,
       name: product.name,
@@ -42,9 +41,25 @@ const Product = ({ product }) => {
     });
   };
   return (
-    <div className="flex flex-col  mb-8 mt-24 md:flex-row justify-center items-center space-y-3 md:space-y-0 md:space-x-2 mx-3">
+    <div className="hidden  md:flex flex-col mb-8 mt-20 md:flex-row justify-start items-start space-y-3 md:space-y-0 md:space-x-4 ml-3  ">
+      {/* Combined Image Div */}
+      <div className="md:col-span-2  flex-1 md:flex-none md:min-h-[700px] md:w-2/3 p-12 bg-customColor shadow-md flex flex-col justify-center items-center overflow-y-auto scrollbar-hide">
+        {product.imageDetails.map((imageDetail, index) => (
+         
+            <Image
+              key={index}
+              src={imageDetail.imageUrl}
+              alt="Description"
+              width={1000}
+              height={1000}
+              className=" mt-24 mb-24 w-72 h-auto"
+            />
+          
+        ))}
+      </div>
+
       {/* First Div */}
-      <div className="flex-1 min-h-[200px] md:min-h-[700px] md:w-1/3 p-4 bg-customColor shadow-md  flex justify-center items-center">
+      {/* <div className="flex-1 min-h-[200px] md:min-h-[700px] md:w-1/3 p-4 bg-customColor shadow-md  flex justify-center items-center">
         <Image
           src={product.imageDetails[0].imageUrl}
           alt="Description"
@@ -52,10 +67,10 @@ const Product = ({ product }) => {
           height={500}
           className=""
         />
-      </div>
+      </div> */}
 
       {/* Second Div */}
-      <div className="flex-1 min-h-[200px] md:min-h-[700px] md:w-1/3 p-4 bg-customColor shadow-md  flex justify-center items-center">
+      {/* <div className="flex-1 min-h-[200px] md:min-h-[700px] md:w-1/3 p-4 bg-customColor shadow-md  flex justify-center items-center">
         <Image
           src={product.imageDetails[1].imageUrl}
           alt="Description"
@@ -63,17 +78,17 @@ const Product = ({ product }) => {
           height={500}
           className=""
         />
-      </div>
+      </div> */}
 
       {/* Third Div */}
-      <div className="w-full md:w-1/4 p-6 min-h-[200px] md:min-h-[700px] text-gray-600 bg-white flex flex-col items-start justify-start md:px-10">
-        <h2 className="text-lg font-body font-medium">{product.name}</h2>
-        <p className="text-sm font-medium tracking-widest mb-4">
+      <div className="w-full md:w-1/4 p-6 min-h-[200px] md:min-h-[700px] text-gray-600 font-FuturaLight bg-white flex flex-col items-start justify-start md:px-10 sticky top-14">
+        <h2 className="text-lg text-gray-800 font-semibold">{product.name}</h2>
+        <p className="text-sm font-semibold text-gray-700 tracking-widest mb-4">
           ${product.price}
         </p>
 
         <div className="space-y-2 mb-8">
-          <span className=" text-xs tracking-tighter">Select Color</span>
+          <span className=" text-xs tracking-tighter font-semibold text-gray-600">Select Color</span>
           <div className="flex space-x-2">
             {product.colors.map((color, index) => (
               <button
@@ -95,7 +110,7 @@ const Product = ({ product }) => {
             value={selectedSize}
             className="appearance-none text-sm w-40 pl-2 pr-8 py-1 border border-gray-300 relative bg-transparent"
           >
-            <option  value="" disabled>
+            <option value="" defaultValue disabled>
               Select size
             </option>
             {product.sizes.map((size, index) => (
@@ -124,7 +139,7 @@ const Product = ({ product }) => {
         </button>
 
         {/* Disclosure panels */}
-        <div className="">
+        <div className=" w-60 font-FuturaLight">
           {[
             {
               title: "Product Details and Sizing",

@@ -22,23 +22,21 @@ const Footer = () => {
       {/* Columns */}
       <div className="flex flex-col md:flex-row gap-2  md:gap-8 justify-between">
         {/* First Column */}
+        {/* logo for md screens */}
         <div className=" -mt-6 hidden md:block ml-9">
-          {/* <h3 className="font-extrabold tracking-widest text-lg ml-8 mb-4 opacity-60">
-            Merville
-          </h3> */}
+         
           <Image
             src="/Merville.png"
             alt="Melville1 Logo"
-            width={500}
-            height={500}
+            width={1000}
+            height={1000}
             className=" w-20 h-auto ml-4"
           />
 
           <img
-            src="logobg white.png"
+            src="/logobg white.png"
             alt="Melville1 Logo"
-            width={500}
-            height={500}
+           
             className=" w-28 h-28"
           />
         </div>

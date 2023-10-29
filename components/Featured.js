@@ -8,8 +8,8 @@ const Featured = () => {
         src="/Hats.png"
         alt="Description of Image"
         layout="fill"
-        objectFit="cover"
-        objectPosition="center"
+        style={{objectFit:"cover"}}
+        // objectPosition="center"
       />
 
       {/* Black overlay - can adjust opacity as needed */}

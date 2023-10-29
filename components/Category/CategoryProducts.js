@@ -4,39 +4,39 @@ import Link from "next/link";
 import Image from "next/image";
 import PromotionBanner from "../PromotionBanner";
 
-const CategoryProducts = ({ products, colors, sizes,text }) => {
+const CategoryProducts = ({ title,products, colors, sizes, text }) => {
   const [showFilters, setShowFilters] = useState(false);
   return (
-    <div className="bg-white mt-16 mb-2">
+    <div className="bg-white mt-[50px] md:mt-[60px] mb-0">
       {/* added mb-16 for spacing before footer */}
-      <div className="relative w-full h-64 mb-3">
+      <div className="relative w-full h-72 mb-3">
         <Image
           src="/shoesCategory.png"
-          width={100}
-          height={100}
+          width={1000}
+          height={1000}
           alt="shoes wear image"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-white font-medium text-3xl tracking-wider px-3 py-1">
-            SHOES
+          <span className="text-white font-FuturaLight font-medium text-3xl tracking-wider px-3 py-1 uppercase ">
+            {title}
           </span>
         </div>
       </div>
-      <div className="sticky top-12 md:top-14 z-10 bg-white shadow-sm">
+      <div className="top-12 md:top-14 z-10 bg-white shadow-sm">
         <div className="flex justify-between items-center text-black p-2 border-b pb-4">
-          <div className="flex space-x-1 md:space-x-2">
-            <span className="text-black text-xs md:text-sm font-medium">
+          <div className="flex space-x-1 md:space-x-2  ">
+            <span className="text-black text-xs tracking-widest  md:text-sm font-medium">
               Men |
             </span>
-            <span className="text-black text-xs md:text-sm font-medium">
-              Men FootWear
+            <span className="text-black text-xs tracking-widest md:text-sm font-medium">
+              Men {title}
             </span>
           </div>
           <div className="flex space-x-1 md:space-x-4 mr-2 md:mr-5">
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className="flex items-center focus:outline-none text-sm tracking-wide"
+              className="flex items-center focus:outline-none text-sm tracking-widest"
             >
               Filters
               <svg
@@ -53,18 +53,27 @@ const CategoryProducts = ({ products, colors, sizes,text }) => {
             </button>
             <span>|</span>
             <div className="group relative">
-              <span className="cursor-pointer text-gray-500 text-xs">
+              <span className="cursor-pointer tracking-widest text-gray-500 text-xs">
                 Sort by:
               </span>
               <span className="cursor-pointer "> newest</span>
               <div className="absolute right-0 mt-2 w-32 text-xs py-2 bg-white border rounded shadow-xl opacity-0 group-hover:opacity-100 transition duration-150 ease-in">
-                <a href="#" className="block text-white px-4 py-2 bg-gray-900">
+                <a
+                  href="#"
+                  className="block text-white px-4 py-2 tracking-widest bg-gray-900"
+                >
                   Newest
                 </a>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-200">
+                <a
+                  href="#"
+                  className="block px-4 py-2 tracking-widest hover:bg-gray-200"
+                >
                   Price - High to Low
                 </a>
-                <a href="#" className="block px-4 py-2 hover:bg-gray-200">
+                <a
+                  href="#"
+                  className="block px-4 py-2 tracking-widest hover:bg-gray-200"
+                >
                   Price - Low to High
                 </a>
               </div>
@@ -104,7 +113,6 @@ const CategoryProducts = ({ products, colors, sizes,text }) => {
                     </label>
                   </div>
                 ))}
-              
               </div>
             </div>
             <div className="flex mt-8 items-center justify-center">
@@ -127,27 +135,32 @@ const CategoryProducts = ({ products, colors, sizes,text }) => {
           </div>
         )}
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-1 mb-5">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-[3px] mb-0">
         {products.map((product) => (
           <div
             key={product.id}
-            className="bg-gray-200 text-black p-4  flex flex-col items-center"
+            className="bg-gray-200 text-black p-4  flex flex-col items-center relative"
           >
             <Image
-              width={100}
-              height={100}
+              width={1000}
+              height={1000}
               src={product.imageDetails[0].imageUrl}
               alt={product.name}
-              className="w-1/2 mt-10"
+              className="w-64 md:w-1/2 mt-10"
             />
             <Link href={`/product/${product.id}`}>
-              <h2 className="text-center text-xs mt-10  tracking-tighter font-body font-medium">
+              <h2 className="text-center text-xs mt-16 font-futura  tracking-wider  font-medium">
                 {product.name}
               </h2>
-              <p className="text-center text-xs font-medium font-body tracking-tighter mt-1 md:mb-10">
+              <p className="text-center text-xs font-medium font-body tracking-wider mt-1 md:mb-5">
                 £{product.price.toFixed(2)}
               </p>
             </Link>
+            {product.comingsoon && (
+              <div className="absolute w-full bottom-0  font-bold tracking-widest  bg-gray-400 text-gray-500 text-xs px-2 ">
+                Coming Soon Coming Soon
+              </div>
+            )}
           </div>
         ))}
       </div>

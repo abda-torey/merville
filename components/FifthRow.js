@@ -7,7 +7,9 @@ const FifthRow = () => {
       <Image
         src="/Shoes.png"
         alt="Description"
-        layout="fill" objectFit="cover"
+        fill
+        //  objectFit="cover"
+         style={{objectFit:"cover"}}
       />
 
       {/* 'Coming Soon' text at the center bottom */}

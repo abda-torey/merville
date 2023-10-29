@@ -73,9 +73,9 @@ const Thirdrow = () => {
               <Image
                 src={item.src}
                 alt=""
-                layout="fill"
-                objectFit="cover"
-                objectPosition="center"
+                fill
+                style={{ objectFit: "cover" }}
+                // objectPosition="center"
               />
               <h3
                 className={`absolute top-8 left-1/2 transform -translate-x-1/2 text-2xl md:text-3xl ${
