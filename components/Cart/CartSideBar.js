@@ -11,15 +11,20 @@ const futuraMedium = localFont({
 });
 
 const CartSideBar = () => {
-  const { addItemToCart, cart, deleteItemFromCart, updateQuantity,toggleDrawerBag } =
-    useContext(CartContext);
+  const {
+    addItemToCart,
+    cart,
+    deleteItemFromCart,
+    updateQuantity,
+    toggleDrawerBag,
+  } = useContext(CartContext);
   const amountWithoutTax = cart?.cartItems?.reduce(
     (acc, item) => acc + item.quantity * item.price,
     0
   );
   const tax = (amountWithoutTax * 0.15).toFixed(2);
   const totalAmount = Number(amountWithoutTax) + Number(tax);
- 
+
   return (
     <div className="flex flex-col h-full">
       <div className="flex items-start justify-center pt-5   gap-8">
@@ -45,7 +50,9 @@ const CartSideBar = () => {
       </div>
       <div className="flex-grow overflow-y-auto">
         {cart?.cartItems?.length === 0 ? (
-          <h3 className="text-center justify-center text-lg mt-16 text-black">No Items in Bag</h3>
+          <h3 className="text-center justify-center text-lg mt-16 text-black">
+            No Items in Bag
+          </h3>
         ) : (
           cart?.cartItems?.map((product, productIdx) => (
             <div className="flex mt-7 " key={productIdx}>
@@ -107,11 +114,11 @@ const CartSideBar = () => {
                     </button>
                   </div>
                   <div className="relative ml-6">
-                    <span className="absolute top-1/2 left-2  md:left-0.5 transform -translate-y-1/2 text-xs pointer-events-none">
+                    <span className="absolute top-1/2 left-1  md:left-0.5 transform -translate-y-1/2 text-xs pointer-events-none">
                       QTY:
                     </span>
                     <select
-                      className="border p-2 text-xs pl-7  md:pl-7 w-16" // Adjusted padding, width, and removed unnecessary padding
+                      className=" appearance-none border p-2 text-xs pl-6 w-14" // Adjusted padding, width, and removed unnecessary padding
                       value={product.quantity}
                       onChange={(e) =>
                         updateQuantity(
@@ -128,6 +135,19 @@ const CartSideBar = () => {
                         </option>
                       ))}
                     </select>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="absolute right-2 top-1/2 transform -translate-y-1/2 h-4 w-4 pointer-events-none"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
                   </div>
                 </div>
               </div>
