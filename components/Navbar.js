@@ -104,7 +104,7 @@ const Header = ({ categories }) => {
   //     console.error("Search error:", error);
   //   }
   // }, 300); // wait 300ms after the last keypress
-  console.log(results);
+  
   return (
     <header
       className={classNames(

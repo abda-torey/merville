@@ -19,7 +19,7 @@ const CartSideBar = ({ toggleDrawerBag }) => {
   );
   const tax = (amountWithoutTax * 0.15).toFixed(2);
   const totalAmount = Number(amountWithoutTax) + Number(tax);
-  console.log(cart.cartItems);
+ 
   return (
     <div className="flex flex-col h-full">
       <div className="flex items-start justify-center pt-5   gap-8">
