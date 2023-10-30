@@ -107,11 +107,11 @@ const CartSideBar = () => {
                     </button>
                   </div>
                   <div className="relative ml-6">
-                    <span className="absolute top-1/2 left-0.5 transform -translate-y-1/2 text-xs pointer-events-none">
+                    <span className="absolute top-1/2 left-2  md:left-0.5 transform -translate-y-1/2 text-xs pointer-events-none">
                       QTY:
                     </span>
                     <select
-                      className="border p-1 text-xs pl-7 w-16" // Adjusted padding, width, and removed unnecessary padding
+                      className="border p-2 text-xs pl-7  md:pl-7 w-16" // Adjusted padding, width, and removed unnecessary padding
                       value={product.quantity}
                       onChange={(e) =>
                         updateQuantity(
