@@ -7,6 +7,12 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const router = useRouter();
+  const [isBagOpen, setIsBagOpen] = useState(false); 
+
+  const toggleDrawerBag = () => {
+    setIsBagOpen((prev) => !prev);
+  };
+
   const setCartToState = () => {
     setCart(
       localStorage.getItem("cart")
@@ -60,9 +66,13 @@ export const CartProvider = ({ children }) => {
     setCartToState();
   };
 
-  const updateQuantity = (productId,color,size, qty) => {
+  const updateQuantity = (productId, color, size, qty) => {
     const updatedCartItems = cart.cartItems.map((item) => {
-      if (item.productId === productId && item.color === color && item.size === size) {
+      if (
+        item.productId === productId &&
+        item.color === color &&
+        item.size === size
+      ) {
         return { ...item, quantity: qty };
       }
       return item;
@@ -77,12 +87,12 @@ export const CartProvider = ({ children }) => {
 
   const deleteItemFromCart = (productId, color, size) => {
     const newCartItems = cart?.cartItems?.filter(
-      (i) => !(i.productId === productId && i.color === color && i.size === size)
+      (i) =>
+        !(i.productId === productId && i.color === color && i.size === size)
     );
     localStorage.setItem("cart", JSON.stringify({ cartItems: newCartItems }));
     setCartToState();
-};
-
+  };
 
   useEffect(() => {
     setCartToState();
@@ -94,6 +104,8 @@ export const CartProvider = ({ children }) => {
         addItemToCart,
         deleteItemFromCart,
         updateQuantity,
+        isBagOpen,
+        toggleDrawerBag,
       }}
     >
       {children}

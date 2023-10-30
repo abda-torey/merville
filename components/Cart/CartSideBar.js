@@ -10,8 +10,8 @@ const futuraMedium = localFont({
   variable: "--font-futura-medium",
 });
 
-const CartSideBar = ({ toggleDrawerBag }) => {
-  const { addItemToCart, cart, deleteItemFromCart, updateQuantity } =
+const CartSideBar = () => {
+  const { addItemToCart, cart, deleteItemFromCart, updateQuantity,toggleDrawerBag } =
     useContext(CartContext);
   const amountWithoutTax = cart?.cartItems?.reduce(
     (acc, item) => acc + item.quantity * item.price,

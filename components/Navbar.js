@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Link from "next/link";
 import {
   Bars3Icon,
@@ -11,6 +11,7 @@ import classNames from "classnames";
 import { UserButton } from "@clerk/nextjs";
 import { useUser } from "@clerk/nextjs";
 import localFont from "next/font/local";
+import CartContext from "@/app/context/CartContext";
 import Cart from "./Cart/Cart";
 import CartSideBar from "./Cart/CartSideBar";
 
@@ -20,25 +21,18 @@ const futuraMedium = localFont({
 });
 
 // funcion to clear search input after a while
-function debounce(func, wait) {
-  let timeout;
-  return function (...args) {
-    const context = this;
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func.apply(context, args), wait);
-  };
-}
+
 const Header = ({ categories }) => {
   // State to hold current and last scroll positions
   const [lastScrollTop, setLastScrollTop] = useState(0);
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [isBagOpen, setIsBagOpen] = useState(false);
   const [showSubcategories, setShowSubcategories] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false); // State for search overlay
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
+  const { toggleDrawerBag, isBagOpen } = useContext(CartContext);
 
   const toggleSubcategories = () => setShowSubcategories(!showSubcategories);
   const { isSignedIn, user } = useUser();
@@ -86,14 +80,11 @@ const Header = ({ categories }) => {
   const toggleSearch = () => {
     setIsSearchOpen(!isSearchOpen);
   };
-  const toggleDrawerBag = () => {
-    setIsBagOpen((prev) => !prev);
-  };
+
   //  function to search db as user types
   const handleChange = (e) => {
     const value = e.target.value;
     setQuery(value);
-    debouncedSearch(value);
   };
   // const debouncedSearch = debounce(async (q) => {
   //   try {
@@ -104,7 +95,7 @@ const Header = ({ categories }) => {
   //     console.error("Search error:", error);
   //   }
   // }, 300); // wait 300ms after the last keypress
-  
+
   return (
     <header
       className={classNames(
@@ -222,17 +213,16 @@ const Header = ({ categories }) => {
                 <ul className="space-y-2 pl-6">
                   {/* Subcategories */}
                   {categories.map((category) => (
-                   <Link  href={`/mens-wear/${category.id}`}  key={category.id}>
-                    <li
-                     
-                      className={`${futuraMedium.className} text-xs text-gray-500 tracking-wide cursor-pointer
+                    <Link href={`/mens-wear/${category.id}`} key={category.id}>
+                      <li
+                        className={`${futuraMedium.className} text-xs text-gray-500 tracking-wide cursor-pointer
                       hover:text-gray-600 hover:text-sm
                       `}
-                      onClick={toggleDrawer}
-                    >
-                      {category.name}
-                    </li>
-                    </Link> 
+                        onClick={toggleDrawer}
+                      >
+                        {category.name}
+                      </li>
+                    </Link>
                   ))}
                 </ul>
               )}

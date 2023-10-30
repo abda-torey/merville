@@ -28,9 +28,27 @@ const Product = ({ product }) => {
   const [selectedSize, setSize] = useState("");
   const [selectedColor, setColor] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const { addItemToCart } = useContext(CartContext);
+  const { addItemToCart, toggleDrawerBag } = useContext(CartContext);
+  const [showFeedback, setShowFeedback] = useState(false);
+
+  // check if sizes and colors are required to prevent user from adding to cart without selecting
+  const [isSizeRequired, setIsSizeRequired] = useState(
+    product.sizes && product.sizes.length > 0
+  );
+  const [isColorRequired, setIsColorRequired] = useState(
+    product.colors && product.colors.length > 0
+  );
+  const canAddToCart = () => {
+    if (isSizeRequired && !selectedSize) return false;
+    if (isColorRequired && !selectedColor) return false;
+    return true;
+  };
 
   const addToCartHandler = () => {
+    if (!canAddToCart()) {
+      setShowFeedback(true);
+      return;
+    }
     addItemToCart({
       productId: product.id,
       name: product.name,
@@ -40,11 +58,15 @@ const Product = ({ product }) => {
       image: product.imageDetails[0].imageUrl,
       stock: product.stock,
     });
+    toggleDrawerBag();
+    setShowFeedback(false);
+    setSize("");
+    setColor("");
   };
   return (
     <>
       {" "}
-      <div className="  md:flex flex-col mb-8 mt-20 md:flex-row justify-start items-start space-y-3 md:space-y-0 md:space-x-4 ml-3  ">
+      <div className="  md:flex flex-col mb-0  md:mb-8 mt-20 md:flex-row justify-start items-start space-y-3 md:space-y-0 md:space-x-4 ml-3  ">
         {/* Combined Image Div */}
         <div className="hidden md:col-span-2  flex-1 md:flex-none md:min-h-[700px] md:w-2/3 p-12 bg-customColor shadow-md md:flex  flex-col justify-center items-center overflow-y-auto scrollbar-hide">
           {product.imageDetails.map((imageDetail, index) => (
@@ -90,12 +112,12 @@ const Product = ({ product }) => {
             </div>
           </div>
 
-          <div className="relative mb-8">
+          <div className="relative  mb-8">
             <select
               id="size"
               onChange={(e) => setSize(e.target.value)}
               value={selectedSize}
-              className="appearance-none text-sm w-60 md:w-40 pl-2 pr-8 py-1 border border-gray-300 relative bg-transparent"
+              className="appearance-none text-sm w-64 md:w-40 pl-2 pr-8 py-1 border border-gray-300 relative bg-transparent"
             >
               <option value="" defaultValue disabled>
                 Select size
@@ -119,11 +141,20 @@ const Product = ({ product }) => {
           </div>
 
           <button
-            onClick={addToCartHandler}
+            onClick={() => {
+              addToCartHandler();
+              
+            }}
+           
             className="bg-black mb-10 text-white text-xs w-[90%] md:w-full py-2"
           >
             ADD TO BAG
           </button>
+          {showFeedback && (
+            <p className="text-xs text-red-500 mt-2">
+              Please select required attributes before adding to bag.
+            </p>
+          )}
 
           {/* Disclosure panels */}
           <div className=" w-[90%] md:w-60 font-FuturaLight">

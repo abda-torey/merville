@@ -17,8 +17,7 @@ const Footer = () => {
   return (
     <footer className="bg-black font-FuturaLight text-opacity-90 text-white p-2">
       {/* White Border Line */}
-      <hr className="w-full mb-4 border-t border-white opacity-60" />
-
+     
       {/* Columns */}
       <div className="flex flex-col md:flex-row gap-2  md:gap-8 justify-between">
         {/* First Column */}
