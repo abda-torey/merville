@@ -64,7 +64,7 @@ const Product = ({ product }) => {
         </div>
 
         {/* Third Div */}
-        <div className="w-full md:w-1/4 p-6 min-h-[200px] md:min-h-[700px] text-gray-600 font-FuturaLight bg-white flex flex-col items-start justify-start md:px-10 sticky top-14">
+        <div className="w-full  md:w-1/4 p-4 md:p-6 min-h-[200px] md:min-h-[700px] text-gray-600 font-FuturaLight bg-white flex flex-col items-start justify-start md:px-10 sticky top-14">
           <h2 className="text-lg text-gray-800 font-semibold">
             {product.name}
           </h2>
@@ -95,7 +95,7 @@ const Product = ({ product }) => {
               id="size"
               onChange={(e) => setSize(e.target.value)}
               value={selectedSize}
-              className="appearance-none text-sm w-40 pl-2 pr-8 py-1 border border-gray-300 relative bg-transparent"
+              className="appearance-none text-sm w-60 md:w-40 pl-2 pr-8 py-1 border border-gray-300 relative bg-transparent"
             >
               <option value="" defaultValue disabled>
                 Select size
@@ -120,13 +120,13 @@ const Product = ({ product }) => {
 
           <button
             onClick={addToCartHandler}
-            className="bg-black mb-10 text-white text-xs w-48 md:w-full py-2"
+            className="bg-black mb-10 text-white text-xs w-80 md:w-full py-2"
           >
             ADD TO BAG
           </button>
 
           {/* Disclosure panels */}
-          <div className=" w-60 font-FuturaLight">
+          <div className=" w-80 md:w-60 font-FuturaLight">
             {[
               {
                 title: "Product Details and Sizing",
