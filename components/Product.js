@@ -120,13 +120,13 @@ const Product = ({ product }) => {
 
           <button
             onClick={addToCartHandler}
-            className="bg-black mb-10 text-white text-xs w-80 md:w-full py-2"
+            className="bg-black mb-10 text-white text-xs w-[90%] md:w-full py-2"
           >
             ADD TO BAG
           </button>
 
           {/* Disclosure panels */}
-          <div className=" w-80 md:w-60 font-FuturaLight">
+          <div className=" w-[90%] md:w-60 font-FuturaLight">
             {[
               {
                 title: "Product Details and Sizing",
