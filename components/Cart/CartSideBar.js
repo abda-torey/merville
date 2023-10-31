@@ -158,7 +158,9 @@ const CartSideBar = () => {
       <hr className="mt-5"></hr>
       <div className="bg-white py-4 mt-auto">
         <div className="py-0 md:py-4 flex mx-9 justify-between items-center">
-          <span className={`${futuraMedium.className} text-xs font-bold`}>SUBTOTAL</span>
+          <span className={`${futuraMedium.className} text-xs font-bold`}>
+            SUBTOTAL
+          </span>
           <span className={`${futuraMedium.className} text-xs font-bold`}>
             £ {amountWithoutTax}
           </span>
@@ -173,7 +175,7 @@ const CartSideBar = () => {
           <button
             className={`${futuraMedium.className} bg-black border-2 text-white text-xs tracking-tighter px-4 py-2 w-full md:w-24`}
           >
-            PROCEED TO CHECKOUT
+            <Link href="/checkoutPage">PROCEED TO CHECKOUT</Link>
           </button>
         </div>
       </div>
