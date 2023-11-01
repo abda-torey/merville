@@ -11,9 +11,10 @@
   #submit:hover {
     background-color: #5d4bd0;
   }
-  #spinner {
-    background-color: red;
-  }
+  /* #spinner {
+    background-color: blue;
+    color: white;
+  } */
   #payment-message {
     color: red; 
   }

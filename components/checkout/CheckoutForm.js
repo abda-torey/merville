@@ -1,12 +1,12 @@
 "use client";
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   PaymentElement,
   LinkAuthenticationElement,
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import './Checkout.css';
+import "./Checkout.css";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
@@ -94,11 +94,17 @@ export default function CheckoutForm() {
       <PaymentElement id="payment-element" options={paymentElementOptions} />
       <button disabled={isLoading || !stripe || !elements} id="submit">
         <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
+          {isLoading ? (
+            <div className="spinner" id="spinner">
+              Processing....
+            </div>
+          ) : (
+            "Pay now"
+          )}
         </span>
       </button>
       {/* Show any error or success messages */}
-      {message && <div id="payment-message">{message}</div>}
+      {message && <div id="payment-message" className=" mt-4">{message}</div>}
     </form>
   );
 }

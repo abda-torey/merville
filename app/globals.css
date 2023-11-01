@@ -39,6 +39,21 @@
   src: url("/fonts/futura light bt.ttf");
   font-weight: 400;
 }
+@font-face {
+  font-family: "FuturaMedium";
+  src: url("/fonts/futura medium bt.ttf");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "FuturaBold";
+  src: url("/fonts/Futura Bold font.ttf");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "FuturaHeavy";
+  src: url("/fonts/Futura Heavy font.ttf");
+  font-weight: 400;
+}
 body {
   @apply text-white h-screen flex flex-col  text-[16px] leading-[20px];
 }
