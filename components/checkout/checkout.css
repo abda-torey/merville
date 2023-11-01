@@ -1,0 +1,20 @@
+#submit {
+    background-color: black;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+   
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  #submit:hover {
+    background-color: #5d4bd0;
+  }
+  #spinner {
+    background-color: red;
+  }
+  #payment-message {
+    color: red; 
+  }
+      
