@@ -6,7 +6,7 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import "./Checkout.css";
+import "./checkout.css";
 
 export default function CheckoutForm() {
   const stripe = useStripe();
@@ -14,6 +14,7 @@ export default function CheckoutForm() {
 
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(null);
+  const [orderId, setOrderId] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -30,6 +31,9 @@ export default function CheckoutForm() {
     }
 
     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
+      const orderId = '453455';
+      setOrderId(orderId)
+      console.log("orderId...........",orderId);
       switch (paymentIntent.status) {
         case "succeeded":
           setMessage("Payment succeeded!");
@@ -58,14 +62,17 @@ export default function CheckoutForm() {
 
     setIsLoading(true);
 
+    
+   
+    
+
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        // Make sure to change this to your payment completion page
-        return_url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/checkoutPage`,
+        // Pass the orderId to the return_url as a query parameter
+        return_url: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/receipt`,
       },
     });
-    console.log(process.env.NEXT_PUBLIC_FRONTEND_URL);
 
     // This point will only be reached if there is an immediate error when
     // confirming the payment. Otherwise, your customer will be redirected to
@@ -104,7 +111,11 @@ export default function CheckoutForm() {
         </span>
       </button>
       {/* Show any error or success messages */}
-      {message && <div id="payment-message" className=" mt-4">{message}</div>}
+      {message && (
+        <div id="payment-message" className=" mt-4">
+          {message}
+        </div>
+      )}
     </form>
   );
 }
