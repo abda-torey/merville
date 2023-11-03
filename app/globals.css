@@ -39,27 +39,52 @@
   src: url("/fonts/futura light bt.ttf");
   font-weight: 400;
 }
+
 @font-face {
   font-family: "FuturaMedium";
   src: url("/fonts/futura medium bt.ttf");
   font-weight: 400;
 }
+
 @font-face {
   font-family: "FuturaBold";
   src: url("/fonts/Futura Bold font.ttf");
   font-weight: 400;
 }
+
 @font-face {
   font-family: "FuturaHeavy";
   src: url("/fonts/Futura Heavy font.ttf");
   font-weight: 400;
 }
+
 body {
-  @apply text-white h-screen flex flex-col  text-[16px] leading-[20px];
+  @apply text-white h-screen flex flex-col text-[16px] leading-[20px];
 }
 
 main {
   @apply flex-1;
+}
+
+.cl-userButtonBox {
+  
+}
+
+.cl-avatarImage {
+  
+}
+
+.cl-userButtonAvatarImage {
+
+  
+}
+
+.cl-userButtonTrigger {}
+
+.cl-avatarBox {}
+
+.cl-userButtonAvatarBox {
+  
 }
 
 @media print {
@@ -71,7 +96,7 @@ main {
 /* Show only the printable div and its children during print */
 @media print {
 
-  
+
   #printablediv * {
     visibility: visible;
     page-break-inside: avoid;
@@ -96,6 +121,7 @@ main {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-100%);
   }
@@ -107,4 +133,3 @@ main {
   padding-left: 100%;
   animation: marquee 50s linear infinite;
 }
-

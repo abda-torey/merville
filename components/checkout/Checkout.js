@@ -615,7 +615,7 @@ export default function Checkout() {
                   ))
                 )}{" "}
               </div>
-              <div className="border md:w-[350px] bg-gray-100 mt-8 text-xs p-4 ">
+              <div className="border md:w-[350px] bg-gray-100 mt-2 text-xs p-4 ">
                 <div className="flex justify-between border-b font-FuturaMedium text-gray-800  pb-2">
                   <span>Subtotal</span>
                   <span>${amountWithoutTax}</span>

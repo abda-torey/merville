@@ -308,7 +308,7 @@ const Header = ({ categories }) => {
             )}
           >
             {!isSignedIn && (
-              <Link href="/sign-in">
+              <Link href="/signIn">
                 <button className="flex items-center gap-2">
                   <span className="hidden  text-sm tracking-wide md:inline">
                     Sign in
@@ -317,7 +317,10 @@ const Header = ({ categories }) => {
                 </button>
               </Link>
             )}
-            <UserButton afterSignOutUrl="/" />
+           <UserButton afterSignOutUrl="/" >
+            user
+           </UserButton>
+           
             <button
               className="flex items-center gap-2"
               onClick={toggleDrawerBag}
