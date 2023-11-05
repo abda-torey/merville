@@ -115,7 +115,7 @@ export default function Checkout() {
       }
     };
 
-    // Call handleResize once on component mount to set initial state
+    // Call handleResize once on component mount to set initial state of the handleResize
     handleResize();
 
     // Set up event listener for window resize
@@ -148,8 +148,8 @@ export default function Checkout() {
       );
 
       const data = await response.json();
-      console.log(data.orderId);
-      localStorage.setItem("orderId", JSON.stringify(data.orderId));
+      console.log(data.clientSecret);
+      // localStorage.setItem("orderId", JSON.stringify(data.orderId));
       setClientSecret(data.clientSecret);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -634,6 +634,8 @@ export default function Checkout() {
         </div>
       </div>
     </div>
+   
+
 
     // <div className="App">
     //   {clientSecret && (
