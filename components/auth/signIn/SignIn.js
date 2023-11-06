@@ -35,9 +35,9 @@ export default function SignIn({redirectPath = '/'}) {
   };
 
   return (
-    <div className="mt-24 flex justify-center items-start  md:mb-24">
+    <div className=" flex justify-center items-start">
       <div
-        className="bg-white p-6 font-futura tracking-wider shadow-md "
+        className="bg-white p-2  font-futura tracking-wider  "
         style={{ width: "300px" }}
       >
         {" "}
@@ -45,7 +45,7 @@ export default function SignIn({redirectPath = '/'}) {
         <div className="mb-4 text-start">
           {" "}
           {/* centered the text */}
-          <span className=" font-FuturaBold  text-center text-sm text-gray-500 cursor-pointer hover:underline">
+          <span className=" font-FuturaBold tracking-widest text-center text-lg text-gray-500 cursor-pointer hover:underline">
             My Account
           </span>{" "}
           {/* added hover effect */}
@@ -54,7 +54,7 @@ export default function SignIn({redirectPath = '/'}) {
           <div className="mb-4">
             <label
               htmlFor="email"
-              className="block mb-2 text-xs font-FuturaMedium text-gray-500"
+              className="block mb-2 text-xs font-FuturaBold tracking-widest text-gray-500"
             >
               Email Address
             </label>{" "}
@@ -71,11 +71,11 @@ export default function SignIn({redirectPath = '/'}) {
             <div className="flex justify-between items-center">
               <label
                 htmlFor="password"
-                className="text-xs font-FuturaMedium text-gray-500"
+                className="text-xs font-FuturaBold tracking-widest text-gray-500"
               >
                 Password
               </label>
-              <div className="text-xs text-gray-400 cursor-pointer font-FuturaMedium hover:underline">
+              <div className="text-xs text-gray-400 cursor-pointer tracking-widest font-FuturaBold hover:underline">
                 Forgot Password?
               </div>
             </div>
@@ -90,7 +90,7 @@ export default function SignIn({redirectPath = '/'}) {
 
           <button
             onClick={handleSubmit}
-            className="w-full bg-black text-white p-2  hover:bg-gray-800"
+            className="w-full bg-black text-white p-2 mb-8 font-FuturaBold text-xs tracking-widest  hover:bg-gray-800"
           >
             Sign In
           </button>

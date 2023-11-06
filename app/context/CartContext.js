@@ -24,6 +24,7 @@ export const CartProvider = ({ children }) => {
   const addItemToCart = ({
     productId,
     name,
+    description,
     size,
     color,
     price,
@@ -35,6 +36,7 @@ export const CartProvider = ({ children }) => {
     const item = {
       productId,
       name,
+      description,
       size,
       color,
       price,

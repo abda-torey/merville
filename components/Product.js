@@ -52,6 +52,7 @@ const Product = ({ product }) => {
     addItemToCart({
       productId: product.id,
       name: product.name,
+      description:product.description,
       size: selectedSize,
       color: selectedColor,
       price: product.price,

@@ -15,6 +15,7 @@ import CartContext from "@/app/context/CartContext";
 import Cart from "./Cart/Cart";
 import CartSideBar from "./Cart/CartSideBar";
 
+
 const futuraMedium = localFont({
   src: "../public/fonts/futura medium bt.ttf",
   variable: "--font-futura-medium",
@@ -32,8 +33,8 @@ const Header = ({ categories }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false); // State for search overlay
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
-  const { toggleDrawerBag, isBagOpen } = useContext(CartContext);
-
+  const { toggleDrawerBag, isBagOpen, cart } = useContext(CartContext);
+const cartItemCount = cart && cart.cartItems ? cart.cartItems.length : 0;
   const toggleSubcategories = () => setShowSubcategories(!showSubcategories);
   const { isSignedIn, user } = useUser();
   const SCROLL_THRESHOLD = 20;
@@ -317,18 +318,21 @@ const Header = ({ categories }) => {
                 </button>
               </Link>
             )}
-           <UserButton afterSignOutUrl="/" >
-            user
-           </UserButton>
-           
+            <UserButton afterSignOutUrl="/">user</UserButton>
+
             <button
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 relative"
               onClick={toggleDrawerBag}
             >
-              <span className="hidden text-sm tracking-wide   md:inline">
+              <span className="hidden text-sm tracking-wide md:inline">
                 Bag
               </span>
               <ShoppingBagIcon className="h-3 w-3" />
+              {cartItemCount > 0 && (
+                <span className="absolute -top-[13px] md:-top-[10px] -right-2   text-white rounded-full px-1 py-1 text-[9px]">
+                  {cartItemCount}
+                </span>
+              )}
             </button>
             <div
               className={`fixed inset-0 z-30 bg-black opacity-50 ${
