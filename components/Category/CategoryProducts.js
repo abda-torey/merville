@@ -153,7 +153,7 @@ const CategoryProducts = ({ title,products, colors, sizes, text }) => {
                 {product.name}
               </h2>
               <p className="text-center text-xs font-medium font-body tracking-wider mt-1 md:mb-5">
-                £{product.price.toFixed(2)}
+                £{(product.price / 100).toFixed(2)}
               </p>
             </Link>
             {product.comingsoon && (

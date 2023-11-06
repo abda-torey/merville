@@ -18,12 +18,26 @@ const CartSideBar = () => {
     updateQuantity,
     toggleDrawerBag,
   } = useContext(CartContext);
-  const amountWithoutTax = cart?.cartItems?.reduce(
-    (acc, item) => acc + item.quantity * item.price,
-    0
-  );
-  const tax = (amountWithoutTax * 0.15).toFixed(2);
-  const totalAmount = Number(amountWithoutTax) + Number(tax);
+// First, calculate the total in cents
+const amountInCents = cart?.cartItems?.reduce(
+  (acc, item) => acc + item.quantity * item.price,
+  0
+);
+
+// Convert the total in cents to a floating-point number for euros
+const amountWithoutTax = amountInCents / 100;
+
+// Calculate the tax as a numerical value
+const tax = amountWithoutTax * 0.15;
+
+// Sum the amounts to get the total
+const totalAmount = amountWithoutTax + tax;
+
+// Now, format the numbers as strings with two decimal places for display
+const amountWithoutTaxStr = amountWithoutTax.toFixed(2);
+const taxStr = tax.toFixed(2);
+const totalAmountStr = totalAmount.toFixed(2);
+
 
   return (
     <div className="flex flex-col h-full">

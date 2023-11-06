@@ -91,7 +91,7 @@ const Product = ({ product }) => {
             {product.name}
           </h2>
           <p className="text-sm font-semibold text-gray-700 tracking-widest mb-4">
-            ${product.price}
+            ${(product.price / 100).toFixed(2)}
           </p>
 
           <div className="space-y-2 mb-8">
