@@ -33,6 +33,8 @@ export default function Checkout() {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const [errors, setErrors] = useState({});
 
+  const [windowWidth, setWindowWidth] = useState(null);
+
   const [formData, setFormData] = useState({
     title: "",
     firstName: "",
@@ -108,11 +110,10 @@ export default function Checkout() {
   // Use useEffect to set the default state based on the screen width
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 768) {
-        setIsCollapsed(false);
-      } else {
-        setIsCollapsed(true);
-      }
+      
+        setWindowWidth(window.innerWidth);
+        setIsCollapsed(window.innerWidth < 768);
+      
     };
 
     // Call handleResize once on component mount to set initial state
@@ -120,11 +121,15 @@ export default function Checkout() {
 
     // Set up event listener for window resize
     window.addEventListener("resize", handleResize);
+
     // Cleanup event listener on component unmount
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  // Guard against window being undefined in server-side rendering context
+  const isMobile = windowWidth !== null && windowWidth < 768;
+
   // create checkout data from cart context to be passed to payment intent
   let checkoutData = {
     items: cart?.cartItems?.map((product) => ({
@@ -148,8 +153,8 @@ export default function Checkout() {
       );
 
       const data = await response.json();
-      console.log(data.orderId);
-      localStorage.setItem("orderId", JSON.stringify(data.orderId));
+      console.log(data.clientSecret);
+      // localStorage.setItem("orderId", JSON.stringify(data.orderId));
       setClientSecret(data.clientSecret);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -361,7 +366,7 @@ export default function Checkout() {
                         className="w-[90%] md:w-32 text-xs md:text-sm p-2 border"
                       >
                         <option value="">Country</option>
-                        {allCountries.map((countryData, index) => (
+                        {allCountries?.map((countryData, index) => (
                           <option key={index} value={countryData[0]}>
                             {countryData[0]}
                           </option>
@@ -557,12 +562,10 @@ export default function Checkout() {
         <div className="text-black">
           <div className=" flex justify-between md:text-center">
             <h3
-              className={` md:text-center font-FuturaMedium ${
-                window.innerWidth < 768 ? "cursor-pointer" : ""
+              className={`md:text-center font-FuturaMedium ${
+                isMobile ? "cursor-pointer" : ""
               }`}
-              onClick={() =>
-                window.innerWidth < 768 && setIsCollapsed(!isCollapsed)
-              }
+              onClick={() => isMobile && setIsCollapsed(!isCollapsed)}
             >
               Your Order Summary
             </h3>
