@@ -33,12 +33,26 @@ const Cart = () => {
   //   addItemToCart(item);
   // };
 
-  const amountWithoutTax = cart?.cartItems?.reduce(
-    (acc, item) => acc + item.quantity * item.price,
-    0
-  );
-  const tax = (amountWithoutTax * 0.15).toFixed(2);
-  const totalAmount = Number(amountWithoutTax) + Number(tax);
+// First, calculate the total in cents
+const amountInCents = cart?.cartItems?.reduce(
+  (acc, item) => acc + item.quantity * item.price,
+  0
+);
+
+// Convert the total in cents to a floating-point number for euros
+const amountWithoutTax = amountInCents / 100;
+
+// Calculate the tax as a numerical value
+const tax = amountWithoutTax * 0.15;
+
+// Sum the amounts to get the total
+const totalAmount = amountWithoutTax + tax;
+
+// Now, format the numbers as strings with two decimal places for display
+const amountWithoutTaxStr = amountWithoutTax.toFixed(2);
+const taxStr = tax.toFixed(2);
+const totalAmountStr = totalAmount.toFixed(2);
+
 
   const onCheckOut = async (event) => {
     event.preventDefault();
@@ -292,10 +306,13 @@ const Cart = () => {
 
           <div className=" flex justify-between mt-2 p-1 font-FuturaBold text-xs">
             <span>Total</span>
-            <span>${totalAmount}</span>
+            <span>${totalAmountStr}</span>
           </div>
           <div>
-            <button className=" mt-12 bg-black text-white w-full p-1 text-xs font-FuturaLight tracking-widest" onClick={onCheckOut}>
+            <button
+              className=" mt-12 bg-black text-white w-full p-1 text-xs font-FuturaLight tracking-widest"
+              onClick={onCheckOut}
+            >
               Proceed to Checkout
             </button>
           </div>
