@@ -1,14 +1,11 @@
 "use client";
 import React, { useContext } from "react";
-import localFont from "next/font/local";
+
 import CartContext from "@/app/context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
 
-const futuraMedium = localFont({
-  src: "../../public/fonts/futura medium bt.ttf",
-  variable: "--font-futura-medium",
-});
+
 
 const CartSideBar = () => {
   const {
@@ -41,11 +38,11 @@ const totalAmountStr = totalAmount.toFixed(2);
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex items-start justify-center pt-5   gap-8">
-        <h3 className={`${futuraMedium.className} font-light text-sm`}>
+      <div className="flex items-center justify-center pt-5    gap-12">
+        <h3 className="font-FuturaMedium font-light text-lg ml-4 mr-4 ">
           SHOPPING BAG
         </h3>
-        <button className="text-2xl" onClick={() => toggleDrawerBag()}>
+        <button className="text-2xl ml-2 " onClick={() => toggleDrawerBag()}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -64,58 +61,58 @@ const totalAmountStr = totalAmount.toFixed(2);
       </div>
       <div className="flex-grow overflow-y-auto">
         {cart?.cartItems?.length === 0 ? (
-          <h3 className="text-center justify-center text-lg mt-16 text-black">
+          <h3 className="text-center font-FuturaBold justify-center text-lg mt-16 text-black">
             No Items in Bag
           </h3>
         ) : (
           cart?.cartItems?.map((product, productIdx) => (
             <div className="flex mt-7 " key={productIdx}>
               {/* Product Image */}
-              <div className=" w-[150px] p-4 bg-customColor flex items-center justify-center">
+              <div className=" w-[150px] md:h-[152px] p-2 bg-customColor flex items-center justify-center">
                 <Image
                   src={product.image}
                   width={500}
                   height={500}
                   alt={product.name}
-                  className=" w-48"
+                  className=" w-28"
                 />
               </div>
 
               {/* Product Details */}
-              <div className="p-4 w-[145px] flex flex-col">
+              <div className="pl-2 w-[180px] flex flex-col ">
                 <div>
                   <h2
-                    className={`${futuraMedium.className} tracking-wide font-light text-sm mb-2`}
+                    className="font-FuturaMedium tracking-wide font-light text-sm mb-0 mt-3"
                   >
                     {product.name}
                   </h2>
                   <p
-                    className={`${futuraMedium.className} text-gray-600 font-extralight text-xs`}
+                    className="font-FuturaMedium text-gray-600 font-extralight tracking-tighter text-xs"
                   >
-                    Color: {product.color}
+                    {product.color} {" "} {product.description}
                   </p>
                   <p
-                    className={`${futuraMedium.className} text-gray-600  mb-3 text-xs`}
+                    className="font-FuturaMedium text-gray-600  mb-2 text-xs"
                   >
                     Size: {product.size}
                   </p>
-                  <span className={`${futuraMedium.className}  text-xs`}>
-                    $ {product.price}
+                  <span className="font-FuturaMedium  text-xs">
+                    ${(product.price / 100).toFixed(2)}
                   </span>
                 </div>
 
                 {/* Edit, Remove, and Quantity Selector */}
-                <div className="flex  mt-4 justify-between">
-                  <div className="flex space-x-2">
+                <div className="flex  mt-3 justify-between">
+                  <div className="flex space-x-2 items-center">
                     <button
-                      className={`${futuraMedium.className} text-gray-600 underline py-1 text-xs`}
+                      className="font-FuturaMedium text-black underline py-1 text-xs"
                     >
                       Edit
                     </button>
-                    <div className="border-l h-6 border-gray-950 mx-2"></div>{" "}
+                    <div className="border-l h-[14px] border-gray-950 mx-2"></div>{" "}
                     {/* Separator */}
                     <button
-                      className={`${futuraMedium.className} text-gray-600 underline py-1 text-xs`}
+                      className="font-FuturaMedium text-black underline py-1 text-xs"
                       onClick={() =>
                         deleteItemFromCart(
                           product.productId,
@@ -128,11 +125,11 @@ const totalAmountStr = totalAmount.toFixed(2);
                     </button>
                   </div>
                   <div className="relative ml-6">
-                    <span className="absolute top-1/2 left-1  md:left-0.5 transform -translate-y-1/2 text-xs pointer-events-none">
+                    <span className="absolute top-1/2 left-1  md:left-1 transform -translate-y-1/2 text-[9px] pointer-events-none font-FuturaMedium">
                       QTY:
                     </span>
                     <select
-                      className=" appearance-none border p-2 text-xs pl-6 w-14" // Adjusted padding, width, and removed unnecessary padding
+                      className=" appearance-none border p-[3px] font-FuturaMedium text-[9px] pl-6 w-14" // Adjusted padding, width, and removed unnecessary padding
                       value={product.quantity}
                       onChange={(e) =>
                         updateQuantity(
@@ -151,7 +148,7 @@ const totalAmountStr = totalAmount.toFixed(2);
                     </select>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="absolute right-2 top-1/2 transform -translate-y-1/2 h-4 w-4 pointer-events-none"
+                      className="absolute right-[7px] top-1/2 transform -translate-y-1/2 h-3 w-3 pointer-events-none"
                       viewBox="0 0 20 20"
                       fill="currentColor"
                       aria-hidden="true"
@@ -172,24 +169,24 @@ const totalAmountStr = totalAmount.toFixed(2);
       <hr className="mt-5"></hr>
       <div className="bg-white py-4 mt-auto">
         <div className="py-0 md:py-4 flex mx-9 justify-between items-center">
-          <span className={`${futuraMedium.className} text-xs font-bold`}>
+          <span className="font-FuturaMedium text-xs font-bold">
             SUBTOTAL
           </span>
-          <span className={`${futuraMedium.className} text-xs font-bold`}>
-            £ {amountWithoutTax}
+          <span className="font-FuturaMedium text-xs font-bold">
+            £ {amountWithoutTaxStr}
           </span>
         </div>
-        <div className="flex px-4 md:px-0 flex-col md:flex-row items-center justify-center mt-5 space-y-4 md:space-y-0 md:space-x-4 font-futura">
+        <div className="flex px-4 md:px-0 flex-col md:flex-row items-center justify-center mt-5 space-y-4 md:space-y-0 md:space-x-4 font-FuturaMedium tracking-widest">
           <button
-            className={`${futuraMedium.className} bg-white text-black border-2 text-xs tracking-tighter px-4 py-2 w-full md:w-24`}
+            className=" bg-black text-white border-2 text-xs tracking-tighter px-4 py-2 w-full md:w-28"
           >
-            <Link href="/cart">GO TO SHOPPING BAG</Link>
+            <Link href="/cart">VIEW BAG</Link>
           </button>
 
           <button
-            className={`${futuraMedium.className} bg-black border-2 text-white text-xs tracking-tighter px-4 py-2 w-full md:w-24`}
+            className=" bg-black border-2 text-white text-xs tracking-tighter px-4 py-2 w-full md:w-28"
           >
-            <Link href="/checkoutPage">PROCEED TO CHECKOUT</Link>
+            <Link href="/checkoutPage">CHECKOUT</Link>
           </button>
         </div>
       </div>

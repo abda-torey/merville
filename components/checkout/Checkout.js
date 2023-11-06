@@ -179,12 +179,26 @@ export default function Checkout() {
     clientSecret,
     appearance,
   };
-  const amountWithoutTax = cart?.cartItems?.reduce(
-    (acc, item) => acc + item.quantity * item.price,
-    0
-  );
-  const tax = (amountWithoutTax * 0.15).toFixed(2);
-  const totalAmount = Number(amountWithoutTax) + Number(tax);
+ // First, calculate the total in cents
+const amountInCents = cart?.cartItems?.reduce(
+  (acc, item) => acc + item.quantity * item.price,
+  0
+);
+
+// Convert the total in cents to a floating-point number for euros
+const amountWithoutTax = amountInCents / 100;
+
+// Calculate the tax as a numerical value
+const tax = amountWithoutTax * 0.15;
+
+// Sum the amounts to get the total
+const totalAmount = amountWithoutTax + tax;
+
+// Now, format the numbers as strings with two decimal places for display
+const amountWithoutTaxStr = amountWithoutTax.toFixed(2);
+const taxStr = tax.toFixed(2);
+const totalAmountStr = totalAmount.toFixed(2);
+
 
   // validate formdata for areas that are required in the shipping information
 
@@ -621,7 +635,7 @@ export default function Checkout() {
               <div className="border md:w-[350px] bg-gray-100 mt-2 text-xs p-4 ">
                 <div className="flex justify-between border-b font-FuturaMedium text-gray-800  pb-2">
                   <span>Subtotal</span>
-                  <span>${amountWithoutTax}</span>
+                  <span>${amountWithoutTaxStr}</span>
                 </div>
                 <div className="flex justify-between border-b pb-2 font-FuturaMedium text-xs  pt-2">
                   <span>Shipping</span>
@@ -629,7 +643,7 @@ export default function Checkout() {
                 </div>
                 <div className="flex font-FuturaBold text-xs justify-between pt-2">
                   <span className="font-bold">Total</span>
-                  <span className="font-bold">£{amountWithoutTax}</span>
+                  <span className="font-bold">£{totalAmountStr}</span>
                 </div>
               </div>
             </>

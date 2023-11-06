@@ -33,26 +33,25 @@ const Cart = () => {
   //   addItemToCart(item);
   // };
 
-// First, calculate the total in cents
-const amountInCents = cart?.cartItems?.reduce(
-  (acc, item) => acc + item.quantity * item.price,
-  0
-);
+  // First, calculate the total in cents
+  const amountInCents = cart?.cartItems?.reduce(
+    (acc, item) => acc + item.quantity * item.price,
+    0
+  );
 
-// Convert the total in cents to a floating-point number for euros
-const amountWithoutTax = amountInCents / 100;
+  // Convert the total in cents to a floating-point number for euros
+  const amountWithoutTax = amountInCents / 100;
 
-// Calculate the tax as a numerical value
-const tax = amountWithoutTax * 0.15;
+  // Calculate the tax as a numerical value
+  const tax = amountWithoutTax * 0.15;
 
-// Sum the amounts to get the total
-const totalAmount = amountWithoutTax + tax;
+  // Sum the amounts to get the total
+  const totalAmount = amountWithoutTax + tax;
 
-// Now, format the numbers as strings with two decimal places for display
-const amountWithoutTaxStr = amountWithoutTax.toFixed(2);
-const taxStr = tax.toFixed(2);
-const totalAmountStr = totalAmount.toFixed(2);
-
+  // Now, format the numbers as strings with two decimal places for display
+  const amountWithoutTaxStr = amountWithoutTax.toFixed(2);
+  const taxStr = tax.toFixed(2);
+  const totalAmountStr = totalAmount.toFixed(2);
 
   const onCheckOut = async (event) => {
     event.preventDefault();
@@ -74,17 +73,7 @@ const totalAmountStr = totalAmount.toFixed(2);
         checkoutData.guestEmail =
           isGuest; /* Your logic to retrieve the guest's email here */
       }
-      // const response = await axios.post(
-      //   `${process.env.NEXT_PUBLIC_API_URL}/api/checkout`,
-      //   {
-      //     items: cart?.cartItems?.map((product) => ({
-      //       productId: product.productId,
-      //       selectedColor: product.color,
-      //       selectedSize: product.size,
-      //       quantity: product.quantity,
-      //     })),
-      //   }
-      // );
+
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/api/checkout`,
         checkoutData
@@ -106,104 +95,34 @@ const totalAmountStr = totalAmount.toFixed(2);
     }
   }, [searchParams]);
   return (
-    // <div className="flex justify-center p-4 mr-8">
-    //   <div className="mx-auto max-w-2xl px-4 pb-24 pt-16 sm:px-6 lg:max-w-7xl lg:px-8">
-    //     <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-4">
-    //       Shopping Bag
-    //     </h1>
-
-    //     <div className="bg-white p-4 rounded-lg shadow-md">
-    //       {cart?.cartItems?.map((product, productIdx) => (
-    //         <div
-    //           key={product.productId}
-    //           className="flex justify-between items-center mb-4"
-    //         >
-    //           <div className="flex items-center">
-    //             <div className="w-20 h-20 bg-gray-200 rounded-md overflow-hidden mr-4">
-    //               <Image
-    //                 src={product.image}
-    //                 alt={product.name}
-    //                 width={500}
-    //                 height={500}
-    //                 className="object-cover"
-    //               />
-    //             </div>
-    //             <div>
-    //               <h3 className="text-md font-medium text-gray-700">
-    //                 {product.name}
-    //               </h3>
-    //               <p className="text-sm text-gray-500">{product.color}</p>
-    //               <p className="text-sm text-gray-500">{product.size}</p>
-    //               <p className="mt-1 text-sm font-medium text-gray-900">
-    //                 {product.price}
-    //               </p>
-    //             </div>
-    //           </div>
-    //           <div className="flex items-center">
-    //             <select className="mr-4" value={product.quantity}>
-    //               {[...Array(product.stock).keys()].map((_, idx) => (
-    //                 <option key={idx} value={idx + 1}>
-    //                   {idx + 1}
-    //                 </option>
-    //               ))}
-    //             </select>
-    //             <button className="text-gray-400 hover:text-gray-500">
-    //               Remove
-    //             </button>
-    //           </div>
-    //         </div>
-    //       ))}
-
-    //       <div className="border-t pt-4">
-    //         <div className="flex justify-between items-center mb-2">
-    //           <span className="text-gray-600">SUBTOTAL</span>
-    //           <span>£9,90 GBP</span>
-    //         </div>
-    //         <button className="w-full bg-black text-white rounded-md py-2">
-    //           VIEW BAG
-    //         </button>
-    //         <button className="w-full bg-black text-white rounded-md py-2 mt-2">
-    //           CHECKOUT
-    //         </button>
-    //       </div>
-    //     </div>
-
-    //     {/* Optional: Add this below the cart items if you want to display a message for orders above a certain amount */}
-    //     <div className="mt-6 text-center">
-    //       <span className="text-sm text-gray-600">
-    //         FREE SHIPPING FOR ORDERS ABOVE £200
-    //       </span>
-    //     </div>
-    //   </div>
-    // </div>
-
-    <div className="mt-24 md:mb-40 flex flex-col  ">
-      <div className=" flex items-start justify-center mb-8 mr-24 ">
+    <div className="mt-24 md:mb-40 flex flex-col ">
+      <div className=" flex items-center justify-center mb-8 md:mr-44  md:pr-44  ">
+        
         <h3 className=" font-FuturaMedium text-sm text-black">
           MY SHOPPING BAG
         </h3>
       </div>
-      <div className="flex">
-        <div className="w-1/2 flex flex-col   pt-5 text-black h-full">
-          <div className="flex ml-24  justify-between  ">
-            <h3 className=" ml-24 font-FuturaMedium text-gray-700 text-xs">
+      <div className="flex ">
+        <div className="w-1/2 flex flex-col ml-4  pt-5 text-black h-[240px] pl-16">
+          <div className="flex ml-16  justify-between  ">
+            <h3 className=" ml-20 font-FuturaMedium text-gray-700 text-xs">
               YOUR ITEMS
             </h3>
             <span className=" font-FuturaMedium text-gray-300 text-xs">
               continue shopping
             </span>
           </div>
-          <hr className=" md:ml-44 mt-5"></hr>
-          <div className="max-h-[300px] overflow-auto w-full flex flex-col items-center">
+          <hr className=" md:ml-36 mt-5"></hr>
+          <div className="max-h-[300px] overflow-auto  w-full flex flex-col items-center ml-[61px] ">
             {cart?.cartItems?.length === 0 ? (
               <h3 className="text-center justify-center text-lg mt-16 text-black">
                 No Items in Bag
               </h3>
             ) : (
               cart?.cartItems?.map((product, productIdx) => (
-                <div className="flex mt-7  " key={productIdx}>
+                <div className="flex mt-7   " key={productIdx}>
                   {/* Product Image */}
-                  <div className=" w-[100px] h-[100px] p-2 bg-customColor flex items-center justify-center">
+                  <div className=" w-[120px] md:h-[132px] p-3 bg-customColor flex items-center justify-center">
                     <Image
                       src={product.image}
                       width={500}
@@ -214,32 +133,32 @@ const totalAmountStr = totalAmount.toFixed(2);
                   </div>
 
                   {/* Product Details */}
-                  <div className="pl-4 w-[120px] flex flex-col">
+                  <div className="pl-2 md:w-[280px] flex flex-col  ">
                     <div>
-                      <h2 className=" font-FuturaMedium tracking-wide  text-xs mb-0">
+                      <h2 className="font-FuturaMedium tracking-wide font-light text-xs mb-0 mt-3">
                         {product.name}
                       </h2>
-                      <p className=" font-FuturaLight text-gray-600  text-xs">
-                        Color: {product.color}
+                      <p className="font-FuturaMedium text-gray-600 font-extralight tracking-tighter text-[12px]">
+                        {product.color} {product.description}
                       </p>
-                      <p className=" font-FuturaLight text-gray-600  mb-1 text-xs">
+                      <p className="font-FuturaMedium text-gray-600  mb-2 text-[12px]">
                         Size: {product.size}
                       </p>
-                      <span className=" font-FuturaLight text-xs">
-                        $ {product.price}
+                      <span className="font-FuturaMedium  text-[10px]">
+                        ${(product.price / 100).toFixed(2)}
                       </span>
                     </div>
 
                     {/* Edit, Remove, and Quantity Selector */}
-                    <div className="flex  mt-2 justify-between">
-                      <div className="flex space-x-2">
-                        <button className=" font-FuturaMedium text-gray-600 underline py-1 text-xs">
+                    <div className="flex  mt-0 justify-between ">
+                      <div className="flex space-x-2 mr-12 items-center">
+                        <button className="font-FuturaMedium text-black underline py-1 text-[10px]">
                           Edit
                         </button>
-                        <div className="border-l h-6 border-gray-950 mx-2"></div>{" "}
+                        <div className="border-l h-[12px] border-gray-950 mx-2"></div>{" "}
                         {/* Separator */}
                         <button
-                          className=" font-FuturaMedium text-gray-600 underline py-1 text-xs"
+                          className="font-FuturaMedium text-black underline py-1 text-[10px] "
                           onClick={() =>
                             deleteItemFromCart(
                               product.productId,
@@ -251,12 +170,12 @@ const totalAmountStr = totalAmount.toFixed(2);
                           Remove
                         </button>
                       </div>
-                      <div className="relative ml-6 md:ml-32 ">
-                        <span className="absolute top-1/2 left-1  md:left-0.5 transform -translate-y-1/2 text-xs pointer-events-none">
+                      <div className="relative ml-32 -top-4 ">
+                        <span className="absolute top-1/2 left-1  md:left-1 transform -translate-y-1/2 text-[9px] pointer-events-none font-FuturaMedium">
                           QTY:
                         </span>
                         <select
-                          className=" appearance-none border p-2 text-xs pl-6 w-14" // Adjusted padding, width, and removed unnecessary padding
+                          className=" appearance-none border p-[3px] font-FuturaMedium text-[9px] pl-6 w-14" // Adjusted padding, width, and removed unnecessary padding
                           value={product.quantity}
                           onChange={(e) =>
                             updateQuantity(
@@ -275,7 +194,7 @@ const totalAmountStr = totalAmount.toFixed(2);
                         </select>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="absolute right-2 top-1/2 transform -translate-y-1/2 h-4 w-4 pointer-events-none"
+                          className="absolute right-[7px] top-1/2 transform -translate-y-1/2 h-3 w-3 pointer-events-none"
                           viewBox="0 0 20 20"
                           fill="currentColor"
                           aria-hidden="true"
@@ -294,23 +213,24 @@ const totalAmountStr = totalAmount.toFixed(2);
             )}
           </div>
         </div>
-        <div className="w-[200px] flex flex-col  ml-14 text-black bg-customColor  p-3">
+        <div className="w-[250px] flex flex-col  ml-24 text-black bg-gray-100   p-4">
           <div>
             <h3 className=" mt-2 font-FuturaBold text-xs">BASKET TOTAL</h3>
           </div>
 
-          <div className="flex p-1 mt-2 justify-between font-FuturaMedium text-xs text-gray-600">
+          <div className="flex p-1 mt-2 justify-between font-FuturaMedium text-xs text-gray-900">
             <span>Subtotal</span>
-            <span>${amountWithoutTax}</span>
+            <span>${amountWithoutTaxStr}</span>
           </div>
-
-          <div className=" flex justify-between mt-2 p-1 font-FuturaBold text-xs">
+          <hr className="my-2 border-t border-gray-300" />
+          <div className=" flex justify-between mt-2 p-1 font-FuturaBold text-sm">
             <span>Total</span>
             <span>${totalAmountStr}</span>
           </div>
+          <hr className="my-2 border-t border-gray-300" />
           <div>
             <button
-              className=" mt-12 bg-black text-white w-full p-1 text-xs font-FuturaLight tracking-widest"
+              className=" mt-10 bg-black text-white w-full p-[9px] text-xs font-FuturaLight tracking-widest"
               onClick={onCheckOut}
             >
               Proceed to Checkout
