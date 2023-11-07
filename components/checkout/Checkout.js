@@ -110,10 +110,8 @@ export default function Checkout() {
   // Use useEffect to set the default state based on the screen width
   useEffect(() => {
     const handleResize = () => {
-      
-        setWindowWidth(window.innerWidth);
-        setIsCollapsed(window.innerWidth < 768);
-      
+      setWindowWidth(window.innerWidth);
+      setIsCollapsed(window.innerWidth < 768);
     };
 
     // Call handleResize once on component mount to set initial state
@@ -179,26 +177,25 @@ export default function Checkout() {
     clientSecret,
     appearance,
   };
- // First, calculate the total in cents
-const amountInCents = cart?.cartItems?.reduce(
-  (acc, item) => acc + item.quantity * item.price,
-  0
-);
+  // First, calculate the total in cents
+  const amountInCents = cart?.cartItems?.reduce(
+    (acc, item) => acc + item.quantity * item.price,
+    0
+  );
 
-// Convert the total in cents to a floating-point number for euros
-const amountWithoutTax = amountInCents / 100;
+  // Convert the total in cents to a floating-point number for euros
+  const amountWithoutTax = amountInCents / 100;
 
-// Calculate the tax as a numerical value
-const tax = amountWithoutTax * 0.15;
+  // Calculate the tax as a numerical value
+  const tax = amountWithoutTax * 0.15;
 
-// Sum the amounts to get the total
-const totalAmount = amountWithoutTax + tax;
+  // Sum the amounts to get the total
+  const totalAmount = amountWithoutTax + tax;
 
-// Now, format the numbers as strings with two decimal places for display
-const amountWithoutTaxStr = amountWithoutTax.toFixed(2);
-const taxStr = tax.toFixed(2);
-const totalAmountStr = totalAmount.toFixed(2);
-
+  // Now, format the numbers as strings with two decimal places for display
+  const amountWithoutTaxStr = amountWithoutTax.toFixed(2);
+  const taxStr = tax.toFixed(2);
+  const totalAmountStr = totalAmount.toFixed(2);
 
   // validate formdata for areas that are required in the shipping information
 
@@ -268,21 +265,33 @@ const totalAmountStr = totalAmount.toFixed(2);
             <form>
               <div className="flex  bg-customColor p-4 text-black font-FuturaLight">
                 <div className="md:w-full ">
-                  <h2 className="mb-4 font-FuturaMedium">NEW ADDRESS</h2>
+                  <h2 className="mb-4 font-FuturaMedium text-gray-700">NEW ADDRESS</h2>
 
                   <div className="grid grid-cols-1  md:grid-cols-5 font-FuturaLight font-semibold text-xs gap-1 md:gap-2 mb-4">
                     <div className="  md:w-14  col-span-1 ">
-                      <select className=" w-full md:w-14  p-2 border">
+                      <label
+                        htmlFor="title"
+                        className="block tracking-widest text-[10px] text-gray-600 mb-1"
+                      >
+                        TITLE
+                      </label>
+                      <select className=" w-full md:w-20  p-2 border">
+                        <option value=""></option>
                         <option value="mr">Mr.</option>
                         <option value="ms">Ms.</option>
                         {/* Add other titles as needed */}
                       </select>
                     </div>
                     <div className=" w-full col-span-1 md:col-span-2 ">
+                      <label
+                        htmlFor="title"
+                        className="block tracking-widest text-[10px] text-gray-600 mb-1"
+                      >
+                        FIRST NAME
+                      </label>
                       <input
                         type="text"
                         className=" w-full  md:w-full p-2 border   "
-                        placeholder="First Name"
                         autoComplete="name"
                         onChange={(e) => {
                           setFormData((prevState) => ({
@@ -302,10 +311,15 @@ const totalAmountStr = totalAmount.toFixed(2);
                       )}
                     </div>
                     <div className=" w-full col-span-1 md:col-span-2">
+                      <label
+                        htmlFor="title"
+                        className="block tracking-widest text-[10px] text-gray-600 mb-1"
+                      >
+                        SURNAME
+                      </label>
                       <input
                         type="text"
                         className=" w-full md:w-full p-2 border "
-                        placeholder="Surname"
                         onChange={(e) => {
                           setFormData((prevState) => ({
                             ...prevState,
@@ -325,12 +339,18 @@ const totalAmountStr = totalAmount.toFixed(2);
                     </div>
                   </div>
 
-                  <div className="mb-4 font-FuturaLight font-semibold text-xs ">
+                  <div className="mb-4 font-FuturaMedium  text-xs ">
+                    <label
+                      htmlFor="title"
+                      className="block tracking-widest text-[10px] text-gray-600 mb-1"
+                    >
+                      ADDRESS LINE 1
+                    </label>
+
                     <input
                       type="text"
                       className="md:w-full w-[100%] p-2 border"
                       autoComplete="address-line1"
-                      placeholder="Address Line 1"
                       onChange={(e) => {
                         setFormData((prevState) => ({
                           ...prevState,
@@ -348,11 +368,16 @@ const totalAmountStr = totalAmount.toFixed(2);
                       </div>
                     )}
                   </div>
-                  <div className="mb-4 font-FuturaLight font-semibold text-xs">
+                  <div className="mb-4 font-FuturaMedium text-xs">
+                    <label
+                      htmlFor="title"
+                      className="block tracking-widest text-[10px] text-gray-600 mb-1"
+                    >
+                      ADDRESS LINE 2
+                    </label>
                     <input
                       type="text"
                       className="md:w-full w-[100%] p-2 border"
-                      placeholder="Address Line 2"
                       autoComplete="address-line2"
                       onChange={(e) => {
                         setFormData((prevState) => ({
@@ -373,11 +398,17 @@ const totalAmountStr = totalAmount.toFixed(2);
                   </div>
                   <div className="flex flex-wrap">
                     {/* First Row: Country and City */}
-                    <div className="w-1/2 mr-0 md:mr-4 md:w-24  flex-grow">
+                    <div className="w-1/2 mr-0 md:mr-4 md:w-24 font-FuturaMedium  flex-grow">
+                      <label
+                        htmlFor="title"
+                        className="block   tracking-widest text-[10px] text-gray-600 mb-1"
+                      >
+                        COUNTRY/REGION
+                      </label>
                       <select
                         value={formData.country}
                         onChange={handleCountryChange}
-                        className="w-[90%] md:w-32 text-xs md:text-sm p-2 border"
+                        className="w-[90%] md:w-32 text-[10px] text-gray-600 md:text-sm p-2 border"
                       >
                         <option value="">Country</option>
                         {allCountries?.map((countryData, index) => (
@@ -393,12 +424,17 @@ const totalAmountStr = totalAmount.toFixed(2);
                       )}
                     </div>
 
-                    <div className="w-1/2 md:w-1/5  md:ml-4  flex-grow">
+                    <div className="w-1/2 md:w-1/5  md:ml-4 font-FuturaMedium   flex-grow">
+                      <label
+                        htmlFor="title"
+                        className="block tracking-widest text-[10px] text-gray-600 mb-1"
+                      >
+                        CITY
+                      </label>
                       <input
                         type="text"
                         className="w-full text-xs md:text-sm p-2 border"
                         name="city"
-                        placeholder="City"
                         onChange={(e) => {
                           setFormData((prevState) => ({
                             ...prevState,
@@ -418,12 +454,17 @@ const totalAmountStr = totalAmount.toFixed(2);
                     </div>
 
                     {/* Second Row: Postal Code and Region */}
-                    <div className="mt-4 md:mt-0  w-1/3  md:w-1/5 ml-0 md:ml-2  flex-grow">
+                    <div className="mt-4 md:mt-0  w-1/3  md:w-1/5 ml-0 md:ml-2 font-FuturaMedium  flex-grow">
+                      <label
+                        htmlFor="title"
+                        className="block tracking-widest text-[10px] text-gray-600 mb-1"
+                      >
+                        POSTAL CODE
+                      </label>
                       <input
                         type="text"
                         className=" w-full md:w-full text-xs md:text-sm p-2 border"
                         name="postal-code"
-                        placeholder="Postal Code"
                         onChange={(e) => {
                           setFormData((prevState) => ({
                             ...prevState,
@@ -442,9 +483,15 @@ const totalAmountStr = totalAmount.toFixed(2);
                       )}
                     </div>
 
-                    <div className="mt-4 md:mt-0  w-1/3 md:w-1/6 ml-2   flex-grow">
-                      <select className=" w-full md:w-full text-xs md:text-sm p-2 border">
-                        <option value="">Region</option>
+                    <div className="mt-4 md:mt-0  w-1/3 md:w-1/6 ml-2 font-FuturaMedium   flex-grow">
+                      <label
+                        htmlFor="title"
+                        className="block  tracking-widest text-[10px] text-gray-600 mb-1"
+                      >
+                        COUNTY
+                      </label>
+                      <select className=" w-full md:w-full text-[10px] text-gray-600 md:text-sm p-2 border">
+                        <option value=""></option>
                         {counties.map((region, index) => (
                           <option key={index} value={region}>
                             {region}
@@ -461,8 +508,19 @@ const totalAmountStr = totalAmount.toFixed(2);
                         type="text"
                         className="w-16 p-2 border"
                         autoComplete="tel-extension"
-                        readOnly // Make the input read-only
-                        value={`+${phoneExtension}`} // Display the phone extension value here
+                        value={
+                          phoneExtension.startsWith("+")
+                            ? phoneExtension
+                            : `+${phoneExtension}`
+                        } // Add "+" sign if it's not already present
+                        onChange={(e) => {
+                          const inputValue = e.target.value;
+                          setPhoneExtension(
+                            inputValue.startsWith("+")
+                              ? inputValue
+                              : `+${inputValue}`
+                          );
+                        }}
                       />
                     </div>
                     <div className="flex-grow">
@@ -490,11 +548,11 @@ const totalAmountStr = totalAmount.toFixed(2);
                     </div>
                   </div>
 
-                  <h2 className="mt-6 mb-4 font-FuturaLight  text-sm">
+                  <h2 className="mt-6 mb-4 font-FuturaMedium text-gray-700  text-sm">
                     SHIPPING METHOD
                   </h2>
-                  <div className="mb-4">
-                    <label className="flex items-center font-FuturaLight text-xs">
+                  <div className="mb-4 text-gray-600">
+                    <label className="flex items-center font-FuturaMedium text-xs">
                       <input
                         type="radio"
                         className="mr-2"
@@ -515,7 +573,7 @@ const totalAmountStr = totalAmount.toFixed(2);
                     </label>
                   </div>
                   <div className="mb-4">
-                    <label className="flex items-center font-FuturaLight  text-xs">
+                    <label className="flex items-center font-FuturaMedium text-xs text-gray-600">
                       <input
                         type="radio"
                         className="mr-2"

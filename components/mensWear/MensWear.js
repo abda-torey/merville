@@ -23,15 +23,17 @@ const MensWear = ({ categories, menswearPromo }) => {
 
       <div className="flex flex-col items-center space-y-1 mb-2">
         {/* displaying the first three categories */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-[3px] mt-2 w-full max-w-full ">
+        <div className="grid grid-cols-1 md:grid-cols-2  mt-2 w-full max-w-full ">
           {categories.slice(0, 3).map((category, idx) => (
             <Link
               key={category.id}
               href={`/mens-wear/${category.id}`}
               className={`relative flex flex-col items-center justify-center overflow-hidden bg-gray-100 hover:bg-gray-200 ${
                 idx === 0
-                  ? "md:col-span-1 md:row-span-2 h-[17rem] md:h-[calc(2*18rem)] "
-                  : "h-[17rem] md:h-[18rem] py-7"
+                  ? "md:col-span-1 md:row-span-2 h-[17rem]  md:h-[calc(2*18rem)] "
+                  : idx === 2
+                  ? "h-[17rem] md:h-[284px] py-7 ml-1 mt-1 "
+                  : "h-[17rem] md:h-[18rem] py-7  ml-1 "
               }`}
             >
               <Image
@@ -72,7 +74,7 @@ const MensWear = ({ categories, menswearPromo }) => {
             </Link>
           ))}
         </div>
-            {/* displaying the rest of the categories in a row of three cols */}
+        {/* displaying the rest of the categories in a row of three cols */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-[3px] mt-2 mb-2 w-full max-w-full">
           {categories.slice(5, 15).map((category, idx) => (
             <Link

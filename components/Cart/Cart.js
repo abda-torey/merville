@@ -95,7 +95,7 @@ const Cart = () => {
     }
   }, [searchParams]);
   return (
-    <div className="mt-24 md:mb-40 flex flex-col ">
+    <div className="mt-24 md:mb-40 hidden md:flex md:flex-col ">
       <div className=" flex items-center justify-center mb-8 md:mr-44  md:pr-44  ">
         
         <h3 className=" font-FuturaMedium text-sm text-black">
@@ -113,7 +113,7 @@ const Cart = () => {
             </span>
           </div>
           <hr className=" md:ml-36 mt-5"></hr>
-          <div className="max-h-[300px] overflow-auto  w-full flex flex-col items-center ml-[61px] ">
+          <div className="max-h-[300px] overflow-auto  w-full  flex flex-col items-center ml-[61px] ">
             {cart?.cartItems?.length === 0 ? (
               <h3 className="text-center justify-center text-lg mt-16 text-black">
                 No Items in Bag
@@ -122,7 +122,7 @@ const Cart = () => {
               cart?.cartItems?.map((product, productIdx) => (
                 <div className="flex mt-7   " key={productIdx}>
                   {/* Product Image */}
-                  <div className=" w-[120px] md:h-[132px] p-3 bg-customColor flex items-center justify-center">
+                  <div className=" w-[120px] lg:w-[120px] md: md:h-[132px] p-3 bg-customColor flex items-center justify-center">
                     <Image
                       src={product.image}
                       width={500}

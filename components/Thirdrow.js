@@ -86,7 +86,7 @@ const Thirdrow = () => {
               </h3>
               <Link
                 href="#"
-                className={`absolute bottom-8 left-1/3 md:bottom-5 md:left-1/2 transform -translate-x-1/2 text-lg font-extrabold no-underline border-b-4 ${
+                className={`absolute bottom-8 left-1/3 md:bottom-5 md:left-1/2 transform -translate-x-1/2 text-xs tracking-widest font-FuturaBold no-underline border-b-2 ${
                   item.bg_bottom === "dark"
                     ? "text-white border-white"
                     : "text-black border-black"

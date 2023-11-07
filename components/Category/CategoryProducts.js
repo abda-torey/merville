@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import PromotionBanner from "../PromotionBanner";
 
-const CategoryProducts = ({ title,products, colors, sizes, text }) => {
+const CategoryProducts = ({ title, products, colors, sizes, text }) => {
   const [showFilters, setShowFilters] = useState(false);
   return (
     <div className="bg-white mt-[50px] md:mt-[60px] mb-0">
@@ -137,31 +137,33 @@ const CategoryProducts = ({ title,products, colors, sizes, text }) => {
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-[3px] mb-0">
         {products.map((product) => (
-          <div
-            key={product.id}
-            className="bg-gray-200 text-black p-4  flex flex-col items-center relative"
-          >
-            <Image
-              width={1000}
-              height={1000}
-              src={product.imageDetails[0].imageUrl}
-              alt={product.name}
-              className="w-64 md:w-1/2 mt-10"
-            />
-            <Link href={`/product/${product.id}`}>
+          <Link href={`/product/${product.id}`} className="">
+            <div
+              key={product.id}
+              className="bg-gray-200 text-black p-4  flex flex-col items-center relative hover:bg-gray-300"
+            >
+              <Image
+                width={1000}
+                height={1000}
+                src={product.imageDetails[0].imageUrl}
+                alt={product.name}
+                className="w-64 md:w-1/2 mt-10"
+              />
+
               <h2 className="text-center text-xs mt-16 font-futura  tracking-wider  font-medium">
                 {product.name}
               </h2>
               <p className="text-center text-xs font-medium font-body tracking-wider mt-1 md:mb-5">
                 £{(product.price / 100).toFixed(2)}
               </p>
-            </Link>
-            {product.comingsoon && (
-              <div className="absolute w-full bottom-0  font-bold tracking-widest  bg-gray-400 text-gray-500 text-xs px-2 ">
-                Coming Soon Coming Soon
-              </div>
-            )}
-          </div>
+
+              {product.comingsoon && (
+                <div className="absolute w-full bottom-0  font-bold tracking-widest  bg-gray-400 text-gray-500 text-xs px-2 ">
+                  Coming Soon Coming Soon
+                </div>
+              )}
+            </div>
+          </Link>
         ))}
       </div>
       <PromotionBanner text={text} />

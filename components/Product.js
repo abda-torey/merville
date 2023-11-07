@@ -67,7 +67,7 @@ const Product = ({ product }) => {
   return (
     <>
       {" "}
-      <div className="  md:flex flex-col mb-0  md:mb-8 mt-20 md:flex-row justify-start items-start space-y-3 md:space-y-0 md:space-x-4 ml-3  ">
+      <div className="  md:flex flex-col mb-0  md:mb-8 mt-20 md:flex-row justify-start items-start space-y-3 md:space-y-0 md:space-x-8 ml-3 ">
         {/* Combined Image Div */}
         <div className="hidden md:col-span-2  flex-1 md:flex-none md:min-h-[700px] md:w-2/3 p-12 bg-customColor shadow-md md:flex  flex-col justify-center items-center overflow-y-auto scrollbar-hide">
           {product.imageDetails.map((imageDetail, index) => (
@@ -87,7 +87,7 @@ const Product = ({ product }) => {
         </div>
 
         {/* Third Div */}
-        <div className="w-full  md:w-1/4 p-4 md:p-6 min-h-[200px] md:min-h-[700px] text-gray-600 font-FuturaLight bg-white flex flex-col items-start justify-start md:px-10 sticky top-14">
+        <div className="w-full  md:w-1/4 p-4 md:p-6 min-h-[200px] md:min-h-[700px] text-gray-600 font-FuturaLight flex flex-col items-start justify-start md:ml-4  md:pl-14 md:px-10  sticky top-14">
           <h2 className="text-lg text-gray-800 font-semibold">
             {product.name}
           </h2>
