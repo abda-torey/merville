@@ -137,9 +137,9 @@ const CategoryProducts = ({ title, products, colors, sizes, text }) => {
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-[3px] mb-0">
         {products.map((product) => (
-          <Link href={`/product/${product.id}`} className="">
+          <Link href={`/product/${product.id}`} className="" key={product.id}>
             <div
-              key={product.id}
+              
               className="bg-gray-200 text-black p-4  flex flex-col items-center relative hover:bg-gray-300"
             >
               <Image
