@@ -180,13 +180,13 @@ const totalAmountStr = totalAmount.toFixed(2);
           <button
             className=" bg-black text-white border-2 text-xs tracking-tighter px-4 py-2 w-full md:w-28"
           >
-            <Link href="/cart">VIEW BAG</Link>
+            <Link href="/cart"  onClick={toggleDrawerBag}>VIEW BAG</Link>
           </button>
 
           <button
             className=" bg-black border-2 text-white text-xs tracking-tighter px-4 py-2 w-full md:w-28"
           >
-            <Link href="/checkoutPage">CHECKOUT</Link>
+            <Link href="/checkoutPage"  onClick={toggleDrawerBag}>CHECKOUT</Link>
           </button>
         </div>
       </div>

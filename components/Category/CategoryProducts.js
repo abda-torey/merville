@@ -26,9 +26,10 @@ const CategoryProducts = ({ title, products, colors, sizes, text }) => {
       <div className="top-12 md:top-14 z-10 bg-white shadow-sm">
         <div className="flex justify-between items-center text-black p-2 border-b pb-4">
           <div className="flex space-x-1 md:space-x-2  ">
-            <span className="text-black text-xs tracking-widest  md:text-sm font-medium">
+            <Link href="/mens-wear">
+            <span className="text-black text-xs tracking-widest  md:text-sm font-medium cursor-pointer">
               Men |
-            </span>
+            </span></Link>
             <span className="text-black text-xs tracking-widest md:text-sm font-medium">
               Men {title}
             </span>

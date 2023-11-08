@@ -169,7 +169,8 @@ const cartItemCount = cart && cart.cartItems ? cart.cartItems.length : 0;
 
             {/* Menu Items */}
             <ul className="space-y-4 pl-6">
-              <li className={`${futuraMedium.className} text-sm`}>Home</li>
+              <li className={`${futuraMedium.className} text-sm cursor-pointer`}>
+                <Link href="/"  onClick={toggleDrawer}>Home</Link></li>
               <li
                 onClick={toggleSubcategories}
                 className={`${futuraMedium.className} text-sm flex justify-between items-center`}

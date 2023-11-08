@@ -234,7 +234,7 @@ export default function Checkout() {
 
   return (
     <div className="bg-white mt-8 flex flex-col md:flex-row p-6">
-      <div className=" order-2 md:order-1 w-full  md:w-[650px]  md:mr-0 ml-0 md:ml-12 p-2 md:p-8">
+      <div className=" order-2 md:order-1 w-full   md:w-[650px]  md:mr-0 ml-0 md:ml-12 p-2 md:p-8">
         {/* Multi-step Navigation */}
         <div className="mb-6 flex font-FuturaHeavy text-xs">
           <div
@@ -265,23 +265,38 @@ export default function Checkout() {
             <form>
               <div className="flex  bg-customColor p-4 text-black font-FuturaLight">
                 <div className="md:w-full ">
-                  <h2 className="mb-4 font-FuturaMedium text-gray-700">NEW ADDRESS</h2>
+                  <h2 className="mb-4 font-FuturaMedium text-gray-700">
+                    NEW ADDRESS
+                  </h2>
 
                   <div className="grid grid-cols-1  md:grid-cols-5 font-FuturaLight font-semibold text-xs gap-1 md:gap-2 mb-4">
-                    <div className="  md:w-14  col-span-1 ">
+                    <div className="md:w-14 col-span-1 relative">
                       <label
                         htmlFor="title"
                         className="block tracking-widest text-[10px] text-gray-600 mb-1"
                       >
                         TITLE
                       </label>
-                      <select className=" w-full md:w-20  p-2 border">
+                      <select className="appearance-none w-full md:w-20 p-2 border pr-8">
                         <option value=""></option>
                         <option value="mr">Mr.</option>
                         <option value="ms">Ms.</option>
                         {/* Add other titles as needed */}
                       </select>
+                      <svg
+                        className="w-4 h-4 absolute bottom-[1px] right-2  md:-right-[20px] transform -translate-y-1/2 pointer-events-none text-gray-600"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
                     </div>
+
                     <div className=" w-full col-span-1 md:col-span-2 ">
                       <label
                         htmlFor="title"
@@ -398,7 +413,7 @@ export default function Checkout() {
                   </div>
                   <div className="flex flex-wrap">
                     {/* First Row: Country and City */}
-                    <div className="w-1/2 mr-0 md:mr-4 md:w-24 font-FuturaMedium  flex-grow">
+                    <div className="w-1/2 mr-0 md:mr-4 md:w-24 font-FuturaMedium  flex-grow relative">
                       <label
                         htmlFor="title"
                         className="block   tracking-widest text-[10px] text-gray-600 mb-1"
@@ -408,7 +423,7 @@ export default function Checkout() {
                       <select
                         value={formData.country}
                         onChange={handleCountryChange}
-                        className="w-[90%] md:w-32 text-[10px] text-gray-600 md:text-sm p-2 border"
+                        className=" appearance-none  w-[90%] md:w-32 text-[10px] text-gray-600 md:text-sm p-2 border"
                       >
                         <option value="">Country</option>
                         {allCountries?.map((countryData, index) => (
@@ -417,6 +432,18 @@ export default function Checkout() {
                           </option>
                         ))}
                       </select>
+                      <svg
+                        className="w-4 h-4 absolute bottom-[1px] right-4  md:-right-[6px] transform -translate-y-1/2 pointer-events-none text-gray-600"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
                       {errors.country && (
                         <div className="text-red-500 text-xs mt-1">
                           {errors.country}
@@ -483,14 +510,14 @@ export default function Checkout() {
                       )}
                     </div>
 
-                    <div className="mt-4 md:mt-0  w-1/3 md:w-1/6 ml-2 font-FuturaMedium   flex-grow">
+                    <div className="mt-4 md:mt-0  w-1/3 md:w-1/6 ml-2 font-FuturaMedium   flex-grow relative">
                       <label
                         htmlFor="title"
                         className="block  tracking-widest text-[10px] text-gray-600 mb-1"
                       >
                         COUNTY
                       </label>
-                      <select className=" w-full md:w-full text-[10px] text-gray-600 md:text-sm p-2 border">
+                      <select className=" appearance-none w-full md:w-full text-[10px] text-gray-600 md:text-sm p-2 border">
                         <option value=""></option>
                         {counties.map((region, index) => (
                           <option key={index} value={region}>
@@ -498,6 +525,18 @@ export default function Checkout() {
                           </option>
                         ))}
                       </select>
+                      <svg
+                        className="w-4 h-4 absolute bottom-[1px] right-1   transform -translate-y-1/2 pointer-events-none text-gray-600"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
                       {/* Assuming there's a potential error for county, you can add an error div here similarly */}
                     </div>
                   </div>

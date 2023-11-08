@@ -108,7 +108,7 @@ const Cart = () => {
         <hr className="mt-4 mb-4 border mx-6 text-black"></hr>
         <div className="flex items-start justify-center">
           <button className="w-full bg-black text-white mx-7 p-2 font-FuturaMedium text-lg tracking-widest">
-            Proceed to Checkout
+          <Link href="/checkoutPage">Proceed to Checkout</Link>
           </button>
         </div>
         <hr className="mt-7 mb-4 w-full border  text-black"></hr>
@@ -236,12 +236,15 @@ const Cart = () => {
             </Link>
           </span>
           <button className=" w-full bg-black text-white  mt-4 p-2 font-FuturaMedium text-lg tracking-widest">
-            Proceed to Checkout
+            <Link href="/checkoutPage">Proceed to Checkout</Link>
           </button>
           <div className="mt-12  flex items-center justify-center">
-          <Link href="#" className="text-gray-600 border-b-2    border-gray-400 mx-28  pb-2 font-FuturaBold text-sm text-center  tracking-widest">
-            Continue Shopping
-          </Link>
+            <Link
+              href="#"
+              className="text-gray-600 border-b-2    border-gray-400 mx-28  pb-2 font-FuturaBold text-sm text-center  tracking-widest"
+            >
+              Continue Shopping
+            </Link>
           </div>
         </div>
       </div>
