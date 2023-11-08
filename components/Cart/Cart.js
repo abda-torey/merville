@@ -134,10 +134,10 @@ const Cart = () => {
                     <h2 className=" font-FuturaBold tracking-widest font-light text-sm mb-0 mt-3">
                       {product.name}
                     </h2>
-                    <p className="font-FuturaMedium  font-extralight tracking-tighter text-sm">
+                    <p className="font-FuturaMedium  font-extralight text-gray-700 tracking-wide text-sm">
                       {product.color} {product.description}
                     </p>
-                    <p className="font-FuturaMedium   mb-2 text-sm">
+                    <p className="font-FuturaMedium text-gray-700   mb-2 text-sm">
                       Size: {product.size}
                     </p>
                     <span className=" font-FuturaBold text-sm">
@@ -146,13 +146,13 @@ const Cart = () => {
                   </div>
                   <div className="flex  mt-2  ">
                     <div className="flex space-x-2  items-center">
-                      <button className="font-FuturaMedium text-black underline py-1 text-sm">
+                      <button className="font-FuturaMedium text-gray-700 underline py-1 text-sm">
                         Edit
                       </button>
                       <div className="border-l h-[12px] border-gray-950 mx-2"></div>{" "}
                       {/* Separator */}
                       <button
-                        className="font-FuturaMedium text-black underline py-1 text-sm "
+                        className="font-FuturaMedium text-gray-700 underline py-1 text-sm "
                         onClick={() =>
                           deleteItemFromCart(
                             product.productId,
