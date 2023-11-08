@@ -38,11 +38,11 @@ const totalAmountStr = totalAmount.toFixed(2);
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex items-center justify-center pt-5    gap-12">
-        <h3 className="font-FuturaMedium font-light text-lg ml-4 mr-4 ">
+      <div className="flex items-center justify-center pt-4    gap-12">
+        <h3 className="font-FuturaMedium font-light text-lg ml-7 mr-0 ">
           SHOPPING BAG
         </h3>
-        <button className="text-2xl ml-2 " onClick={() => toggleDrawerBag()}>
+        <button className="text-2xl ml-14 " onClick={() => toggleDrawerBag()}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

@@ -15,7 +15,6 @@ import CartContext from "@/app/context/CartContext";
 import Cart from "./Cart/Cart";
 import CartSideBar from "./Cart/CartSideBar";
 
-
 const futuraMedium = localFont({
   src: "../public/fonts/futura medium bt.ttf",
   variable: "--font-futura-medium",
@@ -34,7 +33,7 @@ const Header = ({ categories }) => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const { toggleDrawerBag, isBagOpen, cart } = useContext(CartContext);
-const cartItemCount = cart && cart.cartItems ? cart.cartItems.length : 0;
+  const cartItemCount = cart && cart.cartItems ? cart.cartItems.length : 0;
   const toggleSubcategories = () => setShowSubcategories(!showSubcategories);
   const { isSignedIn, user } = useUser();
   const SCROLL_THRESHOLD = 20;
@@ -108,7 +107,7 @@ const cartItemCount = cart && cart.cartItems ? cart.cartItems.length : 0;
       {/* header inner */}
       <div
         className={classNames(
-          "flex top-2 flex-1 items-center justify-between px-[15px] md:px-[36px] ",
+          "flex top-2 flex-1 items-center justify-between px-[13px] md:px-[36px] ",
           "md:px-[36px]"
         )}
       >
@@ -140,12 +139,12 @@ const cartItemCount = cart && cart.cartItems ? cart.cartItems.length : 0;
             onClick={toggleDrawer}
           ></div>
           <aside
-            className={`transform top-0 left-0 w-52 md:w-64 bg-white text-black fixed h-full overflow-auto z-40 transition-transform duration-1000 ease-in-out ${
+            className={`transform top-0 left-0 w-52 md:w-64 bg-white  text-black fixed h-full overflow-auto z-40 transition-transform duration-1000 ease-in-out ${
               isOpen ? "translate-x-0" : "-translate-x-full"
             }`}
           >
             {/* Close Button */}
-            <div className="flex justify-start p-4 ml-8">
+            <div className="flex justify-start p-[18px] ml-4 ">
               <button className="text-2xl" onClick={() => toggleDrawer()}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -153,7 +152,7 @@ const cartItemCount = cart && cart.cartItems ? cart.cartItems.length : 0;
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="w-6 h-6"
+                  className="w-5 h-5"
                 >
                   <path
                     strokeLinecap="round"
@@ -169,15 +168,28 @@ const cartItemCount = cart && cart.cartItems ? cart.cartItems.length : 0;
 
             {/* Menu Items */}
             <ul className="space-y-4 pl-6">
-              <li className={`${futuraMedium.className} text-sm cursor-pointer`}>
-                <Link href="/"  onClick={toggleDrawer}>Home</Link></li>
               <li
-                onClick={toggleSubcategories}
+                className={`${futuraMedium.className} text-sm cursor-pointer`}
+              >
+                <Link href="/" onClick={toggleDrawer}>
+                  Home
+                </Link>
+              </li>
+              <li
                 className={`${futuraMedium.className} text-sm flex justify-between items-center`}
               >
-                Menswear
+                <Link
+                  href="/mens-wear"
+                  className=" cursor-pointer "
+                  onClick={toggleDrawer}
+                >
+                  Menswear
+                </Link>
                 {/* Dropdown Indicator */}
-                <div className="bg-white border border-black rounded-sm p-1 flex items-center justify-center mr-8 cursor-pointer">
+                <div
+                  className="bg-white border border-black rounded-sm p-1 flex items-center justify-center mr-8 cursor-pointer"
+                  onClick={toggleSubcategories}
+                >
                   {showSubcategories ? (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -255,16 +267,16 @@ const cartItemCount = cart && cart.cartItems ? cart.cartItems.length : 0;
             <div className="fixed inset-0 z-10 bg-black bg-opacity-100 flex justify-center items-start">
               {/* Close icon */}
               <div
-                className="absolute top-8  left-24 cursor-pointer"
+                className="absolute top-[20px] left-[60px] md:top-[22px]  md:left-28 cursor-pointer"
                 onClick={toggleSearch}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  strokeWidth="1.5"
+                  strokeWidth="3.5"
                   stroke="currentColor"
-                  className="w-4 h-4"
+                  className="w-3 h-3"
                 >
                   <path
                     strokeLinecap="round"
@@ -322,7 +334,7 @@ const cartItemCount = cart && cart.cartItems ? cart.cartItems.length : 0;
             <UserButton afterSignOutUrl="/">user</UserButton>
 
             <button
-              className="flex items-center gap-2 relative"
+              className="flex items-center gap-1 relative"
               onClick={toggleDrawerBag}
             >
               <span className="hidden text-sm tracking-wide md:inline">
@@ -342,7 +354,7 @@ const cartItemCount = cart && cart.cartItems ? cart.cartItems.length : 0;
               onClick={toggleDrawerBag}
             ></div>
             <aside
-              className={`hidden md:block transform top-0 right-0 w-64 md:w-[360px] bg-white text-black fixed h-full overflow-auto z-40 transition-transform duration-1000 ease-in-out ${
+              className={`hidden md:block transform top-0 right-0 w-64 md:w-[360px] bg-white  text-black fixed h-full overflow-auto z-40 transition-transform duration-1000 ease-in-out ${
                 isBagOpen ? "translate-x-0" : "translate-x-full"
               }`}
             >
