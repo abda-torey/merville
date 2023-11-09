@@ -151,9 +151,10 @@ export default function Checkout() {
       );
 
       const data = await response.json();
-      console.log(data.clientSecret);
-      // localStorage.setItem("orderId", JSON.stringify(data.orderId));
+      console.log(data.orderId);
+      localStorage.setItem("orderId", JSON.stringify(data.orderId));
       setClientSecret(data.clientSecret);
+      
     } catch (error) {
       console.error("Error fetching data:", error);
     }

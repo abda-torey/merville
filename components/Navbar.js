@@ -14,6 +14,7 @@ import localFont from "next/font/local";
 import CartContext from "@/app/context/CartContext";
 import Cart from "./Cart/Cart";
 import CartSideBar from "./Cart/CartSideBar";
+import ProfileDropDown from "./menu/ProfileDropDown";
 
 const futuraMedium = localFont({
   src: "../public/fonts/futura medium bt.ttf",
@@ -322,7 +323,7 @@ const Header = ({ categories }) => {
             )}
           >
             {!isSignedIn && (
-              <Link href="/signIn">
+              <Link href="/auth">
                 <button className="flex items-center gap-2">
                   <span className="hidden  text-sm tracking-wide md:inline">
                     Sign in
@@ -331,7 +332,10 @@ const Header = ({ categories }) => {
                 </button>
               </Link>
             )}
-            <UserButton afterSignOutUrl="/">user</UserButton>
+            {isSignedIn && (
+              // <UserButton afterSignOutUrl="/" />
+              <ProfileDropDown />
+            )}
 
             <button
               className="flex items-center gap-1 relative"

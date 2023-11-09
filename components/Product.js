@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Disclosure } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid"; // You might need to install @heroicons/react
 import ImageSlider from "./ImageSlider";
-
+import PromotionBanner from "./PromotionBanner";
 const sampleProductDetails = {
   details: [
     "Made with 100% organic cotton.",
@@ -24,7 +24,7 @@ const sampleProductDetails = {
   ],
 };
 
-const Product = ({ product }) => {
+const Product = ({ product,text }) => {
   const [selectedSize, setSize] = useState("");
   const [selectedColor, setColor] = useState(null);
   const [quantity, setQuantity] = useState(1);
@@ -52,7 +52,7 @@ const Product = ({ product }) => {
     addItemToCart({
       productId: product.id,
       name: product.name,
-      description:product.description,
+      description: product.description,
       size: selectedSize,
       color: selectedColor,
       price: product.price,
@@ -144,9 +144,7 @@ const Product = ({ product }) => {
           <button
             onClick={() => {
               addToCartHandler();
-              
             }}
-           
             className="bg-black mb-10 text-white text-xs w-[90%] md:w-full py-2"
           >
             ADD TO BAG
@@ -209,6 +207,9 @@ const Product = ({ product }) => {
             ))}
           </div>
         </div>
+      </div>
+      <div>
+        <PromotionBanner text={text} />
       </div>
     </>
   );

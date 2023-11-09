@@ -43,9 +43,9 @@ const Receipt = () => {
   console.log(createdAtValue);
 
   return (
-    <div className=" mt-24  mb-8 flex flex-col items-center justify-center text-black">
-      <div className="bg-gray-200 w-[60%] p-4">
-        <div className=" bg-gray-200">
+    <div className=" mt-24  mb-8 flex flex-col items-center justify-center text-black mx-2 md:mx-0">
+      <div className=" bg-customColor w-full md:w-[50%] p-4">
+        <div className=" bg-customColor">
           <h1 className="text-2xl  mb-4 font-FuturaHeavy">
             Thank you for your order
           </h1>
@@ -56,40 +56,44 @@ const Receipt = () => {
           </p>
         </div>
       </div>
-      <div className=" w-[60%] mt-2 mb-2">
-        <div className="flex">
-          <div className="w-72 bg-gray-100 p-4 ">
-            <h2 className="text-xl font-FuturaBold mb-4">
+      <div className=" w-full md:w-[50%] mt-2 mb-2">
+        <div className="flex ">
+          <div className=" w-full  md:w-[50%] bg-gray-100 p-4 ">
+            <h2 className="text-xl font-FuturaLight mb-4">
               Detailed Order Receipt
             </h2>
-            <p className="mb-4 font-FuturaLight text-sm">
+            <p className="mb-4 font-FuturaLight text-xs">Order Number: {orderId}</p>
+            <p className="mb-4 font-FuturaLight text-xs">
               Order Date: {createdAtValue && formatDateToET(createdAtValue)}
             </p>
-            <p className="mb-4 font-FuturaLight text-xs">Order Number: {orderId}</p>
+           
             
-            <p className="mb-4 font-FuturaLight">Ship to John Newman</p>
+            <p className="mb-4 font-FuturaLight tracking-widest">Ship to John Newman</p>
 
-            <h3 className="text-lg font-FuturaBold mb-4">Shipping Address</h3>
-            <p className="mb-2 font-FuturaLight text-sm">John Newman</p>
-            <p className="mb-2 font-FuturaLight text-sm">CHESTNUT ST</p>
-            <p className="mb-2 font-FuturaLight text-sm">
+            <h3 className="text-lg font-FuturaMedium tracking-widest mb-4">Shipping Address</h3>
+            
+            <span className="mb-2 font-FuturaLight text-sm tracking-widest">John Newman</span><br></br>
+            <span className="mb-2 font-FuturaLight text-sm tracking-widest">CHESTNUT ST</span><br></br>
+            <span className="mb-2 font-FuturaLight text-sm tracking-widest">
               SACRAMENTO, CA,94203
-            </p>
+            </span>
             <p className="mb-8 font-FuturaLight text-sm">+4407729966565</p>
           </div>
-          <div className="w-96 pl-10  flex flex-col">
-            <div className=" flex items-center justify-center">
-              <div className="flex-grow overflow-y-auto h-36 ">
+          
+          <div className="w-full md:w-[60%] pl-10   hidden md:flex flex-col">
+            <div className=" flex  ">
+              
+              <div className="flex-grow overflow-y-auto  p-0 items-start justify-start  h-[140px]  ">
                 {orderData?.products?.map((product, productIdx) => (
                   <div className="flex mt-7  " key={productIdx}>
                     {/* Product Image */}
-                    <div className=" w-[130px] h-[130px] p-4 bg-gray-100 flex items-center justify-center">
+                    <div className=" w-[130px] h-[110px] p-4 bg-gray-100 flex items-center justify-center">
                       <Image
                         src={product.image}
                         width={500}
                         height={500}
                         alt={product.name}
-                        className=" w-24"
+                        className=" w-20"
                       />
                     </div>
 
@@ -117,11 +121,11 @@ const Receipt = () => {
                 ))}
               </div>
             </div>
-            <div className=" flex">
+            <div className=" hidden md:flex ">
               <div>
-                <div className=" mt-4">
-                  <h3 className=" font-FuturaBold  text-sm">Shipping Method</h3>
-                  <p className="pl-1 mt-1 font-FuturaLight text-xs">
+                <div className=" mt-4 w-36 ">
+                  <h3 className=" font-FuturaMedium tracking-widest  text-sm">Shipping Method</h3>
+                  <p className="pl-1 mt-1 font-FuturaLight tracking-widest text-xs">
                     standard fee
                   </p>
                   <span className="pl-1 font-FuturaLight text-xs">
@@ -130,22 +134,22 @@ const Receipt = () => {
                 </div>
 
                 <div className=" mt-24">
-                  <button className=" border bg-black text-white p-2 w-20 text-xs">
+                  <button className=" border bg-black text-white tracking-widest font-FuturaLight p-2 w-24 text-xs">
                     Print Receipt
                   </button>
                 </div>
               </div>
-              <div className=" flex place-items-end ml-32">
-                <div>
-                  <h3 className=" font-FuturaBold tracking-widest">
+              <div className=" flex place-items-end ml-12 w-96">
+                <div className=" ">
+                  <h3 className=" font-FuturaMedium text-sm tracking-widest">
                     Order Summary
                   </h3>
-                  <p className=" font-FuturaLight text-sm">
+                  <p className=" font-FuturaLight text-[13px] tracking-widest">
                     Merchandize $50.00
                   </p>
-                  <p className=" font-FuturaLight text-sm">Shipping $8.99</p>
-                  <p className=" font-FuturaLight text-sm">Tax $0.00</p>
-                  <h3 className=" font-FuturaBold text-sm">
+                  <p className=" font-FuturaLight text-[13px] tracking-widest">Shipping $8.99</p>
+                  <p className=" font-FuturaLight text-[13px] tracking-widest">Tax $0.00</p>
+                  <h3 className=" font-FuturaMedium text-[13px] tracking-widest">
                     Order Total: $50.00
                   </h3>
                 </div>
@@ -154,6 +158,7 @@ const Receipt = () => {
           </div>
         </div>
       </div>
+      <button className=" block md:hidden font-FuturaMedium tracking-widest bg-black text-white border p-4 w-44 mt-4">Print Receipt</button>
     </div>
   );
 };

@@ -15,7 +15,7 @@ const page = async ({params}) => {
   
   return (
     <>
-    <Product product = {product} />
+    <Product product = {product.product} text={product.promoTextBanner} />
     </>
   );
 };

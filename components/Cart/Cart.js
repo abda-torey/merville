@@ -13,8 +13,9 @@ import {
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import PromotionBanner from "../PromotionBanner";
 
-const Cart = () => {
+const Cart = ({ text }) => {
   const {
     addItemToCart,
     cart,
@@ -27,12 +28,7 @@ const Cart = () => {
   const { isSignedIn, user } = useUser();
   const router = useRouter();
   const isGuest = localStorage.getItem("guestEmail");
-  console.log(user);
-  // const updateQuantity = (e, product) => {
-  //   const item = { ...product, quantity: parseInt(e.target.value) };
-  //   if (parseInt(e.target.value) > Number(product.stock)) return;
-  //   addItemToCart(item);
-  // };
+  console.log(text);
 
   // items in cart
   const cartItemCount = cart && cart.cartItems ? cart.cartItems.length : 0;
@@ -108,7 +104,7 @@ const Cart = () => {
         <hr className="mt-4 mb-4 border mx-6 text-black"></hr>
         <div className="flex items-start justify-center">
           <button className="w-full bg-black text-white mx-7 p-2 font-FuturaMedium text-lg tracking-widest">
-          <Link href="/checkoutPage">Proceed to Checkout</Link>
+            <Link href="/checkoutPage">Proceed to Checkout</Link>
           </button>
         </div>
         <hr className="mt-7 mb-4 w-full border  text-black"></hr>
@@ -385,15 +381,19 @@ const Cart = () => {
             </div>
             <hr className="my-2 border-t border-gray-300" />
             <div>
-              <button
-                className=" mt-10 bg-black text-white w-full p-[9px] text-xs font-FuturaLight tracking-widest"
-                onClick={onCheckOut}
-              >
-                Proceed to Checkout
+              <button className=" mt-10 bg-black text-white w-full p-[9px] text-xs font-FuturaLight tracking-widest">
+                <Link href="/checkoutPage" >
+                  {" "}
+                  Proceed to Checkout
+                </Link>
               </button>
             </div>
           </div>
         </div>
+      </div>
+
+      <div>
+        <PromotionBanner text={text} />
       </div>
     </>
   );
