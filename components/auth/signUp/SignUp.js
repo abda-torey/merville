@@ -10,6 +10,8 @@ const SignUp = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [errorCodeMessage, setErrorCodeMessage] = useState("");
   const [pendingVerification, setPendingVerification] = useState(false);
   const [code, setCode] = useState("");
   const router = useRouter();
@@ -24,12 +26,16 @@ const SignUp = () => {
     }
 
     try {
-      await signUp.create({
-        first_name: firstName,
-        last_name: lastName,
-        email_address: email,
-        password,
-      });
+      await signUp
+        .create({
+          first_name: firstName,
+          last_name: lastName,
+          email_address: email,
+          password,
+        })
+        .then((res) => console.log("response", res))
+        
+        .catch((err) => setErrorMessage(err.errors[0].message));
 
       // send the email.
       await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
@@ -55,14 +61,15 @@ const SignUp = () => {
       if (completeSignUp.status !== "complete") {
         /*  investigate the response, to see if there was an error
          or if the user needs to complete more steps.*/
-        console.log(JSON.stringify(completeSignUp, null, 2));
+        // console.log(JSON.stringify(completeSignUp, null, 2));
       }
       if (completeSignUp.status === "complete") {
         await setActive({ session: completeSignUp.createdSessionId });
         router.push("/");
       }
     } catch (err) {
-      console.error(JSON.stringify(err, null, 2));
+      // console.error(JSON.stringify(err, null, 2));
+      setErrorCodeMessage(err.errors[0].longMessage);
     }
   };
 
@@ -133,6 +140,11 @@ const SignUp = () => {
                 required={true}
               />
             </div>
+            {errorMessage && (
+              <p className="text-red-500 mt-2 font-FuturaLight tracking-wider text-xs italic">
+                {errorMessage}
+              </p>
+            )}
             <button
               type="submit"
               className={`w-full mb-4 text-white ${
@@ -142,6 +154,7 @@ const SignUp = () => {
             >
               SUBMIT
             </button>
+            
             <div className="flex items-center">
               <input
                 type="checkbox"
@@ -176,10 +189,15 @@ const SignUp = () => {
                 placeholder="Enter Verification Code..."
                 onChange={(e) => setCode(e.target.value)}
               />
+              {errorCodeMessage && (
+              <p className="text-red-500 mt-2 font-FuturaMedium  tracking-wider text-xs italic">
+                {errorCodeMessage}
+              </p>
+            )}
               <button
                 type="submit"
                 onClick={onPressVerify}
-                className="w-full text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                className="w-full text-white bg-blue-600 hover:bg-blue-700 font-FuturaMedium text-sm px-5 py-2.5 text-center"
               >
                 Verify Email
               </button>

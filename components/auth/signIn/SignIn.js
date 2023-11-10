@@ -3,10 +3,11 @@ import { useState } from "react";
 import { useSignIn } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 
-export default function SignIn({redirectPath = '/'}) {
+export default function SignIn({ redirectPath = "/" }) {
   const { isLoaded, signIn, setActive } = useSignIn();
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const router = useRouter();
   // start the sign In process.
   const handleSubmit = async (e) => {
@@ -31,6 +32,8 @@ export default function SignIn({redirectPath = '/'}) {
       }
     } catch (err) {
       console.error("error", err.errors[0].longMessage);
+      console.log(err);
+      setErrorMessage(err.errors[0].longMessage);
     }
   };
 
@@ -64,8 +67,9 @@ export default function SignIn({redirectPath = '/'}) {
               id="email"
               name="email"
               type="email"
-              className="w-full p-2 border border-gray-300  focus:outline-none focus:border-blue-500"
+              className="w-full p-2 border border-gray-300 font-FuturaMedium tracking-wider  focus:outline-none focus:border-blue-500"
             />
+           
           </div>
           <div className="mb-4">
             <div className="flex justify-between items-center">
@@ -84,8 +88,13 @@ export default function SignIn({redirectPath = '/'}) {
               id="password"
               name="password"
               type="password"
-              className="w-full p-2 mt-2 border border-gray-300 focus:outline-none focus:border-blue-500"
+              className="w-full p-2 mt-2 border border-gray-300  tracking-wider focus:outline-none focus:border-blue-500"
             />
+            {errorMessage && (
+              <p className="text-red-500 mt-2 font-FuturaLight tracking-wider text-xs italic">
+                {errorMessage}
+              </p>
+            )}
           </div>
 
           <button
