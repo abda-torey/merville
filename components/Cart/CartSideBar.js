@@ -1,11 +1,9 @@
 "use client";
 import React, { useContext } from "react";
-
+import { useUser } from "@clerk/nextjs";
 import CartContext from "@/app/context/CartContext";
 import Image from "next/image";
 import Link from "next/link";
-
-
 
 const CartSideBar = () => {
   const {
@@ -15,26 +13,26 @@ const CartSideBar = () => {
     updateQuantity,
     toggleDrawerBag,
   } = useContext(CartContext);
-// First, calculate the total in cents
-const amountInCents = cart?.cartItems?.reduce(
-  (acc, item) => acc + item.quantity * item.price,
-  0
-);
+  const { isSignedIn, user } = useUser();
+  // First, calculate the total in cents
+  const amountInCents = cart?.cartItems?.reduce(
+    (acc, item) => acc + item.quantity * item.price,
+    0
+  );
 
-// Convert the total in cents to a floating-point number for euros
-const amountWithoutTax = amountInCents / 100;
+  // Convert the total in cents to a floating-point number for euros
+  const amountWithoutTax = amountInCents / 100;
 
-// Calculate the tax as a numerical value
-const tax = amountWithoutTax * 0.15;
+  // Calculate the tax as a numerical value
+  const tax = amountWithoutTax * 0.15;
 
-// Sum the amounts to get the total
-const totalAmount = amountWithoutTax + tax;
+  // Sum the amounts to get the total
+  const totalAmount = amountWithoutTax + tax;
 
-// Now, format the numbers as strings with two decimal places for display
-const amountWithoutTaxStr = amountWithoutTax.toFixed(2);
-const taxStr = tax.toFixed(2);
-const totalAmountStr = totalAmount.toFixed(2);
-
+  // Now, format the numbers as strings with two decimal places for display
+  const amountWithoutTaxStr = amountWithoutTax.toFixed(2);
+  const taxStr = tax.toFixed(2);
+  const totalAmountStr = totalAmount.toFixed(2);
 
   return (
     <div className="flex flex-col h-full">
@@ -60,7 +58,7 @@ const totalAmountStr = totalAmount.toFixed(2);
         </button>
       </div>
       <div className="flex-grow overflow-y-auto">
-        {cart?.cartItems?.length === 0 ? (
+        {cart?.length === 0 ? (
           <h3 className="text-center font-FuturaBold justify-center text-lg mt-16 text-black">
             No Items in Bag
           </h3>
@@ -81,19 +79,13 @@ const totalAmountStr = totalAmount.toFixed(2);
               {/* Product Details */}
               <div className="pl-2 w-[180px] flex flex-col ">
                 <div>
-                  <h2
-                    className="font-FuturaMedium tracking-wide font-light text-sm mb-0 mt-3"
-                  >
+                  <h2 className="font-FuturaMedium tracking-wide font-light text-sm mb-0 mt-3">
                     {product.name}
                   </h2>
-                  <p
-                    className="font-FuturaMedium text-gray-600 font-extralight tracking-tighter text-xs"
-                  >
-                    {product.color} {" "} {product.description}
+                  <p className="font-FuturaMedium text-gray-600 font-extralight tracking-tighter text-xs">
+                    {product.color} {product.description}
                   </p>
-                  <p
-                    className="font-FuturaMedium text-gray-600  mb-2 text-xs"
-                  >
+                  <p className="font-FuturaMedium text-gray-600  mb-2 text-xs">
                     Size: {product.size}
                   </p>
                   <span className="font-FuturaMedium  text-xs">
@@ -104,9 +96,7 @@ const totalAmountStr = totalAmount.toFixed(2);
                 {/* Edit, Remove, and Quantity Selector */}
                 <div className="flex  mt-3 justify-between">
                   <div className="flex space-x-2 items-center">
-                    <button
-                      className="font-FuturaMedium text-black underline py-1 text-xs"
-                    >
+                    <button className="font-FuturaMedium text-black underline py-1 text-xs">
                       Edit
                     </button>
                     <div className="border-l h-[14px] border-gray-950 mx-2"></div>{" "}
@@ -169,24 +159,32 @@ const totalAmountStr = totalAmount.toFixed(2);
       <hr className="mt-5"></hr>
       <div className="bg-white py-4 mt-auto">
         <div className="py-0 md:py-4 flex mx-9 justify-between items-center">
-          <span className="font-FuturaMedium text-xs font-bold">
-            SUBTOTAL
-          </span>
+          <span className="font-FuturaMedium text-xs font-bold">SUBTOTAL</span>
           <span className="font-FuturaMedium text-xs font-bold">
             £ {amountWithoutTaxStr}
           </span>
         </div>
         <div className="flex px-4 md:px-0 flex-col md:flex-row items-center justify-center mt-5 space-y-4 md:space-y-0 md:space-x-4 font-FuturaMedium tracking-widest">
-          <button
-            className=" bg-black text-white border-2 text-xs tracking-tighter px-4 py-2 w-full md:w-28"
-          >
-            <Link href="/cart"  onClick={toggleDrawerBag}>VIEW BAG</Link>
+          <button className=" bg-black text-white border-2 text-xs tracking-tighter px-4 py-2 w-full md:w-28">
+            <Link href={cart?.cartItems?.length > 0 ? "/cart" : "#!"} onClick={toggleDrawerBag}>
+              VIEW BAG
+            </Link>
           </button>
 
           <button
             className=" bg-black border-2 text-white text-xs tracking-tighter px-4 py-2 w-full md:w-28"
+            
           >
-            <Link href="/checkoutPage"  onClick={toggleDrawerBag}>CHECKOUT</Link>
+            {isSignedIn && (
+              <Link href={cart?.cartItems?.length > 0  ? "/checkoutPage" : "#!"} onClick={toggleDrawerBag}>
+                CHECKOUT
+              </Link>
+            )}
+            {!isSignedIn && (
+              <Link href={cart?.cartItems?.length > 0 ?  "/checkoutLogin" : "#!"} onClick={toggleDrawerBag}>
+                CHECKOUT
+              </Link>
+            )}
           </button>
         </div>
       </div>

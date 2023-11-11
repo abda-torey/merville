@@ -1,14 +1,17 @@
 "use client";
 import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
 // import React, { useState, useEffect, useContext, useRef } from "react";
 import CartContext from "@/app/context/CartContext";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import localFont from "next/font/local";
 import CheckoutForm from "./CheckoutForm";
+import { useUser } from "@clerk/nextjs";
 import Image from "next/image";
 
 import { allCountries } from "country-region-data";
+import GuestEmail from "../Cart/GuestEmail";
 const countryCodes = require("country-codes-list");
 
 // Make sure to call loadStripe outside of a component’s render to avoid
@@ -38,7 +41,7 @@ export default function Checkout() {
   const [formData, setFormData] = useState({
     title: "",
     firstName: "",
-    surname: "",
+    lastName: "",
     addressLine1: "",
     addressLine2: "",
     country: "",
@@ -48,6 +51,11 @@ export default function Checkout() {
     phoneNumber: "",
     shippingMethod: "",
   });
+  const { user } = useUser();
+  const isGuest = localStorage.getItem("guestEmail");
+  console.log(user?.emailAddresses[0].emailAddress);
+  console.log(isGuest);
+  // add email address
 
   const myCountryCodesObject = countryCodes.customList(
     "countryCode",
@@ -96,6 +104,43 @@ export default function Checkout() {
       }
     }
   };
+  // set the user address to shipping form
+  useEffect(() => {
+    const id = user?.emailAddresses[0]?.emailAddress;
+    const fetchAddress = async (id) => {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/api/address/${id}`,
+          { cache: "no-store" }
+        );
+
+        if (!res.ok) {
+          throw new Error("Failed to fetch address");
+        }
+        const address = await res.json();
+        console.log(address);
+        if (address) {
+          setFormData((prevFormData) => ({
+            ...prevFormData,
+            firstName: address.firstName || "",
+            lastName: address.lastName || "",
+            addressLine1: address.addressLine1 || "",
+            addressLine2: address.addressLine2 || "",
+            country: address.country || "",
+            city: address.city || "",
+            postalCode: address.postalCode || "",
+            county: address.state || "",
+          }));
+        }
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+    if (id) {
+      fetchAddress(id);
+    }
+  }, [user]);
+  console.log(formData);
 
   useEffect(() => {
     // You can use countryData here, if it's not null
@@ -138,6 +183,40 @@ export default function Checkout() {
       price: product.price,
     })),
   };
+  const handleAddressSubmit = async () => {
+    if (user) {
+      formData.email = user?.emailAddresses[0].emailAddress;
+    }
+    if (!user && isGuest) {
+      formData.email = isGuest;
+    }
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/address`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ formData: formData }),
+        }
+      );
+
+      if (response.ok) {
+        // Handle success
+        console.log("Address added successfully!");
+        return true; // Indicate success
+      } else {
+        // Handle HTTP errors
+        const errorData = await response.json();
+        console.error("Failed to add address:", errorData);
+        return false; // Indicate failure
+      }
+    } catch (error) {
+      // Handle network or other errors
+      console.error("Error adding address:", error.message);
+      return false; // Indicate failure
+    }
+  };
+
   const creatPaymentIntent = async () => {
     // console.log(checkoutData);
     try {
@@ -154,7 +233,6 @@ export default function Checkout() {
       console.log(data.orderId);
       localStorage.setItem("orderId", JSON.stringify(data.orderId));
       setClientSecret(data.clientSecret);
-      
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -206,7 +284,7 @@ export default function Checkout() {
     if (!formData.firstName) {
       newErrors.firstName = "First Name is required.";
     }
-    if (!formData.surname) {
+    if (!formData.lastName) {
       newErrors.surname = "Surname is required.";
     }
     if (!formData.addressLine1) {
@@ -307,6 +385,7 @@ export default function Checkout() {
                       </label>
                       <input
                         type="text"
+                        value={formData.firstName}
                         className=" w-full  md:w-full p-2 border   "
                         autoComplete="name"
                         onChange={(e) => {
@@ -335,21 +414,22 @@ export default function Checkout() {
                       </label>
                       <input
                         type="text"
+                        value={formData.lastName}
                         className=" w-full md:w-full p-2 border "
                         onChange={(e) => {
                           setFormData((prevState) => ({
                             ...prevState,
-                            surname: e.target.value,
+                            lastName: e.target.value,
                           }));
                           setErrors((prevErrors) => ({
                             ...prevErrors,
-                            surname: undefined,
+                            lastName: undefined,
                           }));
                         }}
                       />
-                      {errors.surname && (
+                      {errors.lastName && (
                         <div className="text-red-500 text-xs mt-1">
-                          {errors.surname}
+                          {errors.lastName}
                         </div>
                       )}
                     </div>
@@ -365,6 +445,7 @@ export default function Checkout() {
 
                     <input
                       type="text"
+                      value={formData.addressLine1}
                       className="md:w-full w-[100%] p-2 border"
                       autoComplete="address-line1"
                       onChange={(e) => {
@@ -393,6 +474,7 @@ export default function Checkout() {
                     </label>
                     <input
                       type="text"
+                      value={formData.addressLine2}
                       className="md:w-full w-[100%] p-2 border"
                       autoComplete="address-line2"
                       onChange={(e) => {
@@ -461,6 +543,7 @@ export default function Checkout() {
                       </label>
                       <input
                         type="text"
+                        value={formData.city}
                         className="w-full text-xs md:text-sm p-2 border"
                         name="city"
                         onChange={(e) => {
@@ -491,6 +574,7 @@ export default function Checkout() {
                       </label>
                       <input
                         type="text"
+                        value={formData.postalCode}
                         className=" w-full md:w-full text-xs md:text-sm p-2 border"
                         name="postal-code"
                         onChange={(e) => {
@@ -518,7 +602,10 @@ export default function Checkout() {
                       >
                         COUNTY
                       </label>
-                      <select className=" appearance-none w-full md:w-full text-[10px] text-gray-600 md:text-sm p-2 border">
+                      <select
+                        className=" appearance-none w-full md:w-full text-[10px] text-gray-600 md:text-sm p-2 border"
+                        value={formData.county}
+                      >
                         <option value=""></option>
                         {counties.map((region, index) => (
                           <option key={index} value={region}>
@@ -566,6 +653,7 @@ export default function Checkout() {
                     <div className="flex-grow">
                       <input
                         type="text"
+                        value={formData.phoneNumber}
                         className="w-full p-2 border"
                         autoComplete="tel"
                         placeholder="Phone Number"
@@ -637,11 +725,13 @@ export default function Checkout() {
                   <button
                     onClick={(e) => {
                       e.preventDefault(); // Prevent default form submit
+                      console.log(formData);
                       if (validateFormData()) {
                         setStep(2);
                         creatPaymentIntent();
                       } else {
                       }
+                      handleAddressSubmit(e);
                     }}
                     className="mt-4 px-4 py-2 font-FuturaLight text-xs bg-black text-white "
                   >

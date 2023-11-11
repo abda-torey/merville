@@ -3,7 +3,7 @@ import { useState } from "react";
 import SignIn from "./signIn/SignIn";
 import SignUp from "./signUp/SignUp";
 
-const Authentication = () => {
+const Authentication = ({redirectPath = "/" }) => {
   const [isSignIn, setIsSignIn] = useState(true); // State to toggle between sign in and sign up
 
   return (
@@ -34,7 +34,7 @@ const Authentication = () => {
         <div className="p-0">
           {isSignIn ? (
             // Sign In Form
-            <SignIn />
+            <SignIn redirectPath = {redirectPath} />
           ) : (
             // Sign Up Form
             <SignUp />
