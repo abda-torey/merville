@@ -317,9 +317,9 @@ export default function Checkout() {
         {/* Multi-step Navigation */}
         <div className="mb-6 flex font-FuturaHeavy text-xs">
           <div
-            className={`px-3 mr-8 py-2 ${
+            className={`px-1 mr-8 py-2 ${
               step === 1
-                ? "text-blue-500 border-b-2 border-blue-500"
+                ? "text-gray-500 border-b-2 border-gray-400"
                 : "text-gray-400"
             }`}
             onClick={() => setStep(1)}
@@ -327,12 +327,12 @@ export default function Checkout() {
             1. Shipping
           </div>
           <div
-            className={`px-3 py-2 ${
+            className={`px-1  py-2 ${
               step === 2
-                ? "text-blue-500 border-b-2 border-blue-500"
+                ? "text-gray-500 border-b-2 border-gray-400"
                 : "text-gray-400"
             }`}
-            onClick={() => setStep(2)}
+           
           >
             2. Payment Method
           </div>
@@ -777,29 +777,29 @@ export default function Checkout() {
           </div>
           {!isCollapsed && (
             <>
-              <div className="flex-grow overflow-y-auto h-80 ">
+              <div className="flex-grow overflow-y-auto min-h-[180px] max-h-[300px] md:w-[300px] ">
                 {cart?.cartItems?.length === 0 ? (
                   <h3 className="text-center justify-center font-FuturaLight text-lg mt-16 text-black">
                     No Items in Bag
                   </h3>
                 ) : (
                   cart?.cartItems?.map((product, productIdx) => (
-                    <div className="flex mt-7  " key={productIdx}>
+                    <div className="flex mt-7   " key={productIdx}>
                       {/* Product Image */}
-                      <div className=" w-[130px] h-[130px] p-4 bg-gray-100 flex items-center justify-center">
+                      <div className=" w-[100px] h-[100px] p-2 bg-gray-100 flex items-center justify-center">
                         <Image
                           src={product.image}
                           width={500}
                           height={500}
                           alt={product.name}
-                          className=" w-24"
+                          className=" w-20"
                         />
                       </div>
 
                       {/* Product Details */}
-                      <div className=" pl-4 w-[145px] flex flex-col">
+                      <div className=" pl-4 w-[125px]  flex flex-col">
                         <div>
-                          <h2 className=" font-FuturaLight tracking-wide font-bold text-xs mb-2">
+                          <h2 className=" font-FuturaLight tracking-normal font-bold text-xs mb-2">
                             {product.name}
                           </h2>
                           <p className=" font-FuturaLight text-gray-600  text-xs">
@@ -820,7 +820,7 @@ export default function Checkout() {
                   ))
                 )}{" "}
               </div>
-              <div className="border md:w-[350px] bg-gray-100 mt-2 text-xs p-4 ">
+              <div className="border md:w-[320px] bg-gray-100 mt-2 text-xs p-4 ">
                 <div className="flex justify-between border-b font-FuturaMedium text-gray-800  pb-2">
                   <span>Subtotal</span>
                   <span>${amountWithoutTaxStr}</span>
