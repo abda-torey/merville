@@ -71,7 +71,7 @@ export default function SignIn({ redirectPath = "/" }) {
             />
            
           </div>
-          <div className="mb-4">
+          <div className="mb-6">
             <div className="flex justify-between items-center">
               <label
                 htmlFor="password"
@@ -99,9 +99,9 @@ export default function SignIn({ redirectPath = "/" }) {
 
           <button
             onClick={handleSubmit}
-            className="w-full bg-black text-white p-2 mb-8 font-FuturaBold text-xs tracking-widest  hover:bg-gray-800"
+            className="w-full bg-black text-white p-3 mb-8 font-FuturaBold text-xs tracking-widest  hover:bg-gray-800"
           >
-            Sign In
+            SIGN IN
           </button>
         </form>
       </div>

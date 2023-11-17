@@ -76,7 +76,7 @@ const SignUp = () => {
   return (
     <div className="  flex justify-center items-start ">
       <div className="      p-4 text-black" style={{ width: "300px" }}>
-        <h1 className="text-lg mb-4 font-FuturaBold text-gray-600 ">
+        <h1 className="text-lg mb-4 font-FuturaBold tracking-widest text-gray-600 ">
           Create account
         </h1>
         {!pendingVerification && (
@@ -84,6 +84,33 @@ const SignUp = () => {
             onSubmit={handleSubmit}
             className="space-y-4 md:space-y-2 text-xs font-FuturaBold tracking-widest"
           >
+             <div className="">
+              <label htmlFor="email" className="block mb-2  text-gray-900">
+                Email Address
+              </label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                onChange={(e) => setEmail(e.target.value)}
+                className="bg-gray-50 mb-5 border border-gray-300 text-gray-900 sm:text-sm  focus:ring-blue-600 focus:border-blue-600 block w-full p-2"
+                placeholder=""
+                required={true}
+              />
+            </div>
+            <div className="">
+              <label htmlFor="password" className="block mb-2  text-gray-900">
+                Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                onChange={(e) => setPassword(e.target.value)}
+                className="bg-gray-50 mb-5 border border-gray-300 text-gray-900 sm:text-sm block w-full p-2"
+                required={true}
+              />
+            </div>
             <div className=" mb-4">
               <label
                 htmlFor="first_name"
@@ -113,33 +140,8 @@ const SignUp = () => {
                 required={true}
               />
             </div>
-            <div className="">
-              <label htmlFor="email" className="block mb-2  text-gray-900">
-                Email Address
-              </label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                onChange={(e) => setEmail(e.target.value)}
-                className="bg-gray-50 mb-5 border border-gray-300 text-gray-900 sm:text-sm  focus:ring-blue-600 focus:border-blue-600 block w-full p-2"
-                placeholder="name@company.com"
-                required={true}
-              />
-            </div>
-            <div className="">
-              <label htmlFor="password" className="block mb-2  text-gray-900">
-                Password
-              </label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                onChange={(e) => setPassword(e.target.value)}
-                className="bg-gray-50 mb-5 border border-gray-300 text-gray-900 sm:text-sm block w-full p-2"
-                required={true}
-              />
-            </div>
+           
+            
             {errorMessage && (
               <p className="text-red-500 mt-2 font-FuturaLight tracking-wider text-xs italic">
                 {errorMessage}
@@ -148,8 +150,8 @@ const SignUp = () => {
             <button
               type="submit"
               className={`w-full mb-4 text-white ${
-                isChecked ? "bg-gray-900 hover:bg-blue-700" : "bg-gray-400"
-              } font-medium text-xs px-5 py-2.5 text-center`}
+                isChecked ? "bg-gray-900 hover:bg-gray-700" : "bg-gray-400"
+              } font-medium text-xs px-5 py-3 text-center`}
               disabled={!isChecked}
             >
               SUBMIT

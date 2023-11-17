@@ -268,7 +268,7 @@ const Header = ({ categories }) => {
             <div className="fixed inset-0 z-10 bg-black bg-opacity-100 flex justify-center items-start">
               {/* Close icon */}
               <div
-                className="absolute top-[20px] left-[60px] md:top-[22px]  md:left-28 cursor-pointer"
+                className="absolute top-[20px] left-[60px] md:top-[22px]  md:left-[114px] cursor-pointer"
                 onClick={toggleSearch}
               >
                 <svg
@@ -340,6 +340,7 @@ const Header = ({ categories }) => {
             <button
               className="flex items-center gap-1 relative"
               onClick={toggleDrawerBag}
+              disabled = {!cart?.cartItems || cart?.cartItems.length === 0}
             >
               <span className="hidden text-sm tracking-wide md:inline">
                 Bag
@@ -358,7 +359,7 @@ const Header = ({ categories }) => {
               onClick={toggleDrawerBag}
             ></div>
             <aside
-              className={`hidden md:block transform top-0 right-0 w-64 md:w-[360px] bg-white  text-black fixed h-full overflow-auto z-40 transition-transform duration-1000 ease-in-out ${
+              className={`hidden md:block transform top-0 right-0 w-64 md:w-[330px] bg-white  text-black fixed h-full overflow-auto z-40 transition-transform duration-1000 ease-in-out ${
                 isBagOpen ? "translate-x-0" : "translate-x-full"
               }`}
             >

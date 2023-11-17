@@ -34,13 +34,18 @@ const CartSideBar = () => {
   const taxStr = tax.toFixed(2);
   const totalAmountStr = totalAmount.toFixed(2);
 
+  // style for cart items height
+  const singleItemStyle = {
+    minHeight: "200px", // Adjust this value as needed
+    maxHeight: "200px", // Adjust this value as needed
+  };
   return (
     <div className="flex flex-col h-full">
       <div className="flex items-center justify-center pt-4    gap-12">
         <h3 className="font-FuturaMedium font-light text-lg ml-7 mr-0 ">
           SHOPPING BAG
         </h3>
-        <button className="text-2xl ml-14 " onClick={() => toggleDrawerBag()}>
+        <button className="text-2xl ml-8 " onClick={() => toggleDrawerBag()}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -57,7 +62,10 @@ const CartSideBar = () => {
           </svg>
         </button>
       </div>
-      <div className="flex-grow overflow-y-auto">
+      <div
+        className="flex-grow overflow-y-auto  "
+        style={cart?.cartItems?.length === 1 ? singleItemStyle : {}}
+      >
         {cart?.length === 0 ? (
           <h3 className="text-center font-FuturaBold justify-center text-lg mt-16 text-black">
             No Items in Bag
@@ -66,20 +74,20 @@ const CartSideBar = () => {
           cart?.cartItems?.map((product, productIdx) => (
             <div className="flex mt-7 " key={productIdx}>
               {/* Product Image */}
-              <div className=" w-[150px] md:h-[152px] p-2 bg-customColor flex items-center justify-center">
+              <div className=" w-[120px] md:ml-1 md:h-[122px] p-2 bg-customColor flex items-center justify-center">
                 <Image
                   src={product.image}
                   width={500}
                   height={500}
                   alt={product.name}
-                  className=" w-28"
+                  className="  w-24"
                 />
               </div>
 
               {/* Product Details */}
               <div className="pl-2 w-[180px] flex flex-col ">
                 <div>
-                  <h2 className="font-FuturaMedium tracking-wide font-light text-sm mb-0 mt-3">
+                  <h2 className="font-FuturaMedium tracking-wide font-light text-sm mb-0 mt-1">
                     {product.name}
                   </h2>
                   <p className="font-FuturaMedium text-gray-600 font-extralight tracking-tighter text-xs">
@@ -156,32 +164,38 @@ const CartSideBar = () => {
           ))
         )}
       </div>
-      <hr className="mt-5"></hr>
-      <div className="bg-white py-4 mt-auto">
-        <div className="py-0 md:py-4 flex mx-9 justify-between items-center">
+      <hr className="mt-3"></hr>
+      <div className="bg-white py-4 ">
+        <div className="py-0 md:py-2 flex mx-9 md:mr-12 justify-between items-center">
           <span className="font-FuturaMedium text-xs font-bold">SUBTOTAL</span>
           <span className="font-FuturaMedium text-xs font-bold">
-            £ {amountWithoutTaxStr}
+            £ {amountWithoutTaxStr} GBP
           </span>
         </div>
         <div className="flex px-4 md:px-0 flex-col md:flex-row items-center justify-center mt-5 space-y-4 md:space-y-0 md:space-x-4 font-FuturaMedium tracking-widest">
           <button className=" bg-black text-white border-2 text-xs tracking-tighter px-4 py-2 w-full md:w-28">
-            <Link href={cart?.cartItems?.length > 0 ? "/cart" : "#!"} onClick={toggleDrawerBag}>
+            <Link
+              href={cart?.cartItems?.length > 0 ? "/cart" : "#!"}
+              onClick={toggleDrawerBag}
+            >
               VIEW BAG
             </Link>
           </button>
 
-          <button
-            className=" bg-black border-2 text-white text-xs tracking-tighter px-4 py-2 w-full md:w-28"
-            
-          >
+          <button className=" bg-black border-2 text-white text-xs tracking-tighter px-4 py-2 w-full md:w-28">
             {isSignedIn && (
-              <Link href={cart?.cartItems?.length > 0  ? "/checkoutPage" : "#!"} onClick={toggleDrawerBag}>
+              <Link
+                href={cart?.cartItems?.length > 0 ? "/checkoutPage" : "#!"}
+                onClick={toggleDrawerBag}
+              >
                 CHECKOUT
               </Link>
             )}
             {!isSignedIn && (
-              <Link href={cart?.cartItems?.length > 0 ?  "/checkoutLogin" : "#!"} onClick={toggleDrawerBag}>
+              <Link
+                href={cart?.cartItems?.length > 0 ? "/checkoutLogin" : "#!"}
+                onClick={toggleDrawerBag}
+              >
                 CHECKOUT
               </Link>
             )}

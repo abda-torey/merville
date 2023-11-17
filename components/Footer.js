@@ -22,7 +22,7 @@ const Footer = () => {
       <div className="flex flex-col md:flex-row gap-2  md:gap-8 justify-between">
         {/* First Column */}
         {/* logo for md screens */}
-        <div className=" -mt-6 hidden md:block ml-9">
+        <div className=" -mt-5 hidden md:block ml-9">
          
           <Image
             src="/Merville.png"
@@ -36,7 +36,7 @@ const Footer = () => {
             src="/logobg white.png"
             alt="Melville1 Logo"
            
-            className=" mt-2 w-28 h-32"
+            className=" ml-2 mt-1 w-20 h-20"
           />
         </div>
 
@@ -44,7 +44,7 @@ const Footer = () => {
         <div className=" ml-2 md:ml-0 mt-6 border-b border-gray-400 md:border-b-0 ">
           <h3
             onClick={() => toggleSection("client")}
-            className=" font-FuturaMedium text-xs ml-2 mr-2 md:mr-0 md:ml-0 tracking-widest  mb-4 flex justify-between "
+            className=" font-FuturaMedium text-xs ml-2 mr-2 md:mr-0 md:ml-0 tracking-widest  mb-3 flex justify-between "
           >
             CLIENT SERVICE
             <span className="ml-2 md:hidden">
@@ -65,7 +65,7 @@ const Footer = () => {
             </span>
           </h3>
           <ul
-            className={`space-y-2 font-FuturaLight text-[10px] tracking-wider ml-10 mb-4 md:mb-0 md:ml-0 ${
+            className={`space-y-0 font-FuturaLight text-[10px] tracking-wider ml-10 mb-4 md:mb-0 md:ml-0 ${
               openSection === "client" ? "block" : "hidden md:block"
             }`}
           >
@@ -102,7 +102,7 @@ const Footer = () => {
           <div className="ml-2 md:ml-0 mt-6 border-b border-gray-400 md:border-b-0 ">
             <h3
               onClick={() => toggleSection("company")}
-              className=" font-FuturaMedium ml-2 mr-2 md:mr-0 md:ml-0 tracking-widest text-xs mb-4 flex justify-between "
+              className=" font-FuturaMedium ml-2 mr-2 md:mr-0 md:ml-0 tracking-widest text-xs mb-3 flex justify-between "
             >
               THE COMPANY
               <span className="ml-2 md:hidden">
@@ -123,7 +123,7 @@ const Footer = () => {
               </span>
             </h3>
             <ul
-              className={`space-y-2 font-FuturaLight text-[10px] tracking-wider ml-10 mb-4 md:mb-0 md:ml-0 ${
+              className={`space-y-0 font-FuturaLight text-[10px] tracking-wider ml-10 mb-4 md:mb-0 md:ml-0 ${
                 openSection === "company" ? "block" : "hidden md:block"
               }`}
             >
@@ -160,7 +160,7 @@ const Footer = () => {
         <div className="ml-2 md:ml-0 mt-6 border-b border-gray-400 md:border-b-0 ">
           <h3
             onClick={() => toggleSection("social")}
-            className=" font-FuturaMedium ml-2 mr-2 md:mr-0 md:ml-0 tracking-widest text-xs mb-4 flex justify-between "
+            className=" font-FuturaMedium ml-2 mr-2 md:mr-0 md:ml-0 tracking-widest text-xs mb-3 flex justify-between "
           >
             Find Us On
             <span className="ml-2 md:hidden">
@@ -181,11 +181,11 @@ const Footer = () => {
             </span>
           </h3>
           <div
-            className={`flex flex-col gap-1 font-FuturaLight text-xs tracking-wider   ml-10 mb-4 md:mb-0 md:ml-0 ${
+            className={`flex flex-col gap-1 font-FuturaLight text-[10px] tracking-wider   ml-10 mb-4 md:mb-0 md:ml-0 ${
               openSection === "social" ? "block" : "hidden md:block"
             } `}
           >
-            <div className="flex items-center gap-2 mb-2">
+            <div className="flex items-center gap-2 mb-0">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 x="0px"
@@ -200,7 +200,7 @@ const Footer = () => {
               </svg>
               <span className="text-white ">Facebook</span>
             </div>
-            <div className="flex items-center gap-2 mb-2">
+            <div className="flex items-center gap-2 mb-0">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 x="0px"
@@ -215,7 +215,7 @@ const Footer = () => {
               </svg>
               <span className=" text-gray-50">Twitter</span>
             </div>
-            <div className="flex items-center gap-2 mb-2">
+            <div className="flex items-center gap-2 mb-0">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 x="0px"
@@ -230,7 +230,7 @@ const Footer = () => {
               </svg>
               <span>Instagram</span>
             </div>
-            <div className="flex items-center gap-2 mb-2">
+            <div className="flex items-center gap-2 mb-0">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 x="0px"
@@ -267,7 +267,7 @@ const Footer = () => {
         <div className="mt-6 w-full md:w-80  mr-2 md:mr-0 ml-2 md:ml-0    border-b border-gray-400 md:border-b-0 ">
           <h3
             onClick={() => toggleSection("updates")}
-            className=" font-FuturaMedium ml-2 mr-4 md:mr-0 md:ml-0 tracking-widest text-xs mb-4 flex justify-between "
+            className=" font-FuturaMedium ml-2 mr-4 md:mr-0 md:ml-0 tracking-widest text-xs mb-3 flex justify-between "
           >
             Sign Up For Updates
             <span className="ml-2 md:hidden">
@@ -292,21 +292,21 @@ const Footer = () => {
               openSection === "updates" ? "block" : "hidden md:block"
             }`}
           >
-            <p className="mb-4 mr-2 font-FuturaLight  text-xs tracking-wider ">
+            <p className="mb-2 mr-3 font-FuturaLight  text-[10px] tracking-wider ">
               By entering your email address below, you consent to recieving our
               newsletter with access to our latest collections, events and
               Initiatives. More details on this are provided in our privacy
               policy.
             </p>
 
-            <div className="flex mt-6 mr-2">
+            <div className="flex mt-2 mr-3">
               <input
                 type="email"
                 placeholder="Email Address"
                 className="flex-grow bg-black focus:border-none border-b border-white  mr-2 rounded-none"
               />
-              <button className="bg-white text-black text-sm font-medium   hover:bg-gray-200 px-2 py-2 rounded-none ">
-                Subscribe
+              <button className="bg-white text-black text-[8px]  font-medium   hover:bg-gray-200 px-[5px] py-[5px] rounded-none ">
+                SUBSCRIBE
               </button>
             </div>
           </div>
