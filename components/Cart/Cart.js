@@ -385,7 +385,7 @@ const Cart = ({ text }) => {
               {isSignedIn && (
               <Link
                 href={cart?.cartItems?.length > 0 ? "/checkoutPage" : "#!"}
-                onClick={toggleDrawerBag}
+               
               >
                 Proceed to Checkout
               </Link>
@@ -393,7 +393,7 @@ const Cart = ({ text }) => {
             {!isSignedIn && (
               <Link
                 href={cart?.cartItems?.length > 0 ? "/checkoutLogin" : "#!"}
-                onClick={toggleDrawerBag}
+                
               >
                 Proceed to Checkout
               </Link>
