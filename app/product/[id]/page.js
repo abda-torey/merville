@@ -12,7 +12,7 @@ const page = async ({params}) => {
   const {id} = params
   const product = await getProduct(id);
   
-  
+  console.log(product);
   return (
     <>
     <Product product = {product.product} text={product.promoTextBanner} />

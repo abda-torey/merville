@@ -382,10 +382,22 @@ const Cart = ({ text }) => {
             <hr className="my-2 border-t border-gray-300" />
             <div>
               <button className=" mt-10 bg-black text-white w-full p-[9px] text-xs font-FuturaLight tracking-widest">
-                <Link href="/checkoutPage" >
-                  {" "}
-                  Proceed to Checkout
-                </Link>
+              {isSignedIn && (
+              <Link
+                href={cart?.cartItems?.length > 0 ? "/checkoutPage" : "#!"}
+                onClick={toggleDrawerBag}
+              >
+                Proceed to Checkout
+              </Link>
+            )}
+            {!isSignedIn && (
+              <Link
+                href={cart?.cartItems?.length > 0 ? "/checkoutLogin" : "#!"}
+                onClick={toggleDrawerBag}
+              >
+                Proceed to Checkout
+              </Link>
+            )}
               </button>
             </div>
           </div>

@@ -30,7 +30,7 @@ const Product = ({ product, text }) => {
   const [quantity, setQuantity] = useState(1);
   const { addItemToCart, toggleDrawerBag } = useContext(CartContext);
   const [showFeedback, setShowFeedback] = useState(false);
-  console.log(product);
+
   // check if sizes and colors are required to prevent user from adding to cart without selecting
   const [isSizeRequired, setIsSizeRequired] = useState(
     product?.sizes?.length > 0
