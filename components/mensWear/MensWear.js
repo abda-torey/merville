@@ -5,7 +5,7 @@ import PromotionBanner from "../PromotionBanner";
 
 const MensWear = ({ categories, menswearPromo }) => {
   return (
-    <div className="bg-white">
+    <div className="bg-white ">
       <div className="relative w-full h-80 mb-0">
         <Image
           src="/menswear.jpg"
@@ -21,7 +21,7 @@ const MensWear = ({ categories, menswearPromo }) => {
         </div>
       </div>
 
-      <div className="flex flex-col items-center space-y-1 mb-2">
+      <div className="flex flex-col items-center  space-y-1 mb-1">
         {/* displaying the first three categories */}
         <div className="grid grid-cols-1 md:grid-cols-2  mt-2 w-full max-w-full ">
           {categories.slice(0, 3).map((category, idx) => (
@@ -30,10 +30,10 @@ const MensWear = ({ categories, menswearPromo }) => {
               href={`/mens-wear/${category.id}`}
               className={`relative flex flex-col items-center justify-center overflow-hidden bg-gray-100 hover:bg-gray-200 ${
                 idx === 0
-                  ? "md:col-span-1 md:row-span-2 h-[17rem]  md:h-[calc(2*18rem)] "
+                  ? "md:col-span-1 md:row-span-2 md:mr-[2px] h-[17rem]  md:h-[calc(2*18rem)] "
                   : idx === 2
-                  ? "h-[17rem] md:h-[284px] py-7 ml-1 mt-1 "
-                  : "h-[17rem] md:h-[18rem] py-7  ml-1 "
+                  ? "h-[17rem] md:h-[284px] py-7 md:ml-[2px] mt-1 "
+                  : "h-[17rem] md:h-[18rem] py-7  md:ml-[2px] mt-1 md:mt-0 "
               }`}
             >
               <Image
