@@ -48,14 +48,14 @@ const Product = ({ product,text }) => {
       return;
     }
     addItemToCart({
-      productId: product.id,
-      name: product.name,
-      description: product.description,
+      productId: product?.id,
+      name: product?.name,
+      description: product?.description,
       size: selectedSize,
       color: selectedColor,
-      price: product.price,
-      image: product.imageDetails[0].imageUrl,
-      stock: product.stock,
+      price: product?.price,
+      image: product?.imageDetails[0].imageUrl,
+      stock: product?.stock,
     });
     toggleDrawerBag();
     setShowFeedback(false);
@@ -68,7 +68,7 @@ const Product = ({ product,text }) => {
       <div className="  md:flex flex-col mb-0  md:mb-8 mt-20 md:flex-row justify-start items-start space-y-3 md:space-y-0 md:space-x-8 ml-3 ">
         {/* Combined Image Div */}
         <div className="hidden md:col-span-2  flex-1 md:flex-none md:min-h-[700px] md:w-2/3 p-12 bg-customColor shadow-md md:flex  flex-col justify-center items-center overflow-y-auto scrollbar-hide">
-          {product.imageDetails.map((imageDetail, index) => (
+          {product?.imageDetails?.map((imageDetail, index) => (
             <Image
               key={index}
               src={imageDetail.imageUrl}
@@ -81,16 +81,16 @@ const Product = ({ product,text }) => {
         </div>
 
         <div className="md:hidden">
-          <ImageSlider imageDetails={product.imageDetails} />
+          <ImageSlider imageDetails={product?.imageDetails} />
         </div>
 
         {/* Third Div */}
         <div className="w-full  md:w-1/4 p-4 md:p-6 min-h-[200px] md:min-h-[400px] text-gray-600 font-FuturaLight flex flex-col items-start justify-start md:ml-4  md:pl-14 md:px-10  sticky top-14">
           <h2 className="text-lg text-gray-800 font-semibold">
-            {product.name}
+            {product?.name}
           </h2>
           <p className="text-sm font-semibold text-gray-700 tracking-widest mb-4">
-            ${(product.price / 100).toFixed(2)}
+            ${(product?.price / 100).toFixed(2)}
           </p>
 
           <div className="space-y-2 mb-8">
@@ -98,7 +98,7 @@ const Product = ({ product,text }) => {
               Select Color
             </span>
             <div className="flex space-x-2">
-              {product.colors.map((color, index) => (
+              {product?.colors?.map((color, index) => (
                 <button
                   key={index}
                   className={`w-7 h-7 border-1 border-black ${
@@ -121,7 +121,7 @@ const Product = ({ product,text }) => {
               <option value="" defaultValue disabled>
                 Select size
               </option>
-              {product.sizes.map((size, index) => (
+              {product?.sizes?.map((size, index) => (
                 <option key={index} value={size}>
                   {size}
                 </option>
