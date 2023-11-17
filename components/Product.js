@@ -32,11 +32,9 @@ const Product = ({ product,text }) => {
   const [showFeedback, setShowFeedback] = useState(false);
 
   // check if sizes and colors are required to prevent user from adding to cart without selecting
-  const [isSizeRequired, setIsSizeRequired] = useState(
-    product.sizes && product.sizes.length > 0
-  );
-  const [isColorRequired, setIsColorRequired] = useState(
-    product.colors && product.colors.length > 0
+  const [isSizeRequired, setIsSizeRequired] = useState(product?.sizes?.length > 0);
+
+  const [isColorRequired, setIsColorRequired] = useState(product?.colors?.length > 0
   );
   const canAddToCart = () => {
     if (isSizeRequired && !selectedSize) return false;
