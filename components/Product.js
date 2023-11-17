@@ -24,17 +24,20 @@ const sampleProductDetails = {
   ],
 };
 
-const Product = ({ product,text }) => {
+const Product = ({ product, text }) => {
   const [selectedSize, setSize] = useState("");
   const [selectedColor, setColor] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const { addItemToCart, toggleDrawerBag } = useContext(CartContext);
   const [showFeedback, setShowFeedback] = useState(false);
-
+  console.log(product);
   // check if sizes and colors are required to prevent user from adding to cart without selecting
-  const [isSizeRequired, setIsSizeRequired] = useState(product?.sizes?.length > 0);
+  const [isSizeRequired, setIsSizeRequired] = useState(
+    product?.sizes?.length > 0
+  );
 
-  const [isColorRequired, setIsColorRequired] = useState(product?.colors?.length > 0
+  const [isColorRequired, setIsColorRequired] = useState(
+    product?.colors?.length > 0
   );
   const canAddToCart = () => {
     if (isSizeRequired && !selectedSize) return false;
@@ -64,7 +67,6 @@ const Product = ({ product,text }) => {
   };
   return (
     <>
-      
       <div className="  md:flex flex-col mb-0  md:mb-8 mt-20 md:flex-row justify-start items-start space-y-3 md:space-y-0 md:space-x-8 ml-3 ">
         {/* Combined Image Div */}
         <div className="hidden md:col-span-2  flex-1 md:flex-none md:min-h-[700px] md:w-2/3 p-12 bg-customColor shadow-md md:flex  flex-col justify-center items-center overflow-y-auto scrollbar-hide">
